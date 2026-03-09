@@ -1,7 +1,12 @@
 package com.example.fieldtrack.data.repository
 
-class Repository {
-//    Zone(id, name, notes, photoUri?)
-//    Product(id, name, category, defaultReapplyDays, storageLocation, notes)
-//    Application(id, zoneId, productId, appliedAt, reapplyDaysOverride?, quantity?, notes?)
+import com.example.fieldtrack.data.db.dao.ApplicationDao
+import javax.inject.Inject
+
+class Repository @Inject constructor(
+    private val applicationDao: ApplicationDao
+){
+
+    fun getApplications() = applicationDao.getAll()
+
 }
