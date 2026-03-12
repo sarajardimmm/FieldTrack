@@ -1,6 +1,14 @@
 package com.example.fieldtrack.feature.applicationlist
 
-class ApplicationScreenViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.fieldtrack.data.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class ApplicationListViewModel @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
     //This is the activity/history screen.
 
     //A list of all applications across all zones:

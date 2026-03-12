@@ -14,3 +14,4 @@ This is for my dad, my favourite stakeholder, he wanted me to build him an app b
 - MVVM architecture
 - Hilt for dependency injection
 - Coroutines for asynchronous work
+- Navigation 2

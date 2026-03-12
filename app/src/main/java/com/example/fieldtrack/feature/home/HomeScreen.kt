@@ -1,4 +1,7 @@
 package com.example.fieldtrack.feature.home
 
-class HomeScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun HomeScreen() {
 }

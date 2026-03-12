@@ -1,4 +1,7 @@
 package com.example.fieldtrack.feature.zonelist
 
-class ZoneListScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun ZoneListScreen() {
 }

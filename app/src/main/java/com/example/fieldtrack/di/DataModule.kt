@@ -1,4 +1,4 @@
-package com.example.fieldtrack
+package com.example.fieldtrack.di
 
 import android.content.Context
 import com.example.fieldtrack.data.db.AppDatabase
@@ -17,7 +17,7 @@ object DataModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
-        AppDatabase.getInstance(context)
+        AppDatabase.Companion.getInstance(context)
 
     @Provides
     fun provideDao(database: AppDatabase): ApplicationDao {

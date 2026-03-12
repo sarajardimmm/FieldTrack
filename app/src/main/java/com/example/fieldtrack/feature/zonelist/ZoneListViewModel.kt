@@ -1,6 +1,14 @@
 package com.example.fieldtrack.feature.zonelist
 
-class ZoneListViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.fieldtrack.data.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class ZoneListViewModel @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
     //Shows all user-created zones, for example:
     //
     //Front Garden

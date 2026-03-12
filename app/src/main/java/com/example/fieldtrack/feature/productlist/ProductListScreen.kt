@@ -1,4 +1,7 @@
 package com.example.fieldtrack.feature.productlist
 
-class ProductListScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun ProductListScreen() {
 }
