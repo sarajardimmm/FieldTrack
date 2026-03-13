@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.fieldtrack.data.db.dao.ApplicationDao
-import com.example.fieldtrack.data.db.entity.Application
+import com.example.fieldtrack.data.db.entity.ApplicationEntity
 
-@Database(entities = [Application::class], version = 1)
+@Database(entities = [ApplicationEntity::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun applicationDao(): ApplicationDao
 

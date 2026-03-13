@@ -3,21 +3,22 @@ package com.example.fieldtrack.data.db.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.fieldtrack.data.db.entity.Application
+import com.example.fieldtrack.data.db.entity.ApplicationEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ApplicationDao {
-    @Query("SELECT * FROM application")
-    fun getAll(): Flow<List<Application>>
+    @Query("SELECT * FROM applicationentity")
+    fun getAll(): Flow<List<ApplicationEntity>>
 
-    @Query("SELECT * FROM application WHERE uid IN (:applicationIds)")
-    fun loadAllByIds(applicationIds: IntArray): List<Application>
+    @Query("SELECT * FROM applicationentity WHERE uid IN (:applicationIds)")
+    fun loadAllByIds(applicationIds: IntArray): List<ApplicationEntity>
 
-    @Insert
-    fun insertAll(vararg users: Application)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(application: ApplicationEntity)
 
     @Delete
-    fun delete(user: Application)
+    suspend fun delete(user: ApplicationEntity)
 }

@@ -5,10 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Application (
-    @PrimaryKey val uid: Int,
-    @ColumnInfo(name = "zoneId") val zoneId: Int?,
-    @ColumnInfo(name = "productId") val productId: Int?,
+data class ApplicationEntity (
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
+    @ColumnInfo(name = "zoneName") val zoneName: String?,
+    @ColumnInfo(name = "productName") val productName: String?,
     @ColumnInfo(name = "appliedAt") val appliedAt: String?,
     @ColumnInfo(name = "reapplyDays") val reapplyDays: String?,
     @ColumnInfo(name = "quantity") val quantity: String?,

@@ -18,7 +18,7 @@ import com.example.fieldtrack.feature.applicationlist.ApplicationListRoute
             composable("application_list") {
                 ApplicationListRoute(
                     onApplicationClick = {applicationId ->
-                        navController.navigate("applicationDetails/$applicationId")
+                        navController.navigate("application_details/$applicationId")
                     }
                 )
             }
