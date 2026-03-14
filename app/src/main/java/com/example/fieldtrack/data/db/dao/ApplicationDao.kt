@@ -14,7 +14,7 @@ interface ApplicationDao {
     fun getAll(): Flow<List<ApplicationEntity>>
 
     @Query("SELECT * FROM applicationentity WHERE uid IN (:applicationIds)")
-    fun loadAllByIds(applicationIds: IntArray): List<ApplicationEntity>
+    suspend fun getById(applicationIds: String): ApplicationEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(application: ApplicationEntity)

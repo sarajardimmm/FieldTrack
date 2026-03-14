@@ -9,6 +9,7 @@ class Repository @Inject constructor(
 ){
     fun getApplications() = applicationDao.getAll()
 
+    suspend fun getApplication(id: String) = applicationDao.getById(id)
     suspend fun insert(applicationEntity: ApplicationEntity) {
         applicationDao.insert(applicationEntity)
     }

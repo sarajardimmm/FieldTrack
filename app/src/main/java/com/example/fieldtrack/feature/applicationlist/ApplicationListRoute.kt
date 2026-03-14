@@ -17,6 +17,5 @@ fun ApplicationListRoute(
         onApplicationClick = onApplicationClick,
         onAddApplication = viewModel::addApplication,
         applicationHistory = applications
-        //state = viewModel.uiState
     )
 }

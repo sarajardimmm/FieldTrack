@@ -23,14 +23,8 @@ import com.example.fieldtrack.feature.applicationlist.ApplicationListRoute
                 )
             }
 
-            composable("application_details/{applicationId}") { backStackEntry ->
-                val applicationId =
-                    backStackEntry.arguments?.getString("applicationId").orEmpty()
-
-                ApplicationDetailRoute(
-                    applicationId = applicationId,
-                    onBackClick = { navController.popBackStack() }
-                )
+            composable("application_details/{applicationId}") {
+                ApplicationDetailRoute()
             }
     }
 }

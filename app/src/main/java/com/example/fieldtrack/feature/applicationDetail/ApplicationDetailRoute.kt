@@ -5,12 +5,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
 fun ApplicationDetailRoute(
-    applicationId: String,
-    onBackClick: () -> Unit,
-    viewModel: ApplicationDetailViewModel = hiltViewModel()
-) {
+    viewModel: ApplicationDetailViewModel = hiltViewModel()) {
+
     ApplicationDetailScreen(
-        applicationId = applicationId,
-        onBackClick = onBackClick
+        application = viewModel.application
     )
 }
