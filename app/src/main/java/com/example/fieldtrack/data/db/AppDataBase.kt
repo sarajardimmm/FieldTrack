@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.fieldtrack.data.db.dao.ApplicationDao
 import com.example.fieldtrack.data.db.entity.ApplicationEntity
 
-@Database(entities = [ApplicationEntity::class], version = 4)
+@Database(entities = [ApplicationEntity::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun applicationDao(): ApplicationDao
 

@@ -1,13 +1,15 @@
 package com.example.fieldtrack.feature.applicationlist
 
+import android.app.Application
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,8 +17,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.ui.components.ApplicationSamplePreviewData
+import com.example.fieldtrack.ui.components.FormField
+import com.example.fieldtrack.ui.components.HistoryItem
 
 @Composable
 fun ApplicationListScreen(
@@ -31,39 +37,42 @@ fun ApplicationListScreen(
     var quantity by remember { mutableStateOf("") }
     var notes by remember { mutableStateOf("") }
 
-    Column {
-        OutlinedTextField(
+    Column (Modifier.padding(12.dp)){
+        Spacer(modifier = Modifier.size(16.dp))
+        FormField(
             value = zoneName,
             onValueChange = { zoneName = it },
-            label = { Text("zone") },
+            label = "zone",
         )
-        OutlinedTextField(
+        FormField(
             value = productName,
             onValueChange = { productName = it },
-            label = { Text("product") }
+            label = "product"
         )
-        OutlinedTextField(
+        FormField(
             value = appliedAt,
             onValueChange = { appliedAt = it },
-            label = { Text("applied at") },
+            label = "applied at",
         )
-        OutlinedTextField(
+        FormField(
             value = reapplyDays,
             onValueChange = { reapplyDays = it },
-            label = { Text("reapply in") },
+            label = "reapply in",
         )
-        OutlinedTextField(
+        FormField(
             value = quantity,
             onValueChange = { quantity = it },
-            label = { Text("quantity") },
+            label = "quantity",
         )
-        OutlinedTextField(
+        FormField(
             value = notes,
             onValueChange = { notes = it },
-            label = { Text("notes") },
+            label = "notes",
         )
 
-        Button(onClick = {
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
             onAddApplication(
                 ApplicationFormData(
                     zoneName,
@@ -74,15 +83,17 @@ fun ApplicationListScreen(
                     notes
                 )
             )
-        }) { }
+        }) {
+            Text("Add")
+        }
 
         Spacer(modifier = Modifier.size(16.dp))
 
         LazyColumn {
             items(applicationHistory) { application ->
 
-                Text(
-                    text = (application.zoneName + application.productName),
+                HistoryItem(
+                    application = application,
                     modifier = Modifier.clickable {
                         onApplicationClick(application.uid.toString())
                     }
@@ -90,4 +101,11 @@ fun ApplicationListScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun ApplicationListScreenPreview(){
+
+    ApplicationListScreen({}, {}, ApplicationSamplePreviewData.applicationListSample )
 }

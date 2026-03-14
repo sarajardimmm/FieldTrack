@@ -13,3 +13,11 @@ fun ApplicationDetailScreen(application: ApplicationEntity?) {
         application?.zoneName?.let { Text(it) }
     }
 }
+
+
+@Preview
+@Composable
+fun ApplicationDetailScreenPreview(){
+
+    ApplicationDetailScreen(ApplicationSamplePreviewData.applicationSample)
+}
