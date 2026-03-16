@@ -82,11 +82,17 @@ fun AddApplicationFormPreview() {
         }
     }
 }
+
 @Preview
 @Composable
 fun EditApplicationFormPreview() {
     val applicationToEdit = ApplicationFormData(
-        "Front garden", "adubo", "5 Dec 2025", "5 Apr 2026", "quantity", "neighbour gave us the adubo"
+        "Front garden",
+        "adubo",
+        "5 Dec 2025",
+        "5 Apr 2026",
+        "quantity",
+        "neighbour gave us the adubo"
     )
 
     FieldTrackTheme {
