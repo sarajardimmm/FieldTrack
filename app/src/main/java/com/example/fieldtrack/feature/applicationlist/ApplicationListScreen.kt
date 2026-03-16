@@ -10,19 +10,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.data.db.entity.ApplicationEntity
 import com.example.fieldtrack.ui.components.AppTopBar
+import com.example.fieldtrack.ui.components.ApplicationForm
 import com.example.fieldtrack.ui.components.ApplicationSamplePreviewData
-import com.example.fieldtrack.ui.components.FormField
 import com.example.fieldtrack.ui.components.HistoryItem
-import com.example.fieldtrack.ui.components.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -53,54 +48,11 @@ fun ApplicationListContent(
     applicationHistory: List<ApplicationEntity>,
     modifier: Modifier
 ) {
-    var zoneName by remember { mutableStateOf("") }
-    var productName by remember { mutableStateOf("") }
-    var appliedAt by remember { mutableStateOf("") }
-    var reapplyDays by remember { mutableStateOf("") }
-    var quantity by remember { mutableStateOf("") }
-    var notes by remember { mutableStateOf("") }
-
     Column(modifier.padding(12.dp)) {
-        FormField(
-            value = zoneName,
-            onValueChange = { zoneName = it },
-            label = "zone",
+        ApplicationForm(
+            actionLabel = "Add",
+            onApplicationAction = onAddApplication
         )
-        FormField(
-            value = productName,
-            onValueChange = { productName = it },
-            label = "product"
-        )
-        FormField(
-            value = appliedAt,
-            onValueChange = { appliedAt = it },
-            label = "applied at",
-        )
-        FormField(
-            value = reapplyDays,
-            onValueChange = { reapplyDays = it },
-            label = "reapply in",
-        )
-        FormField(
-            value = quantity,
-            onValueChange = { quantity = it },
-            label = "quantity",
-        )
-        FormField(
-            value = notes,
-            onValueChange = { notes = it },
-            label = "notes",
-        )
-
-        SingleButton(
-            label = "Add",
-            onClick = {
-                onAddApplication(
-                    ApplicationFormData(
-                        zoneName, productName, appliedAt, reapplyDays, quantity, notes
-                    )
-                )
-            })
 
         Spacer(modifier = Modifier.size(16.dp))
 
