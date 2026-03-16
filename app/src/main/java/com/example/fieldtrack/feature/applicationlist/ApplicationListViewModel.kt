@@ -28,7 +28,7 @@ class ApplicationListViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            repository.insert(application)
+            repository.insertApplication(application)
         }
     }
 

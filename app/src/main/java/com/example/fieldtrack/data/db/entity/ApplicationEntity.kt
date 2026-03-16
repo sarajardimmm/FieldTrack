@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ApplicationEntity (
-    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
+    @PrimaryKey(autoGenerate = true) val aid: Int = 0,
     @ColumnInfo(name = "zoneName") val zoneName: String?,
     @ColumnInfo(name = "productName") val productName: String?,
     @ColumnInfo(name = "appliedAt") val appliedAt: String?,

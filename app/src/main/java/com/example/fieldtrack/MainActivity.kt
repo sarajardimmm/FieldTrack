@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach {
                 if (it.isNotEmpty()) {
-                    Log.i("Temp", "Foreground location: ${it[it.size - 1].uid}")
+                    Log.i("Temp", "Foreground location: ${it[it.size - 1].aid}")
                 }
             }
             .launchIn(lifecycleScope)
@@ -41,7 +42,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             Log.d("Sara", "MainActivity")
             FieldTrackTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
                     MyApp()
                 }
             }

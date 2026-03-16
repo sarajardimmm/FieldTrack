@@ -3,14 +3,12 @@ package com.example.fieldtrack.feature.applicationlist
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.ApplicationSamplePreviewData
 import com.example.fieldtrack.ui.components.FormField
 import com.example.fieldtrack.ui.components.HistoryItem
+import com.example.fieldtrack.ui.components.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -31,6 +31,28 @@ fun ApplicationListScreen(
     onAddApplication: (ApplicationFormData) -> Unit,
     applicationHistory: List<ApplicationEntity>
 ) {
+    Scaffold(
+        topBar = {
+            AppTopBar("")
+        }
+    ) { innerPadding ->
+        ApplicationListContent(
+            onApplicationClick,
+            onAddApplication,
+            applicationHistory,
+            Modifier.padding(innerPadding)
+        )
+    }
+
+}
+
+@Composable
+fun ApplicationListContent(
+    onApplicationClick: (String) -> Unit,
+    onAddApplication: (ApplicationFormData) -> Unit,
+    applicationHistory: List<ApplicationEntity>,
+    modifier: Modifier
+) {
     var zoneName by remember { mutableStateOf("") }
     var productName by remember { mutableStateOf("") }
     var appliedAt by remember { mutableStateOf("") }
@@ -38,8 +60,7 @@ fun ApplicationListScreen(
     var quantity by remember { mutableStateOf("") }
     var notes by remember { mutableStateOf("") }
 
-    Column (Modifier.padding(12.dp)){
-        Spacer(modifier = Modifier.size(16.dp))
+    Column(modifier.padding(12.dp)) {
         FormField(
             value = zoneName,
             onValueChange = { zoneName = it },
@@ -71,22 +92,15 @@ fun ApplicationListScreen(
             label = "notes",
         )
 
-        Button(
-            modifier = Modifier.fillMaxWidth(),
+        SingleButton(
+            label = "Add",
             onClick = {
-            onAddApplication(
-                ApplicationFormData(
-                    zoneName,
-                    productName,
-                    appliedAt,
-                    reapplyDays,
-                    quantity,
-                    notes
+                onAddApplication(
+                    ApplicationFormData(
+                        zoneName, productName, appliedAt, reapplyDays, quantity, notes
+                    )
                 )
-            )
-        }) {
-            Text("Add")
-        }
+            })
 
         Spacer(modifier = Modifier.size(16.dp))
 
@@ -96,7 +110,7 @@ fun ApplicationListScreen(
                 HistoryItem(
                     application = application,
                     modifier = Modifier.clickable {
-                        onApplicationClick(application.uid.toString())
+                        onApplicationClick(application.aid.toString())
                     }
                 )
             }
@@ -106,7 +120,7 @@ fun ApplicationListScreen(
 
 @Preview
 @Composable
-fun ApplicationListScreenPreview(){
+fun ApplicationListScreenPreview() {
 
     FieldTrackTheme {
         Surface {

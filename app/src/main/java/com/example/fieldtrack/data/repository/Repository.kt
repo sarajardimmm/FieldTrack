@@ -6,11 +6,19 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(
     private val applicationDao: ApplicationDao
-){
+) {
     fun getApplications() = applicationDao.getAll()
 
     suspend fun getApplication(id: String) = applicationDao.getById(id)
-    suspend fun insert(applicationEntity: ApplicationEntity) {
+    suspend fun insertApplication(applicationEntity: ApplicationEntity) {
         applicationDao.insert(applicationEntity)
+    }
+
+    suspend fun deleteApplication(id: String) {
+        applicationDao.delete(id)
+    }
+
+    suspend fun updateApplication(applicationEntity: ApplicationEntity) {
+        applicationDao.update(applicationEntity)
     }
 }

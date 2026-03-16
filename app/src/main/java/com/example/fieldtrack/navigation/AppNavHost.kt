@@ -24,7 +24,9 @@ import com.example.fieldtrack.feature.applicationlist.ApplicationListRoute
             }
 
             composable("application_details/{applicationId}") {
-                ApplicationDetailRoute()
+                ApplicationDetailRoute(onDelete = {
+                    navController.navigate("application_list")
+                })
             }
     }
 }

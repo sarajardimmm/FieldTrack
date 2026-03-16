@@ -18,8 +18,7 @@ class ApplicationDetailViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val applicationId: String =
-            checkNotNull(savedStateHandle["applicationId"])
+    private val applicationId: String = checkNotNull(savedStateHandle["applicationId"])
     var application by mutableStateOf<ApplicationEntity?>(null)
         private set
 
@@ -29,5 +28,10 @@ class ApplicationDetailViewModel @Inject constructor(
         }
     }
 
+    fun onDelete() {
+        viewModelScope.launch {
+            repository.deleteApplication(applicationId)
 
+        }
+    }
 }

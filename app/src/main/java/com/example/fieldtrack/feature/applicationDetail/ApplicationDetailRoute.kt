@@ -5,9 +5,15 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
 fun ApplicationDetailRoute(
-    viewModel: ApplicationDetailViewModel = hiltViewModel()) {
+    onDelete: () -> Unit,
+    viewModel: ApplicationDetailViewModel = hiltViewModel()
+) {
 
     ApplicationDetailScreen(
-        application = viewModel.application
+        application = viewModel.application,
+        onPrimaryAction = {
+            viewModel.onDelete()
+            onDelete()
+        }
     )
 }
