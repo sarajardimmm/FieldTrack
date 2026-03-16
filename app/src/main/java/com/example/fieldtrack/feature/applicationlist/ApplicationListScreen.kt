@@ -1,6 +1,5 @@
 package com.example.fieldtrack.feature.applicationlist
 
-import android.app.Application
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,6 +23,7 @@ import com.example.fieldtrack.data.db.entity.ApplicationEntity
 import com.example.fieldtrack.ui.components.ApplicationSamplePreviewData
 import com.example.fieldtrack.ui.components.FormField
 import com.example.fieldtrack.ui.components.HistoryItem
+import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
 fun ApplicationListScreen(
@@ -107,5 +108,9 @@ fun ApplicationListScreen(
 @Composable
 fun ApplicationListScreenPreview(){
 
-    ApplicationListScreen({}, {}, ApplicationSamplePreviewData.applicationListSample )
+    FieldTrackTheme {
+        Surface {
+            ApplicationListScreen({}, {}, ApplicationSamplePreviewData.applicationListSample)
+        }
+    }
 }

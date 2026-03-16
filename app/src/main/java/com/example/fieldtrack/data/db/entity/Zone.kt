@@ -8,4 +8,5 @@ import androidx.room.PrimaryKey
 data class Zone(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "name") val name: String?,
+    //cultivo
     @ColumnInfo(name = "notes") val notes: String?)

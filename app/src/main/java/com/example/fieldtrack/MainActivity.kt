@@ -6,16 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.compose.rememberNavController
 import com.example.fieldtrack.data.repository.Repository
 import com.example.fieldtrack.navigation.MyApp
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
@@ -45,7 +40,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Log.d("Sara", "MainActivity")
-            MyApp()
+            FieldTrackTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    MyApp()
+                }
+            }
         }
     }
 }
