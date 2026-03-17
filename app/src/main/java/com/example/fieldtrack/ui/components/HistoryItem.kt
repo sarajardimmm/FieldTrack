@@ -16,11 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
-fun HistoryItem(application: ApplicationEntity, modifier: Modifier) {
+fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -32,9 +32,9 @@ fun HistoryItem(application: ApplicationEntity, modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                application.zoneName?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+                logEntry.zoneName?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
                 Spacer(modifier = Modifier.height(4.dp))
-                application.productName?.let {
+                logEntry.productName?.let {
                     Text(
                         it,
                         style = MaterialTheme.typography.bodyMedium
@@ -44,9 +44,9 @@ fun HistoryItem(application: ApplicationEntity, modifier: Modifier) {
             Spacer(modifier = Modifier.height(4.dp))
 
             Column {
-                application.appliedAt?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+                logEntry.appliedAt?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
                 Spacer(modifier = Modifier.height(4.dp))
-                application.reapplyDays?.let {
+                logEntry.reapplyDays?.let {
                     Text(
                         it,
                         style = MaterialTheme.typography.bodyMedium
@@ -60,7 +60,7 @@ fun HistoryItem(application: ApplicationEntity, modifier: Modifier) {
 @Preview
 @Composable
 fun HistoryItemPreview() {
-    val application = ApplicationEntity(
+    val logEntryEntity = LogEntryEntity(
         zoneName = "Back yard",
         productName = "Pesticide x",
         appliedAt = "Dec 5 2025",
@@ -71,7 +71,7 @@ fun HistoryItemPreview() {
 
     FieldTrackTheme {
         Surface {
-            HistoryItem(application = application, modifier = Modifier)
+            HistoryItem(logEntry = logEntryEntity, modifier = Modifier)
         }
     }
 }

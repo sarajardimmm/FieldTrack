@@ -1,6 +1,6 @@
-package com.example.fieldtrack.feature.applicationlist
+package com.example.fieldtrack.feature.logentryhistory
 
-data class ApplicationFormData(
+data class LogEntryFormData(
     val zoneName: String,
     val productName: String,
     val appliedAt: String,

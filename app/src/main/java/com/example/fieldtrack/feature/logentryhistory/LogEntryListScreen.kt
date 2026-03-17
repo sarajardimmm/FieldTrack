@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.applicationlist
+package com.example.fieldtrack.feature.logentryhistory
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,28 +13,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.ui.components.AppTopBar
-import com.example.fieldtrack.ui.components.ApplicationForm
-import com.example.fieldtrack.ui.components.ApplicationSamplePreviewData
+import com.example.fieldtrack.ui.components.LogEntryForm
+import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
 import com.example.fieldtrack.ui.components.HistoryItem
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
-fun ApplicationListScreen(
-    onApplicationClick: (String) -> Unit,
-    onAddApplication: (ApplicationFormData) -> Unit,
-    applicationHistory: List<ApplicationEntity>
+fun LogEntryListScreen(
+    onLogEntryClick: (String) -> Unit,
+    onAddLogEntry: (LogEntryFormData) -> Unit,
+    logEntryEntities: List<LogEntryEntity>
 ) {
     Scaffold(
         topBar = {
             AppTopBar("")
         }
     ) { innerPadding ->
-        ApplicationListContent(
-            onApplicationClick,
-            onAddApplication,
-            applicationHistory,
+        LogEntryListContent(
+            onLogEntryClick,
+            onAddLogEntry,
+            logEntryEntities,
             Modifier.padding(innerPadding)
         )
     }
@@ -42,27 +42,27 @@ fun ApplicationListScreen(
 }
 
 @Composable
-fun ApplicationListContent(
-    onApplicationClick: (String) -> Unit,
-    onAddApplication: (ApplicationFormData) -> Unit,
-    applicationHistory: List<ApplicationEntity>,
+fun LogEntryListContent(
+    onLogEntryClick: (String) -> Unit,
+    onAddLogEntry: (LogEntryFormData) -> Unit,
+    logEntryHistory: List<LogEntryEntity>,
     modifier: Modifier
 ) {
     Column(modifier.padding(12.dp)) {
-        ApplicationForm(
+        LogEntryForm(
             actionLabel = "Add",
-            onApplicationAction = onAddApplication
+            onLogEntryAction = onAddLogEntry
         )
 
         Spacer(modifier = Modifier.size(16.dp))
 
         LazyColumn {
-            items(applicationHistory) { application ->
+            items(logEntryHistory) { logEntry ->
 
                 HistoryItem(
-                    application = application,
+                    logEntry = logEntry,
                     modifier = Modifier.clickable {
-                        onApplicationClick(application.aid.toString())
+                        onLogEntryClick(logEntry.aid.toString())
                     }
                 )
             }
@@ -72,11 +72,11 @@ fun ApplicationListContent(
 
 @Preview
 @Composable
-fun ApplicationListScreenPreview() {
+fun LogEntryListScreenPreview() {
 
     FieldTrackTheme {
         Surface {
-            ApplicationListScreen({}, {}, ApplicationSamplePreviewData.applicationListSample)
+            LogEntryListScreen({}, {}, LogEntrySamplePreviewData.logEntryEntityListSample)
         }
     }
 }

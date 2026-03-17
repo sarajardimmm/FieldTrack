@@ -2,7 +2,7 @@ package com.example.fieldtrack.di
 
 import android.content.Context
 import com.example.fieldtrack.data.db.AppDatabase
-import com.example.fieldtrack.data.db.dao.ApplicationDao
+import com.example.fieldtrack.data.db.dao.LogEntryDao
 import com.example.fieldtrack.data.repository.Repository
 import dagger.Module
 import dagger.Provides
@@ -21,15 +21,15 @@ object DataModule {
         AppDatabase.getInstance(context)
 
     @Provides
-    fun provideDao(database: AppDatabase): ApplicationDao {
-        return database.applicationDao()
+    fun provideDao(database: AppDatabase): LogEntryDao {
+        return database.logEntryDao()
     }
 
     @Provides
     @Singleton
     fun provideApplicationRepository(
-        applicationDao: ApplicationDao
+        logEntryDao: LogEntryDao
     ): Repository {
-        return Repository(applicationDao)
+        return Repository(logEntryDao)
     }
 }

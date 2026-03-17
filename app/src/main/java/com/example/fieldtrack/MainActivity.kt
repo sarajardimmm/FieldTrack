@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        repository.getApplications()
+        repository.getLogEntries()
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach {
                 if (it.isNotEmpty()) {

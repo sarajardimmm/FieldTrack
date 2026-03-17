@@ -11,23 +11,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fieldtrack.feature.applicationlist.ApplicationFormData
+import com.example.fieldtrack.feature.logentryhistory.LogEntryFormData
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 
 @Composable
-fun ApplicationForm(
+fun LogEntryForm(
     actionLabel: String,
-    onApplicationAction: (ApplicationFormData) -> Unit,
+    onLogEntryAction: (LogEntryFormData) -> Unit,
     modifier: Modifier = Modifier,
-    applicationFormData: ApplicationFormData? = null
+    logEntryFormData: LogEntryFormData? = null
 ) {
-    var zoneName by remember { mutableStateOf(applicationFormData?.zoneName ?: "") }
-    var productName by remember { mutableStateOf(applicationFormData?.productName ?: "") }
-    var appliedAt by remember { mutableStateOf(applicationFormData?.appliedAt ?: "") }
-    var reapplyDays by remember { mutableStateOf(applicationFormData?.reapplyDays ?: "") }
-    var quantity by remember { mutableStateOf(applicationFormData?.quantity ?: "") }
-    var notes by remember { mutableStateOf(applicationFormData?.notes ?: "") }
+    var zoneName by remember { mutableStateOf(logEntryFormData?.zoneName ?: "") }
+    var productName by remember { mutableStateOf(logEntryFormData?.productName ?: "") }
+    var appliedAt by remember { mutableStateOf(logEntryFormData?.appliedAt ?: "") }
+    var reapplyDays by remember { mutableStateOf(logEntryFormData?.reapplyDays ?: "") }
+    var quantity by remember { mutableStateOf(logEntryFormData?.quantity ?: "") }
+    var notes by remember { mutableStateOf(logEntryFormData?.notes ?: "") }
 
     Column(modifier.padding(12.dp)) {
         FormField(
@@ -64,8 +64,8 @@ fun ApplicationForm(
         SingleButton(
             label = actionLabel,
             onClick = {
-                onApplicationAction(
-                    ApplicationFormData(
+                onLogEntryAction(
+                    LogEntryFormData(
                         zoneName, productName, appliedAt, reapplyDays, quantity, notes
                     )
                 )
@@ -75,18 +75,18 @@ fun ApplicationForm(
 
 @Preview
 @Composable
-fun AddApplicationFormPreview() {
+fun AddLogEntryFormPreview() {
     FieldTrackTheme {
         Surface {
-            ApplicationForm("Add", {})
+            LogEntryForm("Add", {})
         }
     }
 }
 
 @Preview
 @Composable
-fun EditApplicationFormPreview() {
-    val applicationToEdit = ApplicationFormData(
+fun EditLogEntryFormPreview() {
+    val logEntryFormData = LogEntryFormData(
         "Front garden",
         "adubo",
         "5 Dec 2025",
@@ -97,7 +97,7 @@ fun EditApplicationFormPreview() {
 
     FieldTrackTheme {
         Surface {
-            ApplicationForm("Edit", {}, applicationFormData = applicationToEdit)
+            LogEntryForm("Edit", {}, logEntryFormData = logEntryFormData)
         }
     }
 }

@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.fieldtrack.data.db.dao.ApplicationDao
-import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.data.db.dao.LogEntryDao
+import com.example.fieldtrack.data.db.entity.LogEntryEntity
 
-@Database(entities = [ApplicationEntity::class], version = 5, exportSchema = false)
+@Database(entities = [LogEntryEntity::class], version = 6, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun applicationDao(): ApplicationDao
+    abstract fun logEntryDao(): LogEntryDao
 
     companion object {
         @Volatile

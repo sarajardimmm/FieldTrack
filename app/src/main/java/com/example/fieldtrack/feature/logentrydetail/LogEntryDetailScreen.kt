@@ -1,12 +1,10 @@
-package com.example.fieldtrack.feature.applicationDetail
+package com.example.fieldtrack.feature.logentrydetail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -15,26 +13,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.ui.components.AppTopBar
-import com.example.fieldtrack.ui.components.ApplicationSamplePreviewData
+import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
 import com.example.fieldtrack.ui.components.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
-fun ApplicationDetailScreen(application: ApplicationEntity?, onPrimaryAction: () -> Unit) {
+fun LogEntryDetailScreen(logEntryEntity: LogEntryEntity?, onPrimaryAction: () -> Unit) {
     Scaffold(
         topBar = {
             AppTopBar("")
         }
     ) { innerPadding ->
-        ApplicationDetailContent(application, onPrimaryAction, Modifier.padding(innerPadding))
+        LogEntryDetailContent(logEntryEntity, onPrimaryAction, Modifier.padding(innerPadding))
     }
 }
 
 @Composable
-fun ApplicationDetailContent(
-    application: ApplicationEntity?,
+fun LogEntryDetailContent(
+    logEntryEntity: LogEntryEntity?,
     onPrimaryAction: () -> Unit,
     modifier: Modifier
 ) {
@@ -45,12 +43,12 @@ fun ApplicationDetailContent(
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
             Spacer(modifier = Modifier.height(24.dp))
-            application?.zoneName?.let { Text(it) }
-            application?.productName?.let { Text(it) }
-            application?.quantity?.let { Text(it) }
-            application?.appliedAt?.let { Text(it) }
-            application?.reapplyDays?.let { Text(it) }
-            application?.notes?.let { Text(it) }
+            logEntryEntity?.zoneName?.let { Text(it) }
+            logEntryEntity?.productName?.let { Text(it) }
+            logEntryEntity?.quantity?.let { Text(it) }
+            logEntryEntity?.appliedAt?.let { Text(it) }
+            logEntryEntity?.reapplyDays?.let { Text(it) }
+            logEntryEntity?.notes?.let { Text(it) }
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -65,10 +63,10 @@ fun ApplicationDetailContent(
 
 @Preview
 @Composable
-fun ApplicationDetailScreenPreview() {
+fun LogEntryDetailScreenPreview() {
     FieldTrackTheme {
         Surface {
-            ApplicationDetailScreen(ApplicationSamplePreviewData.applicationSample, {})
+            LogEntryDetailScreen(LogEntrySamplePreviewData.logEntryEntitySample, {})
         }
     }
 }

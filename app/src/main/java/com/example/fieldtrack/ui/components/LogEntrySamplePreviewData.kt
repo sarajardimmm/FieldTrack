@@ -1,9 +1,9 @@
 package com.example.fieldtrack.ui.components
 
-import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.data.db.entity.LogEntryEntity
 
-object ApplicationSamplePreviewData {
-    val applicationSample = ApplicationEntity(
+object LogEntrySamplePreviewData {
+    val logEntryEntitySample = LogEntryEntity(
         zoneName = "Back yard",
         productName = "Pesticide x",
         appliedAt = "Dec 5 2025",
@@ -12,9 +12,9 @@ object ApplicationSamplePreviewData {
         notes = "applied just before blooming started"
     )
 
-    val applicationListSample = listOf(
-        applicationSample,
-        ApplicationEntity(
+    val logEntryEntityListSample = listOf(
+        logEntryEntitySample,
+        LogEntryEntity(
             zoneName = "Front yard",
             productName = "Pesticide y",
             appliedAt = "Jan 5 2025",
@@ -22,7 +22,7 @@ object ApplicationSamplePreviewData {
             quantity = "",
             notes = "applied just before blooming started on the apple tree"
         ),
-        ApplicationEntity(
+        LogEntryEntity(
             zoneName = "Orchids",
             productName = "Fungicide",
             appliedAt = "Jan 5 2025",

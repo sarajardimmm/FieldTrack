@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class ApplicationEntity (
+data class LogEntryEntity (
     @PrimaryKey(autoGenerate = true) val aid: Int = 0,
     @ColumnInfo(name = "zoneName") val zoneName: String?,
     @ColumnInfo(name = "productName") val productName: String?,

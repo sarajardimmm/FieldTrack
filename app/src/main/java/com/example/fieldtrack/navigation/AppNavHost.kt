@@ -4,28 +4,28 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.fieldtrack.feature.applicationDetail.ApplicationDetailRoute
-import com.example.fieldtrack.feature.applicationlist.ApplicationListRoute
+import com.example.fieldtrack.feature.logentrydetail.LogEntryDetailRoute
+import com.example.fieldtrack.feature.logentryhistory.LotEntryListRoute
 
 @Composable
     fun MyApp() {
         val navController = rememberNavController()
-        val startRoute = "application_list"
+        val startRoute = "log_entry_list"
         NavHost(
             navController,
             startDestination = startRoute
         ) {
-            composable("application_list") {
-                ApplicationListRoute(
-                    onApplicationClick = {applicationId ->
-                        navController.navigate("application_details/$applicationId")
+            composable("log_entry_list") {
+                LotEntryListRoute(
+                    onLogEntryClick = { logEntryId ->
+                        navController.navigate("log_entry_details/$logEntryId")
                     }
                 )
             }
 
-            composable("application_details/{applicationId}") {
-                ApplicationDetailRoute(onDelete = {
-                    navController.navigate("application_list")
+            composable("log_entry_details/{logEntryId}") {
+                LogEntryDetailRoute(onDelete = {
+                    navController.navigate("log_entry_list")
                 })
             }
     }

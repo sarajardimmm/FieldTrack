@@ -1,24 +1,24 @@
 package com.example.fieldtrack.data.repository
 
-import com.example.fieldtrack.data.db.dao.ApplicationDao
-import com.example.fieldtrack.data.db.entity.ApplicationEntity
+import com.example.fieldtrack.data.db.dao.LogEntryDao
+import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val applicationDao: ApplicationDao
+    private val logEntryDao: LogEntryDao
 ) {
-    fun getApplications() = applicationDao.getAll()
+    fun getLogEntries() = logEntryDao.getAll()
 
-    suspend fun getApplication(id: String) = applicationDao.getById(id)
-    suspend fun insertApplication(applicationEntity: ApplicationEntity) {
-        applicationDao.insert(applicationEntity)
+    suspend fun getLogEntry(id: String) = logEntryDao.getById(id)
+    suspend fun insertLogEntry(logEntryEntity: LogEntryEntity) {
+        logEntryDao.insert(logEntryEntity)
     }
 
-    suspend fun deleteApplication(id: String) {
-        applicationDao.delete(id)
+    suspend fun deleteLogEntry(id: String) {
+        logEntryDao.delete(id)
     }
 
-    suspend fun updateApplication(applicationEntity: ApplicationEntity) {
-        applicationDao.update(applicationEntity)
+    suspend fun updateLogEntry(logEntryEntity: LogEntryEntity) {
+        logEntryDao.update(logEntryEntity)
     }
 }
