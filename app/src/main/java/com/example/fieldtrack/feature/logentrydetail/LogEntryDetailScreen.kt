@@ -11,8 +11,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
@@ -24,7 +26,7 @@ import java.time.format.DateTimeFormatter
 fun LogEntryDetailScreen(logEntryEntity: LogEntryEntity?, onPrimaryAction: () -> Unit) {
     Scaffold(
         topBar = {
-            AppTopBar("")
+            AppTopBar(stringResource(R.string.title_log_detail))
         }
     ) { innerPadding ->
         LogEntryDetailContent(logEntryEntity, onPrimaryAction, Modifier.padding(innerPadding))
@@ -51,13 +53,13 @@ fun LogEntryDetailContent(
                 val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
                 Text(it.format(formatter)) 
             }
-            logEntryEntity?.reapplyDays?.let { Text(it) }
+            logEntryEntity?.reapplyDays?.let { "${Text(it.toString())} dias" }
             logEntryEntity?.notes?.let { Text(it) }
 
             Spacer(modifier = Modifier.height(24.dp))
 
             SingleButton(
-                label = "Delete",
+                label = stringResource(R.string.action_delete),
                 onClick = onPrimaryAction,
             )
         }

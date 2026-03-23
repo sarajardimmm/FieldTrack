@@ -11,7 +11,7 @@ data class LogEntryEntity (
     @ColumnInfo(name = "zoneName") val zoneName: String?,
     @ColumnInfo(name = "productName") val productName: String?,
     @ColumnInfo(name = "appliedAt") val appliedAt: LocalDate?,
-    @ColumnInfo(name = "reapplyDays") val reapplyDays: String?,
+    @ColumnInfo(name = "reapplyDays") val reapplyDays: Int?,
     @ColumnInfo(name = "quantity") val quantity: String?,
     @ColumnInfo(name = "notes") val notes: String?,
 )

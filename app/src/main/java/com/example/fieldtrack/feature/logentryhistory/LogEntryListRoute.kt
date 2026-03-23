@@ -11,11 +11,13 @@ fun LotEntryListRoute(
     viewModel: LogEntryListViewModel = hiltViewModel()
 ) {
     val logEntryEntities by viewModel.logEntries.collectAsState(initial = emptyList())
+    val uiState by viewModel.uiState.collectAsState()
 
 
     LogEntryListScreen(
+        uiState = uiState,
+        onEvent = viewModel::onEvent,
         onLogEntryClick = onLogEntryClick,
-        onAddLogEntry = viewModel::addLogEntry,
-        logEntryEntities = logEntryEntities
+        logEntryEntities = logEntryEntities,
     )
 }

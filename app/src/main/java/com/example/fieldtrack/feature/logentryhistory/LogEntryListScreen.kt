@@ -15,15 +15,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.ui.components.AppTopBar
-import com.example.fieldtrack.ui.components.LogEntryForm
-import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
 import com.example.fieldtrack.ui.components.HistoryItem
+import com.example.fieldtrack.ui.components.LogEntryForm
+import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryEntityListSample
+import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryUiStateSample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
 fun LogEntryListScreen(
+    uiState: LogEntryUiState,
+    onEvent: (LogEntryEvent) -> Unit,
     onLogEntryClick: (String) -> Unit,
-    onAddLogEntry: (LogEntryFormData) -> Unit,
     logEntryEntities: List<LogEntryEntity>
 ) {
     Scaffold(
@@ -32,8 +34,10 @@ fun LogEntryListScreen(
         }
     ) { innerPadding ->
         LogEntryListContent(
+            uiState,
+            "Add",
+            onEvent,
             onLogEntryClick,
-            onAddLogEntry,
             logEntryEntities,
             Modifier.padding(innerPadding)
         )
@@ -43,15 +47,18 @@ fun LogEntryListScreen(
 
 @Composable
 fun LogEntryListContent(
+    uiState: LogEntryUiState,
+    value: String,
+    onEvent: (LogEntryEvent) -> Unit,
     onLogEntryClick: (String) -> Unit,
-    onAddLogEntry: (LogEntryFormData) -> Unit,
     logEntryHistory: List<LogEntryEntity>,
     modifier: Modifier
 ) {
     Column(modifier.padding(12.dp)) {
         LogEntryForm(
-            actionLabel = "Add",
-            onLogEntryAction = onAddLogEntry
+            uiState = uiState,
+            actionLabel = value,
+            onEvent = onEvent,
         )
 
         Spacer(modifier = Modifier.size(16.dp))
@@ -76,7 +83,12 @@ fun LogEntryListScreenPreview() {
 
     FieldTrackTheme {
         Surface {
-            LogEntryListScreen({}, {}, LogEntrySamplePreviewData.logEntryEntityListSample)
+            LogEntryListScreen(
+                uiState = logEntryUiStateSample,
+                onEvent = {},
+                onLogEntryClick = {},
+                logEntryEntities = logEntryEntityListSample,
+            )
         }
     }
 }

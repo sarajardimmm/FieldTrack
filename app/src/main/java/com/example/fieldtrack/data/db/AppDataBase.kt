@@ -9,7 +9,7 @@ import com.example.fieldtrack.data.db.util.Converters
 import com.example.fieldtrack.data.db.dao.LogEntryDao
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 
-@Database(entities = [LogEntryEntity::class], version = 6, exportSchema = false)
+@Database(entities = [LogEntryEntity::class], version = 7, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun logEntryDao(): LogEntryDao

@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">FieldTrack</string>
+
+    <!-- Titles -->
+    <string name="title_home">Home</string>
+    <string name="title_log_history">Log History</string>
+    <string name="title_log_detail">Log Detail</string>
+
+    <!-- Log Entry Form -->
+    <string name="label_zone">Zone</string>
+    <string name="label_product">Product</string>
+    <string name="label_applied_at">Applied at</string>
+    <string name="label_reapply_in">Reapply in</string>
+    <string name="label_quantity">Quantity</string>
+    <string name="label_notes">Notes</string>
+    <string name="action_add">Add</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+
 </resources>

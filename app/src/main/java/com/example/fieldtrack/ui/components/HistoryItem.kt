@@ -53,7 +53,7 @@ fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
                 Spacer(modifier = Modifier.height(4.dp))
                 logEntry.reapplyDays?.let {
                     Text(
-                        it,
+                        "$it dias",
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
