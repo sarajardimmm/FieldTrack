@@ -18,6 +18,7 @@ import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
 import com.example.fieldtrack.ui.components.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun LogEntryDetailScreen(logEntryEntity: LogEntryEntity?, onPrimaryAction: () -> Unit) {
@@ -46,7 +47,10 @@ fun LogEntryDetailContent(
             logEntryEntity?.zoneName?.let { Text(it) }
             logEntryEntity?.productName?.let { Text(it) }
             logEntryEntity?.quantity?.let { Text(it) }
-            logEntryEntity?.appliedAt?.let { Text(it) }
+            logEntryEntity?.appliedAt?.let { 
+                val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
+                Text(it.format(formatter)) 
+            }
             logEntryEntity?.reapplyDays?.let { Text(it) }
             logEntryEntity?.notes?.let { Text(it) }
 

@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.fieldtrack.data.db.util.Converters
 import com.example.fieldtrack.data.db.dao.LogEntryDao
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 
 @Database(entities = [LogEntryEntity::class], version = 6, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun logEntryDao(): LogEntryDao
 
@@ -22,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,
-                        "user_table"
+                        "log_entity_table"
                     )
                         .fallbackToDestructiveMigration(false)
                         .build()

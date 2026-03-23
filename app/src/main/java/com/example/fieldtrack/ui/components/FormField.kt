@@ -16,8 +16,11 @@ fun FormField (
     value: String,
     onValueChange : (String) -> Unit,
     label: String,
+    modifier: Modifier = Modifier,
     singleLine: Boolean = true,
     isError: Boolean = false,
+    readOnly: Boolean = false,
+    enabled: Boolean = true
     ){
     OutlinedTextField(
         value = value,
@@ -25,8 +28,10 @@ fun FormField (
         label = { Text(label) },
         singleLine = singleLine,
         isError = isError,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
+        readOnly = readOnly,
+        enabled = enabled
         )
 }
 

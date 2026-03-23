@@ -17,7 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
+import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryEntitySample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
@@ -44,7 +46,10 @@ fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
             Spacer(modifier = Modifier.height(4.dp))
 
             Column {
-                logEntry.appliedAt?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+                logEntry.appliedAt?.let {
+                    val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
+                    Text(it.format(formatter), style = MaterialTheme.typography.bodyMedium)
+                }
                 Spacer(modifier = Modifier.height(4.dp))
                 logEntry.reapplyDays?.let {
                     Text(
@@ -60,14 +65,7 @@ fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
 @Preview
 @Composable
 fun HistoryItemPreview() {
-    val logEntryEntity = LogEntryEntity(
-        zoneName = "Back yard",
-        productName = "Pesticide x",
-        appliedAt = "Dec 5 2025",
-        reapplyDays = "Mar 5 2026",
-        quantity = "",
-        notes = "applied just before blooming started"
-    )
+    val logEntryEntity = logEntryEntitySample
 
     FieldTrackTheme {
         Surface {
