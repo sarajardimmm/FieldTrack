@@ -1,7 +1,7 @@
 package com.example.fieldtrack.ui.components
 
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
-import com.example.fieldtrack.feature.logentryhistory.LogEntryUiState
+import com.example.fieldtrack.feature.logEntryForm.LogEntryUiState
 import java.time.LocalDate
 
 object LogEntrySamplePreviewData {

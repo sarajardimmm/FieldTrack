@@ -14,11 +14,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fieldtrack.feature.logentryhistory.LogEntryEvent
-import com.example.fieldtrack.feature.logentryhistory.LogEntryUiState
+import com.example.fieldtrack.feature.logEntryForm.LogEntryEvent
+import com.example.fieldtrack.feature.logEntryForm.LogEntryUiState
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryUiStateSample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Composable

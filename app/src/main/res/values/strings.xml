@@ -18,5 +18,7 @@
     <string name="action_delete">Delete</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancel</string>
+    <string name="title_log_form">Add New Log Entry</string>
+    <string name="title_log_list">Log Entry List</string>
 
 </resources>

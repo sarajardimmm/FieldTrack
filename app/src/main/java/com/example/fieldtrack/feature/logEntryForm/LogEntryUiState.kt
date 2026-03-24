@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.logentryhistory
+package com.example.fieldtrack.feature.logEntryForm
 
 import java.time.LocalDate
 
