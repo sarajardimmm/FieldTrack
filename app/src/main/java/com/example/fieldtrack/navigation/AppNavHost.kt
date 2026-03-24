@@ -28,7 +28,7 @@ import com.example.fieldtrack.feature.logentryhistory.LotEntryListRoute
             }
 
             composable("log_entry_details/{logEntryId}") {
-                LogEntryDetailRoute(onDelete = {
+                LogEntryDetailRoute(onNavigateBack = {
                     navController.navigate("log_entry_list")
                 })
             }

@@ -23,13 +23,18 @@ import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun LogEntryDetailScreen(logEntryEntity: LogEntryEntity?, onPrimaryAction: () -> Unit) {
+fun LogEntryDetailScreen(
+    logEntryEntity: LogEntryEntity?,
+    onPrimaryAction: () -> Unit,
+    onNavigateBack: () -> Unit
+) {
     Scaffold(
         topBar = {
-            AppTopBar(stringResource(R.string.title_log_detail))
+            AppTopBar(stringResource(R.string.title_log_detail), onBack = onNavigateBack)
         }
     ) { innerPadding ->
-        LogEntryDetailContent(logEntryEntity, onPrimaryAction, Modifier.padding(innerPadding))
+        LogEntryDetailContent(
+            logEntryEntity, onPrimaryAction, onNavigateBack, Modifier.padding(innerPadding))
     }
 }
 
@@ -37,7 +42,8 @@ fun LogEntryDetailScreen(logEntryEntity: LogEntryEntity?, onPrimaryAction: () ->
 fun LogEntryDetailContent(
     logEntryEntity: LogEntryEntity?,
     onPrimaryAction: () -> Unit,
-    modifier: Modifier
+    onNavigateBack: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
@@ -49,9 +55,9 @@ fun LogEntryDetailContent(
             logEntryEntity?.zoneName?.let { Text(it) }
             logEntryEntity?.productName?.let { Text(it) }
             logEntryEntity?.quantity?.let { Text(it) }
-            logEntryEntity?.appliedAt?.let { 
+            logEntryEntity?.appliedAt?.let {
                 val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
-                Text(it.format(formatter)) 
+                Text(it.format(formatter))
             }
             logEntryEntity?.reapplyDays?.let { "${Text(it.toString())} dias" }
             logEntryEntity?.notes?.let { Text(it) }
@@ -60,7 +66,10 @@ fun LogEntryDetailContent(
 
             SingleButton(
                 label = stringResource(R.string.action_delete),
-                onClick = onPrimaryAction,
+                onClick = {
+                    onPrimaryAction()
+                    onNavigateBack()
+                },
             )
         }
     }
@@ -72,7 +81,7 @@ fun LogEntryDetailContent(
 fun LogEntryDetailScreenPreview() {
     FieldTrackTheme {
         Surface {
-            LogEntryDetailScreen(LogEntrySamplePreviewData.logEntryEntitySample, {})
+            LogEntryDetailScreen(LogEntrySamplePreviewData.logEntryEntitySample, {}) {}
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import com.example.fieldtrack.R
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -16,12 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.HistoryItem
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryEntityListSample
-import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryUiStateSample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -32,7 +31,7 @@ fun LogEntryListScreen(
 ) {
     Scaffold(
         topBar = {
-            AppTopBar("")
+            AppTopBar(stringResource(R.string.title_log_history))
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -57,23 +56,17 @@ fun LogEntryListContent(
     logEntryHistory: List<LogEntryEntity>,
     modifier: Modifier
 ) {
-    Scaffold(
-        topBar = {
-            AppTopBar(stringResource(R.string.title_log_list))
-        }
-    ) { innerPadding ->
-        Column(modifier.padding(innerPadding)) {
+    Column(modifier.padding(12.dp)) {
 
-            LazyColumn {
-                items(logEntryHistory) { logEntry ->
+        LazyColumn {
+            items(logEntryHistory) { logEntry ->
 
-                    HistoryItem(
-                        logEntry = logEntry,
-                        modifier = Modifier.clickable {
-                            onLogEntryClick(logEntry.aid.toString())
-                        }
-                    )
-                }
+                HistoryItem(
+                    logEntry = logEntry,
+                    modifier = Modifier.clickable {
+                        onLogEntryClick(logEntry.aid.toString())
+                    }
+                )
             }
         }
     }
