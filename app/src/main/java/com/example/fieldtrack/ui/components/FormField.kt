@@ -2,7 +2,9 @@ package com.example.fieldtrack.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,9 +41,14 @@ fun FormField(
         modifier = modifier.fillMaxWidth(),
         readOnly = readOnly,
         enabled = enabled,
+        shape = MaterialTheme.shapes.medium,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline
+        ),
         keyboardOptions = KeyboardOptions(
             keyboardType = if (digitsOnly) KeyboardType.Number else KeyboardType.Text
-        )
+        ),
     )
 }
 

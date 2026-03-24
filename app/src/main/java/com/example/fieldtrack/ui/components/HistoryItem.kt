@@ -1,5 +1,6 @@
 package com.example.fieldtrack.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,37 +25,58 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
+        shape = MaterialTheme.shapes.large,
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        ),
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
+        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
+
         Row(
-            modifier = Modifier.padding(vertical = 12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                logEntry.zoneName?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
-                Spacer(modifier = Modifier.height(4.dp))
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                logEntry.zoneName?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+
                 logEntry.productName?.let {
                     Text(
-                        it,
-                        style = MaterialTheme.typography.bodyMedium
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(4.dp))
 
-            Column {
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
                 logEntry.appliedAt?.let {
-                    val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
-                    Text(it.format(formatter), style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = it.format(formatter),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
-                Spacer(modifier = Modifier.height(4.dp))
+
                 logEntry.reapplyDays?.let {
                     Text(
-                        "$it dias",
-                        style = MaterialTheme.typography.bodyMedium
+                        text = "$it days",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }

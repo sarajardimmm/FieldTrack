@@ -1,7 +1,11 @@
 package com.example.fieldtrack.feature.logentryhistory
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -58,12 +62,20 @@ fun LogEntryListContent(
 ) {
     Column(modifier.padding(12.dp)) {
 
-        LazyColumn {
+        LazyColumn (
+            modifier = modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(vertical = 16.dp)
+        ) {
             items(logEntryHistory) { logEntry ->
 
                 HistoryItem(
                     logEntry = logEntry,
-                    modifier = Modifier.clickable {
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
                         onLogEntryClick(logEntry.aid.toString())
                     }
                 )

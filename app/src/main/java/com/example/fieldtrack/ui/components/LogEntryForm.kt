@@ -1,17 +1,23 @@
 package com.example.fieldtrack.ui.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.feature.logEntryForm.LogEntryEvent
@@ -33,62 +39,89 @@ fun LogEntryForm(
     if (showDatePicker) {
         FieldTrackDatePickerDialog(
             initialDate = uiState.appliedAt,
-            onDateSelected = {date ->
+            onDateSelected = { date ->
                 onEvent(LogEntryEvent.AppliedAtChanged(date))
             },
             onDismiss = { showDatePicker = false }
         )
     }
 
-    Column(modifier.padding(12.dp)) {
-        FormField(
-            value = uiState.zoneName,
-            onValueChange = { onEvent(LogEntryEvent.ZoneChanged(it)) },
-            label = "zone",
-        )
-        FormField(
-            value = uiState.productName ?: "",
-            onValueChange = { onEvent(LogEntryEvent.ProductChanged(it))  },
-            label = "product"
-        )
-        
-        Box(modifier = Modifier.fillMaxWidth()) {
-            FormField(
-                value = uiState.appliedAt.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) ?: "null",
-                onValueChange = {},
-                label = "applied at",
-                readOnly = true,
-                enabled = true
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        tonalElevation = 2.dp,
+        shape = MaterialTheme.shapes.large
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = "Basic Info",
+                style = MaterialTheme.typography.titleMedium
             )
-            // Invisible overlay to catch clicks and prevent focus/keyboard
-            Box(
-                modifier = Modifier
-                    .matchParentSize()
-                    .clickable { showDatePicker = true }
+            FormField(
+                value = uiState.zoneName,
+                onValueChange = { onEvent(LogEntryEvent.ZoneChanged(it)) },
+                label = "zone",
+            )
+            FormField(
+                value = uiState.productName ?: "",
+                onValueChange = { onEvent(LogEntryEvent.ProductChanged(it)) },
+                label = "product"
+            )
+
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "Applied At",
+                    style = MaterialTheme.typography.labelMedium
+                )
+
+                FormField(
+                    value = uiState.appliedAt.format(
+                        DateTimeFormatter.ofPattern("dd MMM yyyy")
+                    ),
+                    onValueChange = {},
+                    label = "",
+                    readOnly = true
+                )
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable { showDatePicker = true }
+                )
+
+            }
+
+            Text(
+                text = "Details",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            FormField(
+                value = uiState.reapplyDays ?: "",
+                onValueChange = { onEvent(LogEntryEvent.ReapplyDaysChanged(it)) },
+                label = "reapply in days",
+                digitsOnly = true
+            )
+            FormField(
+                value = uiState.quantity ?: "",
+                onValueChange = { onEvent(LogEntryEvent.QuantityChanged(it)) },
+                label = "quantity",
+            )
+            FormField(
+                value = uiState.notes ?: "",
+                onValueChange = { onEvent(LogEntryEvent.NotesChanged(it)) },
+                label = "notes",
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            SingleButton(
+                label = actionLabel,
+                onClick = { onEvent(LogEntryEvent.SaveClicked) }
             )
         }
-        
-        FormField(
-            value = uiState.reapplyDays ?: "",
-            onValueChange = { onEvent(LogEntryEvent.ReapplyDaysChanged(it)) },
-            label = "reapply in days",
-            digitsOnly = true
-        )
-        FormField(
-            value = uiState.quantity ?: "",
-            onValueChange = { onEvent(LogEntryEvent.QuantityChanged(it))  },
-            label = "quantity",
-        )
-        FormField(
-            value = uiState.notes ?: "",
-            onValueChange = { onEvent(LogEntryEvent.NotesChanged(it))  },
-            label = "notes",
-        )
-
-        SingleButton(
-            label = actionLabel,
-            onClick = { onEvent(LogEntryEvent.SaveClicked) }
-        )
     }
 }
 
