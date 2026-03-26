@@ -24,37 +24,70 @@ class LogEntryFormViewModel @Inject constructor(
     private val _effect = MutableSharedFlow<LogEntryEffect>()
     val effect = _effect.asSharedFlow()
 
-    //zone is required
-    //applied date is required
-    //for now, product required, later, when we support pruning/harvesting, product can become optional
-
     fun onEvent(event: LogEntryEvent) {
         when (event) {
             is LogEntryEvent.ZoneChanged -> {
-                _uiState.update { it.copy(zoneName = event.value) }
+                _uiState.update {
+                    it.copy(
+                        zoneName = event.value,
+                        zoneNameError = null
+                    )
+                }
             }
+
             is LogEntryEvent.ProductChanged -> {
-                _uiState.update { it.copy(productName = event.value) }
+                _uiState.update {
+                    it.copy(
+                        productName = event.value,
+                        productNameError = null
+                    )
+                }
             }
+
             is LogEntryEvent.ReapplyDaysChanged -> {
                 _uiState.update { it.copy(reapplyDays = event.value) }
             }
+
             is LogEntryEvent.AppliedAtChanged -> {
                 _uiState.update { it.copy(appliedAt = event.value) }
             }
+
             is LogEntryEvent.QuantityChanged -> {
                 _uiState.update { it.copy(quantity = event.value) }
             }
+
             is LogEntryEvent.NotesChanged -> {
                 _uiState.update { it.copy(notes = event.value) }
             }
+
             LogEntryEvent.SaveClicked -> {
                 addLogEntry()
             }
         }
     }
 
+    private fun validateForm(): Boolean {
+        val state = _uiState.value
+
+        val zoneError =
+            if (state.zoneName.isNullOrBlank()) "Zone is required" else null
+
+        val productError =
+            if (state.productName.isNullOrBlank()) "Product is required" else null
+
+        _uiState.update {
+            it.copy(
+                zoneNameError = zoneError,
+                productNameError = productError,
+            )
+        }
+
+        return zoneError == null && productError == null
+    }
+
     fun addLogEntry() {
+        if (!validateForm()) return
+
         val state = _uiState.value
 
         val logEntryEntity = LogEntryEntity(
@@ -68,15 +101,7 @@ class LogEntryFormViewModel @Inject constructor(
 
         viewModelScope.launch {
             repository.insertLogEntry(logEntryEntity)
-        }
-        //validate if success on save
-        viewModelScope.launch {
             _effect.emit(LogEntryEffect.NavigateBack)
         }
     }
-
-    //zone is required
-    //applied date is required
-    //for now, product required, later, when we support pruning/harvesting, product can become optional
-
 }
