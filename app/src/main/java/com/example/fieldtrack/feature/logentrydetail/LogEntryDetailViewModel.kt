@@ -31,7 +31,6 @@ class LogEntryDetailViewModel @Inject constructor(
     fun onDelete() {
         viewModelScope.launch {
             repository.deleteLogEntry(logEntryId)
-
         }
     }
 }
