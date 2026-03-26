@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LogEntryDao {
-    @Query("SELECT * FROM logentryentity")
+    @Query("SELECT * FROM logentryentity ORDER BY createdAt DESC")
     fun getAll(): Flow<List<LogEntryEntity>>
 
     @Query("SELECT * FROM logentryentity WHERE aid IN (:logEntryIds)")

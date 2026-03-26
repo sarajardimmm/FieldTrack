@@ -14,4 +14,5 @@ data class LogEntryEntity (
     @ColumnInfo(name = "reapplyDays") val reapplyDays: Int?,
     @ColumnInfo(name = "quantity") val quantity: String?,
     @ColumnInfo(name = "notes") val notes: String?,
+    @ColumnInfo(name = "createdAt") val createdAt: Long = System.currentTimeMillis()
 )
