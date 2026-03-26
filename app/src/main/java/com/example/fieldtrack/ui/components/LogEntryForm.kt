@@ -119,7 +119,7 @@ fun LogEntryForm(
 
             SingleButton(
                 label = actionLabel,
-                onClick = { onEvent(LogEntryEvent.SaveClicked) }
+                onClick = { onEvent(LogEntryEvent.SaveClicked) },
             )
         }
     }
