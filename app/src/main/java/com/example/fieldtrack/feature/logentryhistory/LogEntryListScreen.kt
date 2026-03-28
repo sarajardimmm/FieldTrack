@@ -47,14 +47,6 @@ fun LogEntryListScreen(
     Scaffold(
         topBar = {
             AppTopBar(stringResource(R.string.title_log_history))
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { onAddLogEntry() },
-                containerColor = MaterialTheme.colorScheme.tertiary,
-            ) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
-            }
         }
     ) { innerPadding ->
         LogEntryListContent(

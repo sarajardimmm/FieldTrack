@@ -1,42 +1,42 @@
 package com.example.fieldtrack.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.fieldtrack.feature.logEntryForm.LogEntryFormRoute
 import com.example.fieldtrack.feature.logentrydetail.LogEntryDetailRoute
 import com.example.fieldtrack.feature.logentryhistory.LotEntryListRoute
+import com.example.fieldtrack.feature.productlist.ProductListRoute
+import com.example.fieldtrack.feature.zonelist.ZoneListRoute
 
 @Composable
-    fun MyApp() {
-        val navController = rememberNavController()
-        val startRoute = "log_entry_list"
-        NavHost(
-            navController,
-            startDestination = startRoute
-        ) {
-            composable("log_entry_list") {
-                LotEntryListRoute(
-                    onLogEntryClick = { logEntryId ->
-                        navController.navigate("log_entry_details/$logEntryId")
-                    },
-                    onAddLogEntry = {
-                        navController.navigate("log_entry_form")
-                    }
-                )
-            }
-
-            composable("log_entry_details/{logEntryId}") {
-                LogEntryDetailRoute(onNavigateBack = {
-                    navController.navigate("log_entry_list")
-                })
-            }
-            composable("log_entry_form") {
-                LogEntryFormRoute(onNavigateBack = {
-                    navController.navigate("log_entry_list")
-                })
-            }
+fun MyApp(modifier: Modifier, navController: NavHostController) {
+    val startRoute = Routes.HISTORY
+    NavHost(
+        navController,
+        startDestination = startRoute) {
+        composable(Routes.HISTORY) {
+            LotEntryListRoute(
+                onLogEntryClick = { logEntryId ->
+                    navController.navigate(Routes.logEntryDetail(logEntryId))
+                },
+                onAddLogEntry = {
+                    navController.navigate(Routes.LOG_ENTRY_FORM)
+                }
+            )
+        }
+        composable(Routes.LOG_ENTRY_DETAIL) {
+            LogEntryDetailRoute(onNavigateBack = {
+                navController.popBackStack()
+            })
+        }
+        composable(Routes.LOG_ENTRY_FORM) {
+            LogEntryFormRoute(onNavigateBack = {
+                navController.popBackStack()
+            })
+        }
         composable(Routes.PRODUCTS) {
             ProductListRoute(onNavigateBack = {
                 navController.popBackStack()

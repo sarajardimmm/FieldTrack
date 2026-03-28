@@ -14,6 +14,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.fieldtrack.data.repository.Repository
 import com.example.fieldtrack.navigation.MyApp
+import com.example.fieldtrack.ui.components.MainScreen
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -42,12 +43,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Log.d("Sara", "MainActivity")
             FieldTrackTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MyApp()
-                }
+                MainScreen()
             }
         }
     }
