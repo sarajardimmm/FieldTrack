@@ -37,5 +37,15 @@ import com.example.fieldtrack.feature.logentryhistory.LotEntryListRoute
                     navController.navigate("log_entry_list")
                 })
             }
+        composable(Routes.PRODUCTS) {
+            ProductListRoute(onNavigateBack = {
+                navController.popBackStack()
+            })
+        }
+        composable(Routes.ZONES) {
+            ZoneListRoute(onNavigateBack = {
+                navController.popBackStack()
+            })
+        }
     }
 }
