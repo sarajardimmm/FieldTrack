@@ -2,6 +2,7 @@ package com.example.fieldtrack.feature.logEntryForm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +31,7 @@ class LogEntryFormViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         zoneName = event.value,
-                        zoneNameError = null
+                        zoneNameErrorRes = null
                     )
                 }
             }
@@ -39,7 +40,7 @@ class LogEntryFormViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         productName = event.value,
-                        productNameError = null
+                        productNameErrorRes = null
                     )
                 }
             }
@@ -70,15 +71,15 @@ class LogEntryFormViewModel @Inject constructor(
         val state = _uiState.value
 
         val zoneError =
-            if (state.zoneName.isNullOrBlank()) "Zone is required" else null
+            if (state.zoneName.isNullOrBlank()) R.string.error_zone_required else null
 
         val productError =
-            if (state.productName.isNullOrBlank()) "Product is required" else null
+            if (state.productName.isNullOrBlank()) R.string.error_product_required else null
 
         _uiState.update {
             it.copy(
-                zoneNameError = zoneError,
-                productNameError = productError,
+                zoneNameErrorRes = zoneError,
+                productNameErrorRes = productError,
             )
         }
 

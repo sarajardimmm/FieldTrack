@@ -10,7 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.fieldtrack.R
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +28,7 @@ fun AppTopBar(
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back"
+                        contentDescription = stringResource(R.string.cd_back)
                     )
                 }
             }
@@ -37,12 +39,12 @@ fun AppTopBar(
 
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "App Top Bar - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "App Top Bar - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
@@ -50,7 +52,7 @@ fun AppTopBar(
 fun AppTopBarWithBackPreview() {
     FieldTrackTheme {
         AppTopBar(
-            title = "Entry Details",
+            title = stringResource(R.string.title_entry_details),
             onBack = {}
         )
     }

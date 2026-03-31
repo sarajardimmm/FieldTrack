@@ -24,7 +24,7 @@ fun LogEntryFormScreen(
         Column(Modifier.padding(innerPadding)) {
             LogEntryForm(
                 uiState = uiState,
-                actionLabel = "Add",
+                actionLabel = stringResource(R.string.action_add),
                 onEvent = onEvent,
             )
         }

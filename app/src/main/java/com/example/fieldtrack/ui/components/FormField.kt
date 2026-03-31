@@ -67,12 +67,12 @@ fun FormField(
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "Form Field - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "Form Field - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
@@ -86,12 +86,12 @@ fun FormFieldPreview() {
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "Form Field - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "Form Field - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )

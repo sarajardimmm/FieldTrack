@@ -1,12 +1,13 @@
 package com.example.fieldtrack.feature.logEntryForm
 
+import androidx.annotation.StringRes
 import java.time.LocalDate
 
 data class LogEntryUiState(
     val zoneName: String? = "",
-    val zoneNameError: String? = null,
+    @param:StringRes val zoneNameErrorRes: Int? = null,
     val productName: String? = "",
-    val productNameError: String? = null,
+    @param:StringRes val productNameErrorRes: Int? = null,
     val appliedAt: LocalDate = LocalDate.now(),
     val quantity: String? = "",
     val reapplyDays: String? = "",

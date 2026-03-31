@@ -9,6 +9,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -43,17 +44,18 @@ fun BottomBarContent(
 ) {
     NavigationBar {
         BottomNavItem.bottomNavItems.forEach { item ->
+            val label = stringResource(item.labelRes)
             NavigationBarItem(
                 selected = currentRoute == item.route,
                 onClick = { onItemClick(item.route) },
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.label
+                        contentDescription = label
                     )
                 },
                 label = {
-                    Text(item.label)
+                    Text(label)
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -68,12 +70,12 @@ fun BottomBarContent(
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "Bottom Bar - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "Bottom Bar - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )

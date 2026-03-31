@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">FieldTrack</string>
+
+    <!-- Titles -->
+    <string name="title_home">Início</string>
+    <string name="title_log_history">Histórico de Registos</string>
+    <string name="title_log_detail">Detalhe do Registo</string>
+    <string name="title_log_form">Adicionar Novo Registo</string>
+    <string name="title_entry_details">Detalhes da Entrada</string>
+    <string name="log_entry_List_title">Lista de Registos</string>
+
+    <!-- Navigation Labels -->
+    <string name="nav_history">Histórico</string>
+    <string name="nav_zones">Zonas</string>
+    <string name="nav_products">Produtos</string>
+
+    <!-- Form Labels & Headers -->
+    <string name="header_basic_info">Informação Básica</string>
+    <string name="header_details">Detalhes</string>
+    <string name="label_zone">Zona</string>
+    <string name="label_product">Produto</string>
+    <string name="label_applied_at">Aplicado em</string>
+    <string name="label_reapply_in">Reaplicar em</string>
+    <string name="label_reapply_in_days">Reaplicar em dias</string>
+    <string name="label_quantity">Quantidade</string>
+    <string name="label_notes">Notas</string>
+
+    <!-- Actions -->
+    <string name="action_add">Adicionar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancelar</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_back">Voltar</string>
+
+    <!-- Under Construction -->
+    <string name="under_construction_title">Em Construção</string>
+    <string name="under_construction_message">Esta funcionalidade ainda está a ser construída 🚧</string>
+
+    <!-- Errors -->
+    <string name="error_zone_required">A zona é obrigatória</string>
+    <string name="error_product_required">O produto é obrigatório</string>
+
+</resources>

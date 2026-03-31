@@ -21,12 +21,12 @@ fun SingleButton(label: String, onClick: () -> Unit, modifier: Modifier = Modifi
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "Single Button - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "Single Button - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )

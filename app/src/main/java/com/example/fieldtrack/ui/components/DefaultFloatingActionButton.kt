@@ -27,12 +27,12 @@ fun DefaultFloatingActionButton(
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "Floating Action Button - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "Floating Action Button - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )

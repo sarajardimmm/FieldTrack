@@ -20,13 +20,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.fieldtrack.R
 import com.example.fieldtrack.feature.logEntryForm.LogEntryEvent
 import com.example.fieldtrack.feature.logEntryForm.LogEntryUiState
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryUiStateSample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 @Composable
 fun LogEntryForm(
@@ -62,31 +65,31 @@ fun LogEntryForm(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Basic Info",
+                text = stringResource(R.string.header_basic_info),
                 style = MaterialTheme.typography.titleMedium
             )
             FormField(
                 value = uiState.zoneName ?: "",
-                errorMessage = uiState.zoneNameError,
+                errorMessage = uiState.zoneNameErrorRes?.let { stringResource(it) },
                 onValueChange = { onEvent(LogEntryEvent.ZoneChanged(it)) },
-                label = "zone",
+                label = stringResource(R.string.label_zone),
             )
             FormField(
                 value = uiState.productName ?: "",
-                errorMessage = uiState.productNameError,
+                errorMessage = uiState.productNameErrorRes?.let { stringResource(it) },
                 onValueChange = { onEvent(LogEntryEvent.ProductChanged(it)) },
-                label = "product"
+                label = stringResource(R.string.label_product)
             )
 
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = "Applied At",
+                    text = stringResource(R.string.label_applied_at),
                     style = MaterialTheme.typography.labelMedium
                 )
 
                 FormField(
                     value = uiState.appliedAt.format(
-                        DateTimeFormatter.ofPattern("dd MMM yyyy")
+                        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
                     ),
                     onValueChange = {},
                     label = "",
@@ -101,25 +104,25 @@ fun LogEntryForm(
             }
 
             Text(
-                text = "Details",
+                text = stringResource(R.string.header_details),
                 style = MaterialTheme.typography.titleMedium
             )
 
             FormField(
                 value = uiState.reapplyDays ?: "",
                 onValueChange = { onEvent(LogEntryEvent.ReapplyDaysChanged(it)) },
-                label = "reapply in days",
+                label = stringResource(R.string.label_reapply_in_days),
                 digitsOnly = true
             )
             FormField(
                 value = uiState.quantity ?: "",
                 onValueChange = { onEvent(LogEntryEvent.QuantityChanged(it)) },
-                label = "quantity",
+                label = stringResource(R.string.label_quantity),
             )
             FormField(
                 value = uiState.notes ?: "",
                 onValueChange = { onEvent(LogEntryEvent.NotesChanged(it)) },
-                label = "notes",
+                label = stringResource(R.string.label_notes),
             )
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -132,14 +135,16 @@ fun LogEntryForm(
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "Log Entry Form - Light",
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    locale = "en"
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "Log Entry Form - Dark",
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    locale = "en"
 )
 @Composable
 fun AddLogEntryFormPreview() {
@@ -147,21 +152,21 @@ fun AddLogEntryFormPreview() {
         Surface {
             LogEntryForm(
                 onEvent = {},
-                actionLabel = "Add",
+                actionLabel = stringResource(R.string.action_add),
                 uiState = LogEntryUiState()
             )
         }
     }
 }
 
-@Preview
+@Preview(locale = "en")
 @Composable
 fun EditLogEntryFormPreview() {
     FieldTrackTheme {
         Surface {
             LogEntryForm(
                 onEvent = {},
-                actionLabel = "Add",
+                actionLabel = stringResource(R.string.action_add),
                 uiState = logEntryUiStateSample
             )
         }

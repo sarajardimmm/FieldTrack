@@ -86,12 +86,12 @@ fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
 }
 
 @Preview(
-    name = "Date Picker - Light",
+    name = "History Item - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "Date Picker - Dark",
+    name = "History Item - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )

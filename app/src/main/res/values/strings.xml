@@ -5,20 +5,42 @@
     <string name="title_home">Home</string>
     <string name="title_log_history">Log History</string>
     <string name="title_log_detail">Log Detail</string>
+    <string name="title_log_form">Add New Log Entry</string>
+    <string name="title_entry_details">Entry Details</string>
+    <string name="log_entry_List_title">Log Entry List</string>
 
-    <!-- Log Entry Form -->
+    <!-- Navigation Labels -->
+    <string name="nav_history">History</string>
+    <string name="nav_zones">Zones</string>
+    <string name="nav_products">Products</string>
+
+    <!-- Form Labels & Headers -->
+    <string name="header_basic_info">Basic Info</string>
+    <string name="header_details">Details</string>
     <string name="label_zone">Zone</string>
     <string name="label_product">Product</string>
     <string name="label_applied_at">Applied at</string>
     <string name="label_reapply_in">Reapply in</string>
+    <string name="label_reapply_in_days">Reapply in days</string>
     <string name="label_quantity">Quantity</string>
     <string name="label_notes">Notes</string>
+
+    <!-- Actions -->
     <string name="action_add">Add</string>
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancel</string>
-    <string name="title_log_form">Add New Log Entry</string>
-    <string name="log_entry_List_title">Log Entry List</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_back">Back</string>
+
+    <!-- Under Construction -->
+    <string name="under_construction_title">Under Construction</string>
+    <string name="under_construction_message">This feature is still being built 🚧</string>
+
+    <!-- Errors -->
+    <string name="error_zone_required">Zone is required</string>
+    <string name="error_product_required">Product is required</string>
 
 </resources>
