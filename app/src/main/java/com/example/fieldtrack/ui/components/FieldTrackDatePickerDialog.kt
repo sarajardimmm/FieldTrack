@@ -45,3 +45,28 @@ fun FieldTrackDatePickerDialog(
         DatePicker(state = datePickerState)
     }
 }
+
+@Preview(
+    name = "Date Picker - Light",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    name = "Date Picker - Dark",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+,
+    locale = "en"
+)
+@Composable
+fun FieldTrackDatePickerDialogPreview() {
+    FieldTrackTheme {
+        Surface {
+            FieldTrackDatePickerDialog(
+                initialDate = LocalDate.now(),
+                onDateSelected = {},
+                onDismiss = {}
+            )
+        }
+    }
+}

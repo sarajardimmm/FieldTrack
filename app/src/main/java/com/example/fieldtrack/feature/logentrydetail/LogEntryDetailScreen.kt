@@ -154,14 +154,6 @@ fun LogEntryDetailContent(
             }
         }
 
-        TextButton(
-            onClick = onNavigateBack,
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(vertical = 8.dp)
-        ) {
-            Text("Back")
-        }
-
         Spacer(modifier = Modifier.height(8.dp))
     }
 }

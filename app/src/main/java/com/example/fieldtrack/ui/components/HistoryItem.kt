@@ -1,5 +1,6 @@
 package com.example.fieldtrack.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -84,7 +85,16 @@ fun HistoryItem(logEntry: LogEntryEntity, modifier: Modifier) {
     }
 }
 
-@Preview
+@Preview(
+    name = "Date Picker - Light",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    name = "Date Picker - Dark",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 fun HistoryItemPreview() {
     val logEntryEntity = logEntryEntitySample

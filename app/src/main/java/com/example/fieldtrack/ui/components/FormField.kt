@@ -1,5 +1,6 @@
 package com.example.fieldtrack.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -65,7 +66,16 @@ fun FormField(
     }
 }
 
-@Preview
+@Preview(
+    name = "Date Picker - Light",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    name = "Date Picker - Dark",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 fun FormFieldPreview() {
     FieldTrackTheme {
@@ -75,7 +85,16 @@ fun FormFieldPreview() {
     }
 }
 
-@Preview
+@Preview(
+    name = "Date Picker - Light",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    name = "Date Picker - Dark",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 fun FormFieldWithErrorPreview() {
     FieldTrackTheme {
