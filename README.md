@@ -16,6 +16,7 @@ This is for my dad, my favourite stakeholder, he wanted me to build him an app b
 - Room Database
 - Hilt (Dependency Injection)
 - MVVM Architecture
+- Mockk (Testing)
 
 ## Architecture
 
@@ -34,8 +35,6 @@ The current implementation keeps the architecture relatively simple for clarity,
 To further evolve the architecture and make it more production-ready, the following improvements could be introduced:
 
 - Introduce a domain layer (use cases) to better encapsulate business logic
-- Improve error handling and UI states (loading / error / success)
-- Add unit tests for ViewModels and data layer
 - Implement a more robust offline-first strategy with data synchronization
 - Refactor into a multi-module architecture for better scalability
 
