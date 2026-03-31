@@ -8,7 +8,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 @Composable
 fun LotEntryListRoute(
     onLogEntryClick: (Long) -> Unit,
-    onAddLogEntry: () -> Unit,
     viewModel: LogEntryListViewModel = hiltViewModel()
 ) {
     val logEntries by viewModel.logEntries.collectAsState(initial = emptyList())
@@ -16,7 +15,6 @@ fun LotEntryListRoute(
 
     LogEntryListScreen(
         onLogEntryClick = onLogEntryClick,
-        logEntries = logEntries,
-        onAddLogEntry = onAddLogEntry
+        logEntries = logEntries
     )
 }

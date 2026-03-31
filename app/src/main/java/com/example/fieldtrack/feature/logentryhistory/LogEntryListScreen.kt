@@ -38,11 +38,11 @@ import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
 import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
+import com.example.fieldtrack.ui.components.EmptyStateCard
 
 @Composable
 fun LogEntryListScreen(
     onLogEntryClick: (Long) -> Unit,
-    onAddLogEntry: () -> Unit,
     logEntries: List<LogEntryDisplay>
 ) {
     Scaffold(
@@ -65,17 +65,11 @@ fun LogEntryListContent(
     modifier: Modifier
 ) {
     if (logEntryHistory.isEmpty()) {
-        Box(
+        EmptyStateCard(
+            title = stringResource(R.string.title_no_log_entries),
+            description = stringResource(R.string.description_no_log_entries),
             modifier = modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            EmptyLogEntryState(
-                onAddLogEntry = {},
-                modifier = modifier
-            )
-        }
+        )
     } else {
         LazyColumn(
             modifier = modifier
@@ -98,52 +92,6 @@ fun LogEntryListContent(
     }
 }
 
-@Composable
-fun EmptyLogEntryState(
-    onAddLogEntry: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Surface(
-            shape = MaterialTheme.shapes.extraLarge,
-            tonalElevation = 2.dp,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Description,
-                    contentDescription = null,
-                    modifier = Modifier.size(48.dp),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "No log entries yet",
-                    style = MaterialTheme.typography.titleMedium
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = "Start tracking your field work by adding your first entry.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
 
 @Preview
 @Composable
@@ -154,7 +102,6 @@ fun LogEntryListScreenPreview() {
             LogEntryListScreen(
                 onLogEntryClick = {},
                 logEntries = logEntryEntityListSample,
-                onAddLogEntry = {}
             )
         }
     }
@@ -169,7 +116,6 @@ fun LogEntryListScreenEmptyPreview() {
             LogEntryListScreen(
                 onLogEntryClick = {},
                 logEntries = emptyList(),
-                onAddLogEntry = {}
             )
         }
     }

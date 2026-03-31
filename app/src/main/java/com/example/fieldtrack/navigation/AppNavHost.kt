@@ -23,9 +23,6 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
             LotEntryListRoute(
                 onLogEntryClick = { logEntryId ->
                     navController.navigate(Routes.logEntryDetail(logEntryId))
-                },
-                onAddLogEntry = {
-                    navController.navigate(Routes.LOG_ENTRY_FORM)
                 }
             )
         }
@@ -36,6 +33,7 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
             LogEntryDetailRoute(onNavigateBack = {
                 navController.popBackStack()
             })
+
         }
         composable(Routes.LOG_ENTRY_FORM) {
             LogEntryFormRoute(onNavigateBack = {
