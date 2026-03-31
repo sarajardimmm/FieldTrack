@@ -7,7 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
-import com.example.fieldtrack.data.repository.Repository
+import com.example.fieldtrack.data.repository.LogEntryRepository
+import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,22 +16,22 @@ import javax.inject.Inject
 @HiltViewModel
 class LogEntryDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val repository: Repository
+    private val logEntryRepository: LogEntryRepository
 ) : ViewModel() {
 
-    private val logEntryId: String = checkNotNull(savedStateHandle["logEntryId"])
-    var logEntryEntity by mutableStateOf<LogEntryEntity?>(null)
+    private val logEntryId: Long = checkNotNull(savedStateHandle["logEntryId"])
+    var logEntryEntity by mutableStateOf<LogEntryDisplay?>(null)
         private set
 
     init {
         viewModelScope.launch {
-            logEntryEntity = repository.getLogEntry(logEntryId)
+            logEntryEntity = logEntryRepository.getLogEntryForDisplay(logEntryId)
         }
     }
 
     fun onDelete() {
         viewModelScope.launch {
-            repository.deleteLogEntry(logEntryId)
+            logEntryRepository.deleteLogEntry(logEntryId)
         }
     }
 }

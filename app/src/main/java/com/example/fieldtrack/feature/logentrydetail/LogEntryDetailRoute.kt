@@ -10,7 +10,7 @@ fun LogEntryDetailRoute(
 ) {
 
     LogEntryDetailScreen(
-        logEntryEntity = viewModel.logEntryEntity,
+        logEntry = viewModel.logEntryEntity,
         onPrimaryAction = viewModel::onDelete,
         onNavigateBack = onNavigateBack
     )

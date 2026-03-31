@@ -21,15 +21,20 @@ object DataModule {
         AppDatabase.getInstance(context)
 
     @Provides
-    fun provideDao(database: AppDatabase): LogEntryDao {
+    fun provideLogEntryDao(database: AppDatabase): LogEntryDao {
         return database.logEntryDao()
     }
 
     @Provides
     @Singleton
-    fun provideApplicationRepository(
-        logEntryDao: LogEntryDao
-    ): Repository {
-        return Repository(logEntryDao)
+    fun provideLogEntryRepository(
+        database: AppDatabase,
+        logEntryDao: LogEntryDao,
+        zoneDao: ZoneDao,
+        productDao: ProductDao
+    ): LogEntryRepository {
+        return LogEntryRepository(database, logEntryDao, zoneDao, productDao)
+    @Provides
+    @Singleton
     }
 }

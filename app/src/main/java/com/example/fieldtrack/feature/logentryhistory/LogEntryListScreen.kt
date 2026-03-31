@@ -37,12 +37,13 @@ import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryEn
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextAlign
+import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
 
 @Composable
 fun LogEntryListScreen(
-    onLogEntryClick: (String) -> Unit,
+    onLogEntryClick: (Long) -> Unit,
     onAddLogEntry: () -> Unit,
-    logEntryEntities: List<LogEntryEntity>
+    logEntries: List<LogEntryDisplay>
 ) {
     Scaffold(
         topBar = {
@@ -51,7 +52,7 @@ fun LogEntryListScreen(
     ) { innerPadding ->
         LogEntryListContent(
             onLogEntryClick,
-            logEntryEntities,
+            logEntries,
             Modifier.padding(innerPadding)
         )
     }
@@ -59,8 +60,8 @@ fun LogEntryListScreen(
 
 @Composable
 fun LogEntryListContent(
-    onLogEntryClick: (String) -> Unit,
-    logEntryHistory: List<LogEntryEntity>,
+    onLogEntryClick: (Long) -> Unit,
+    logEntryHistory: List<LogEntryDisplay>,
     modifier: Modifier
 ) {
     if (logEntryHistory.isEmpty()) {
@@ -89,7 +90,7 @@ fun LogEntryListContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            onLogEntryClick(logEntry.aid.toString())
+                            onLogEntryClick(logEntry.id)
                         }
                 )
             }
@@ -152,7 +153,7 @@ fun LogEntryListScreenPreview() {
         Surface {
             LogEntryListScreen(
                 onLogEntryClick = {},
-                logEntryEntities = logEntryEntityListSample,
+                logEntries = logEntryEntityListSample,
                 onAddLogEntry = {}
             )
         }
@@ -167,7 +168,7 @@ fun LogEntryListScreenEmptyPreview() {
         Surface {
             LogEntryListScreen(
                 onLogEntryClick = {},
-                logEntryEntities = emptyList(),
+                logEntries = emptyList(),
                 onAddLogEntry = {}
             )
         }

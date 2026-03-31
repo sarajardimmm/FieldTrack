@@ -2,7 +2,6 @@ package com.example.fieldtrack.feature.logentrydetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
-import com.example.fieldtrack.data.db.entity.LogEntryEntity
+import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
 import com.example.fieldtrack.ui.components.SingleButton
@@ -35,7 +33,7 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun LogEntryDetailScreen(
-    logEntryEntity: LogEntryEntity?,
+    logEntry: LogEntryDisplay?,
     onPrimaryAction: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
@@ -48,7 +46,7 @@ fun LogEntryDetailScreen(
         }
     ) { innerPadding ->
         LogEntryDetailContent(
-            logEntryEntity = logEntryEntity,
+            logEntry = logEntry,
             onPrimaryAction = onPrimaryAction,
             onNavigateBack = onNavigateBack,
             modifier = Modifier.padding(innerPadding)
@@ -57,7 +55,7 @@ fun LogEntryDetailScreen(
 }
 @Composable
 fun LogEntryDetailContent(
-    logEntryEntity: LogEntryEntity?,
+    logEntry: LogEntryDisplay?,
     onPrimaryAction: () -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
@@ -94,32 +92,32 @@ fun LogEntryDetailContent(
 
                 DetailItem(
                     label = "Zone",
-                    value = logEntryEntity?.zoneName
+                    value = logEntry?.zoneName
                 )
 
                 DetailItem(
                     label = "Product",
-                    value = logEntryEntity?.productName
+                    value = logEntry?.productName
                 )
 
                 DetailItem(
                     label = "Quantity",
-                    value = logEntryEntity?.quantity
+                    value = logEntry?.quantity
                 )
 
                 DetailItem(
                     label = "Applied at",
-                    value = logEntryEntity?.appliedAt?.format(formatter)
+                    value = logEntry?.appliedAt?.format(formatter)
                 )
 
                 DetailItem(
                     label = "Reapply in",
-                    value = logEntryEntity?.reapplyDays?.let { "$it days" }
+                    value = logEntry?.reapplyDays?.let { "$it days" }
                 )
 
                 DetailItem(
                     label = "Notes",
-                    value = logEntryEntity?.notes,
+                    value = logEntry?.notes,
                     multiline = true
                 )
             }
@@ -189,7 +187,7 @@ private fun DetailItem(
 fun LogEntryDetailScreenPreview() {
     FieldTrackTheme {
         Surface {
-            LogEntryDetailScreen(LogEntrySamplePreviewData.logEntryEntitySample, {}) {}
+            LogEntryDetailScreen(LogEntrySamplePreviewData.logEntrySample, {}) {}
         }
     }
 }

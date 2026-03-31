@@ -3,8 +3,10 @@ package com.example.fieldtrack.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.fieldtrack.feature.logEntryForm.LogEntryFormRoute
 import com.example.fieldtrack.feature.logentrydetail.LogEntryDetailRoute
 import com.example.fieldtrack.feature.logentryhistory.LotEntryListRoute
@@ -27,7 +29,10 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 }
             )
         }
-        composable(Routes.LOG_ENTRY_DETAIL) {
+        composable(
+            route = Routes.LOG_ENTRY_DETAIL,
+            arguments = listOf(navArgument("logEntryId") { type = NavType.LongType })
+        ) {
             LogEntryDetailRoute(onNavigateBack = {
                 navController.popBackStack()
             })

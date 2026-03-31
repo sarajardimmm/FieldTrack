@@ -1,13 +1,13 @@
 package com.example.fieldtrack.feature.productlist
 
 import androidx.lifecycle.ViewModel
-import com.example.fieldtrack.data.repository.Repository
+import com.example.fieldtrack.data.repository.LogEntryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
-    private val repository: Repository
+    private val logEntryRepository: LogEntryRepository
 ) : ViewModel() {
     //Each product can have:
     //name

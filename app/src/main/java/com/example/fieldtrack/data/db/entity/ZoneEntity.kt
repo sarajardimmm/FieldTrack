@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "zones",
-    indices = [Index(value = ["normalized_name"], unique = true)]
+    indices = [Index(value = ["normalizedName"], unique = true)]
 )
 data class ZoneEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,

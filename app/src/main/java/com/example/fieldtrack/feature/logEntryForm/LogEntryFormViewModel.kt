@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
-import com.example.fieldtrack.data.repository.Repository
+import com.example.fieldtrack.data.repository.LogEntryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LogEntryFormViewModel @Inject constructor(
-    private val repository: Repository
+    private val logEntryRepository: LogEntryRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LogEntryUiState())
@@ -71,10 +71,10 @@ class LogEntryFormViewModel @Inject constructor(
         val state = _uiState.value
 
         val zoneError =
-            if (state.zoneName.isNullOrBlank()) R.string.error_zone_required else null
+            if (state.zoneName.isBlank()) R.string.error_zone_required else null
 
         val productError =
-            if (state.productName.isNullOrBlank()) R.string.error_product_required else null
+            if (state.productName.isBlank()) R.string.error_product_required else null
 
         _uiState.update {
             it.copy(
@@ -91,17 +91,14 @@ class LogEntryFormViewModel @Inject constructor(
 
         val state = _uiState.value
 
-        val logEntryEntity = LogEntryEntity(
-            zoneName = state.zoneName,
-            productName = state.productName,
-            appliedAt = state.appliedAt,
-            reapplyDays = state.reapplyDays?.toIntOrNull(),
-            quantity = state.quantity,
-            notes = state.notes
-        )
-
         viewModelScope.launch {
-            repository.insertLogEntry(logEntryEntity)
+            logEntryRepository.createLogEntryFromNames(
+                zoneName = state.zoneName,
+                productName = state.productName,
+                appliedAt = state.appliedAt,
+                reapplyDays = state.reapplyDays?.toIntOrNull(),
+                quantity = state.quantity,
+                notes = state.notes)
             _effect.emit(LogEntryEffect.NavigateBack)
         }
     }

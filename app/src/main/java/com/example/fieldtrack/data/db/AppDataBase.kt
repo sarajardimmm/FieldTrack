@@ -7,12 +7,21 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.fieldtrack.data.db.util.Converters
 import com.example.fieldtrack.data.db.dao.LogEntryDao
+import com.example.fieldtrack.data.db.dao.ProductDao
+import com.example.fieldtrack.data.db.dao.ZoneDao
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
+import com.example.fieldtrack.data.db.entity.ProductEntity
+import com.example.fieldtrack.data.db.entity.ZoneEntity
 
-@Database(entities = [LogEntryEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [LogEntryEntity::class, ZoneEntity::class, ProductEntity::class],
+    version = 2,
+    exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun logEntryDao(): LogEntryDao
+    abstract fun zoneDao(): ZoneDao
+    abstract fun productDao(): ProductDao
 
     companion object {
         @Volatile

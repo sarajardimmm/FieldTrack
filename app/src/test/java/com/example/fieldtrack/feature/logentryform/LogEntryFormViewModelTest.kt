@@ -2,7 +2,7 @@ package com.example.fieldtrack.feature.logentryform
 
 import app.cash.turbine.test
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
-import com.example.fieldtrack.data.repository.Repository
+import com.example.fieldtrack.data.repository.LogEntryRepository
 import com.example.fieldtrack.feature.logEntryForm.LogEntryEffect
 import com.example.fieldtrack.feature.logEntryForm.LogEntryEvent
 import com.example.fieldtrack.feature.logEntryForm.LogEntryFormViewModel
@@ -26,13 +26,13 @@ class LogEntryFormViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var repository: Repository
+    private lateinit var logEntryRepository: LogEntryRepository
     private lateinit var viewModel: LogEntryFormViewModel
 
     @Before
     fun setUp() {
-        repository = mockk(relaxed = true)
-        viewModel = LogEntryFormViewModel(repository)
+        logEntryRepository = mockk(relaxed = true)
+        viewModel = LogEntryFormViewModel(logEntryRepository)
     }
 
     @Test
@@ -65,14 +65,14 @@ class LogEntryFormViewModelTest {
         assertEquals("Zone is required", state.zoneNameError)
         assertEquals("Product is required", state.productNameError)
 
-        coVerify(exactly = 0) { repository.insertLogEntry(any()) }
+        coVerify(exactly = 0) { logEntryRepository.insertLogEntry(any()) }
     }
 
     @Test
     fun `SaveClicked with valid data inserts log entry`() = runTest {
         val appliedAt = LocalDate.of(2026, 3, 26)
 
-        coEvery { repository.insertLogEntry(any()) } returns Unit
+        coEvery { logEntryRepository.insertLogEntry(any()) } returns Unit
 
         viewModel.onEvent(LogEntryEvent.ZoneChanged("North Field"))
         viewModel.onEvent(LogEntryEvent.ProductChanged("Fungicide X"))
@@ -85,7 +85,7 @@ class LogEntryFormViewModelTest {
         advanceUntilIdle()
 
         coVerify(exactly = 1) {
-            repository.insertLogEntry(
+            logEntryRepository.insertLogEntry(
                 LogEntryEntity(
                     zoneName = "North Field",
                     productName = "Fungicide X",
@@ -102,7 +102,7 @@ class LogEntryFormViewModelTest {
     fun `SaveClicked with valid data emits NavigateBack`() = runTest {
         val appliedAt = LocalDate.of(2026, 3, 26)
 
-        coEvery { repository.insertLogEntry(any()) } returns Unit
+        coEvery { logEntryRepository.insertLogEntry(any()) } returns Unit
 
         viewModel.effect.test {
             viewModel.onEvent(LogEntryEvent.ZoneChanged("North Field"))
