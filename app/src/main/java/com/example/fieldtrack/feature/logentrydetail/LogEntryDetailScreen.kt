@@ -24,16 +24,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
-import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
+import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
-import com.example.fieldtrack.ui.components.SingleButton
+import com.example.fieldtrack.ui.components.buttons.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import java.time.format.DateTimeFormatter
 
 @Composable
 fun LogEntryDetailScreen(
-    logEntry: LogEntryDisplay?,
+    logEntry: LogEntry?,
     onPrimaryAction: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
@@ -55,7 +55,7 @@ fun LogEntryDetailScreen(
 }
 @Composable
 fun LogEntryDetailContent(
-    logEntry: LogEntryDisplay?,
+    logEntry: LogEntry?,
     onPrimaryAction: () -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier

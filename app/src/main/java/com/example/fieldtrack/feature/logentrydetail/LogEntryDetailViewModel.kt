@@ -6,9 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.data.repository.LogEntryRepository
-import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
+import com.example.fieldtrack.data.db.model.LogEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class LogEntryDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val logEntryId: Long = checkNotNull(savedStateHandle["logEntryId"])
-    var logEntryEntity by mutableStateOf<LogEntryDisplay?>(null)
+    var logEntryEntity by mutableStateOf<LogEntry?>(null)
         private set
 
     init {

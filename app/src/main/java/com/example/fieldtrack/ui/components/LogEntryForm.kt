@@ -27,6 +27,7 @@ import com.example.fieldtrack.R
 import com.example.fieldtrack.feature.logEntryForm.LogEntryEvent
 import com.example.fieldtrack.feature.logEntryForm.LogEntryUiState
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryUiStateSample
+import com.example.fieldtrack.ui.components.buttons.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -69,13 +70,13 @@ fun LogEntryForm(
                 style = MaterialTheme.typography.titleMedium
             )
             FormField(
-                value = uiState.zoneName ?: "",
+                value = uiState.zoneName,
                 errorMessage = uiState.zoneNameErrorRes?.let { stringResource(it) },
                 onValueChange = { onEvent(LogEntryEvent.ZoneChanged(it)) },
                 label = stringResource(R.string.label_zone),
             )
             FormField(
-                value = uiState.productName ?: "",
+                value = uiState.productName,
                 errorMessage = uiState.productNameErrorRes?.let { stringResource(it) },
                 onValueChange = { onEvent(LogEntryEvent.ProductChanged(it)) },
                 label = stringResource(R.string.label_product)

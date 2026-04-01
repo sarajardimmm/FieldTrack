@@ -1,12 +1,11 @@
 package com.example.fieldtrack.ui.components
 
-import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.feature.logEntryForm.LogEntryUiState
-import com.example.fieldtrack.feature.logentryhistory.model.LogEntryDisplay
+import com.example.fieldtrack.data.db.model.LogEntry
 import java.time.LocalDate
 
 object LogEntrySamplePreviewData {
-    val logEntrySample = LogEntryDisplay(
+    val logEntrySample = LogEntry(
         zoneName = "Back yard",
         productName = "Pesticide x",
         appliedAt = LocalDate.of(2025, 12, 5),
@@ -26,7 +25,7 @@ object LogEntrySamplePreviewData {
 
     val logEntryEntityListSample = listOf(
         logEntrySample,
-        LogEntryDisplay(
+        LogEntry(
             zoneName = "Front yard",
             productName = "Pesticide y",
             appliedAt = LocalDate.of(2025, 1, 5),
@@ -35,7 +34,7 @@ object LogEntrySamplePreviewData {
             notes = "applied just before blooming started on the apple tree",
             id = 2
         ),
-        LogEntryDisplay(
+        LogEntry(
             zoneName = "Orchids",
             productName = "Fungicide",
             appliedAt = LocalDate.of(2025, 1, 5),

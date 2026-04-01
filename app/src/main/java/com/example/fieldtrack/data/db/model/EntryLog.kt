@@ -1,8 +1,8 @@
-package com.example.fieldtrack.feature.logentryhistory.model
+package com.example.fieldtrack.data.db.model
 
 import java.time.LocalDate
 
-data class LogEntryDisplay(
+data class LogEntry(
     val id: Long,
     val zoneName: String,
     val productName: String,

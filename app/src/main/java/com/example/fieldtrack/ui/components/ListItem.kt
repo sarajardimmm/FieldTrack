@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 fun ListItem(
     modifier: Modifier,
     contentLeft: @Composable () -> Unit,
-    contentRight: @Composable () -> Unit
+    contentRight: @Composable () -> Unit? = {}
 ) {
     Card(
         modifier = modifier,
