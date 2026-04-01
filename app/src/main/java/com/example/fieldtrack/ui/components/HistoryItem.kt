@@ -23,58 +23,38 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun HistoryItem(logEntry: LogEntryDisplay, modifier: Modifier) {
-    Card(
-        modifier = modifier,
-        shape = MaterialTheme.shapes.large,
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
+    val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
+    ListItem(
+        modifier,
+        contentLeft = {
+            Text(
+                text = logEntry.zoneName,
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text = logEntry.productName,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        contentRight = {
+            Text(
+                text = logEntry.appliedAt.format(formatter),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            logEntry.reapplyDays?.let {
                 Text(
-                    text = logEntry.zoneName,
-                    style = MaterialTheme.typography.titleMedium
+                    text = "$it days",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary
                 )
-
-                Text(
-                    text = logEntry.productName,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-
-            Column(
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = logEntry.appliedAt.format(formatter),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                logEntry.reapplyDays?.let {
-                    Text(
-                        text = "$it days",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
             }
         }
-    }
+    )
 }
 
 @Preview(
