@@ -45,10 +45,16 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 navController.popBackStack()
             })
         }
-        composable(Routes.ZONES) {
-            ZoneListRoute(onNavigateBack = {
-                navController.popBackStack()
-            })
+        composable(
+            route =Routes.ZONES) {
+            ZoneListRoute(
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onZoneClick =  { zoneId ->
+                    //navController.navigate(Routes.zoneDetail(zoneId = zoneId))
+                }
+            )
         }
     }
 }

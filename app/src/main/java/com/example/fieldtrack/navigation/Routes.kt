@@ -5,9 +5,14 @@ object Routes {
     const val ZONES = "zones"
     const val PRODUCTS = "products"
     const val LOG_ENTRY_FORM = "log_entry_form"
+    const val ZONE_FORM = "zone_form"
     const val LOG_ENTRY_DETAIL = "log_entry_details/{logEntryId}"
+    const val ZONE_DETAIL = "zone_details/{zoneId}"
 
     fun logEntryDetail(logEntryId: Long): String {
         return "log_entry_details/$logEntryId"
+    }
+    fun zoneDetail(zoneId: Long): String {
+        return "zone_details/$zoneId"
     }
 }

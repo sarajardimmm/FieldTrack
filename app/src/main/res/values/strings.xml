@@ -46,5 +46,6 @@
     <string name="description_no_log_entries">Start tracking your field work by adding your first entry.</string>
     <string name="title_no_zones">No zones yet</string>
     <string name="description_no_zones">Start tracking your field work by adding a zone</string>
+    <string name="title_zone_list">Zones</string>
 
 </resources>

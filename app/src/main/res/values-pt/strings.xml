@@ -46,5 +46,6 @@
     <string name="description_no_log_entries">Comece por adicionar um registo</string>
     <string name="title_no_zones">Ainda não existem zonas</string>
     <string name="description_no_zones">Comece por adicionar uma zona</string>
+    <string name="title_zone_list">Zonas</string>
 
 </resources>

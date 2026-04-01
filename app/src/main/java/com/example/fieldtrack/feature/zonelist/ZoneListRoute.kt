@@ -1,9 +1,17 @@
 package com.example.fieldtrack.feature.zonelist
 
 import androidx.compose.runtime.Composable
-import com.example.fieldtrack.ui.components.UnderConstructionScreen
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
-fun ZoneListRoute(onNavigateBack: () -> Boolean) {
-    UnderConstructionScreen()
+fun ZoneListRoute(
+    onNavigateBack: () -> Unit,
+    onZoneClick: (Long) -> Unit,
+    zoneListViewModel: ZoneListViewModel = hiltViewModel()
+) {
+    val zones by zoneListViewModel.zones.collectAsState(initial = emptyList())
+
+    ZoneListScreen(onNavigateBack, onZoneClick, zones)
 }
