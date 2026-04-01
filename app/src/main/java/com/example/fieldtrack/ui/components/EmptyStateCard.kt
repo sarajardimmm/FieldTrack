@@ -1,5 +1,6 @@
 package com.example.fieldtrack.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -66,4 +68,22 @@ fun EmptyStateCard(
             }
         }
     }
+}
+
+@Preview(
+    name = "Empty State Card - Light",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Preview(
+    name = "Empty State Card - Dark",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun EmptyStateCardPreview() {
+    EmptyStateCard(
+        title = "No entries yet",
+        description = "Start tracking your field work by adding your first entry."
+    )
 }

@@ -1,4 +1,4 @@
-package com.example.fieldtrack.ui.components
+package com.example.fieldtrack.ui.components.buttons
 
 import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
