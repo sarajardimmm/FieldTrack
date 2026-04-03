@@ -7,11 +7,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.fieldtrack.feature.logEntryForm.LogEntryFormRoute
-import com.example.fieldtrack.feature.logentrydetail.LogEntryDetailRoute
-import com.example.fieldtrack.feature.logentryhistory.LotEntryListRoute
-import com.example.fieldtrack.feature.productlist.ProductListRoute
-import com.example.fieldtrack.feature.zonelist.ZoneListRoute
+import com.example.fieldtrack.feature.logentry.form.LogEntryFormRoute
+import com.example.fieldtrack.feature.logentry.detail.LogEntryDetailRoute
+import com.example.fieldtrack.feature.logentry.history.LotEntryListRoute
+import com.example.fieldtrack.feature.product.list.ProductListRoute
+import com.example.fieldtrack.feature.zone.list.ZoneListRoute
 
 @Composable
 fun MyApp(modifier: Modifier, navController: NavHostController) {

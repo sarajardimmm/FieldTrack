@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.logentryhistory
+package com.example.fieldtrack.feature.logentry.history
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

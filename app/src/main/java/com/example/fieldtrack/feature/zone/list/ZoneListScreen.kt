@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.zonelist
+package com.example.fieldtrack.feature.zone.list
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable

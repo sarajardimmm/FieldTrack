@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.zonelist
+package com.example.fieldtrack.feature.zone.list
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

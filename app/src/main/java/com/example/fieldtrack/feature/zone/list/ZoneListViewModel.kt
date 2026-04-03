@@ -1,7 +1,6 @@
-package com.example.fieldtrack.feature.zonelist
+package com.example.fieldtrack.feature.zone.list
 
 import androidx.lifecycle.ViewModel
-import com.example.fieldtrack.data.repository.LogEntryRepository
 import com.example.fieldtrack.data.repository.ZoneRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

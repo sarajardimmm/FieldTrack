@@ -1,9 +1,8 @@
-package com.example.fieldtrack.feature.logEntryForm
+package com.example.fieldtrack.feature.logentry.form
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fieldtrack.R
-import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.data.repository.LogEntryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

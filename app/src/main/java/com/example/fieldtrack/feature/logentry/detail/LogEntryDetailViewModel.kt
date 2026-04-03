@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.logentrydetail
+package com.example.fieldtrack.feature.logentry.detail
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

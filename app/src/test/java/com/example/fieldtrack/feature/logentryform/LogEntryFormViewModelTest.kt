@@ -2,9 +2,9 @@ package com.example.fieldtrack.feature.logentryform
 
 import app.cash.turbine.test
 import com.example.fieldtrack.data.repository.LogEntryRepository
-import com.example.fieldtrack.feature.logEntryForm.LogEntryEffect
-import com.example.fieldtrack.feature.logEntryForm.LogEntryEvent
-import com.example.fieldtrack.feature.logEntryForm.LogEntryFormViewModel
+import com.example.fieldtrack.feature.logentry.form.LogEntryEffect
+import com.example.fieldtrack.feature.logentry.form.LogEntryEvent
+import com.example.fieldtrack.feature.logentry.form.LogEntryFormViewModel
 import com.example.fieldtrack.util.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.coVerify

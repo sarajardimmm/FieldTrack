@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.logEntryForm
+package com.example.fieldtrack.feature.logentry.form
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

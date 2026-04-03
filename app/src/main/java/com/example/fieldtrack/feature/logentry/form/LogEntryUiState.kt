@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.logEntryForm
+package com.example.fieldtrack.feature.logentry.form
 
 import androidx.annotation.StringRes
 import java.time.LocalDate

@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.productlist
+package com.example.fieldtrack.feature.product.list
 
 import androidx.lifecycle.ViewModel
 import com.example.fieldtrack.data.repository.LogEntryRepository

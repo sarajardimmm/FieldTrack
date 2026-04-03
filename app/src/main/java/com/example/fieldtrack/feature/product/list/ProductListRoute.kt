@@ -1,4 +1,4 @@
-package com.example.fieldtrack.feature.productlist
+package com.example.fieldtrack.feature.product.list
 
 import androidx.compose.runtime.Composable
 import com.example.fieldtrack.ui.components.UnderConstructionScreen

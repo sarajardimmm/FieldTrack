@@ -1,6 +1,6 @@
 package com.example.fieldtrack.ui.components
 
-import com.example.fieldtrack.feature.logEntryForm.LogEntryUiState
+import com.example.fieldtrack.feature.logentry.form.LogEntryUiState
 import com.example.fieldtrack.data.db.model.LogEntry
 import java.time.LocalDate
 
