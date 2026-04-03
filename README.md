@@ -7,11 +7,13 @@ This is for my dad, my favourite stakeholder, he wanted me to build him an app b
 - Reactive UI built with Jetpack Compose
 - State-driven UI updates using Kotlin Flow
 - Dependency injection with Hilt
+- Screen navigation with type-safe argument handling
 
 ## Tech (planned / in progress)
 
 - Kotlin
 - Jetpack Compose
+- Jetpack Compose Navigation
 - Coroutines & Flow (StateFlow)
 - Room Database
 - Hilt (Dependency Injection)
@@ -23,6 +25,7 @@ This is for my dad, my favourite stakeholder, he wanted me to build him an app b
 The app follows a layered architecture with a clear separation of concerns:
 
 - UI Layer: Built with Jetpack Compose, responsible for rendering state
+- Navigation: Centralized `AppNavHost` using route-based navigation with explicit type-safe arguments.
 - ViewModel Layer: Manages UI state and user interactions using StateFlow
 - Data Layer: Handles data persistence and retrieval via Room and a repository abstraction
 
