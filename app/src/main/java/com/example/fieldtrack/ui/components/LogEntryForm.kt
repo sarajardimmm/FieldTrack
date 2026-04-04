@@ -69,17 +69,21 @@ fun LogEntryForm(
                 text = stringResource(R.string.header_basic_info),
                 style = MaterialTheme.typography.titleMedium
             )
-            FormField(
-                value = uiState.zoneName,
-                errorMessage = uiState.zoneNameErrorRes?.let { stringResource(it) },
-                onValueChange = { onEvent(LogEntryEvent.ZoneChanged(it)) },
+            
+            AutocompleteField(
                 label = stringResource(R.string.label_zone),
+                value = uiState.zoneName,
+                suggestions = uiState.zoneSuggestions,
+                onValueChange = { onEvent(LogEntryEvent.ZoneChanged(it)) },
+                errorMessage = uiState.zoneNameErrorRes?.let { stringResource(it) }
             )
-            FormField(
+
+            AutocompleteField(
+                label = stringResource(R.string.label_product),
                 value = uiState.productName,
-                errorMessage = uiState.productNameErrorRes?.let { stringResource(it) },
+                suggestions = uiState.productSuggestions,
                 onValueChange = { onEvent(LogEntryEvent.ProductChanged(it)) },
-                label = stringResource(R.string.label_product)
+                errorMessage = uiState.productNameErrorRes?.let { stringResource(it) }
             )
 
             Box(modifier = Modifier.fillMaxWidth()) {
@@ -130,6 +134,7 @@ fun LogEntryForm(
             SingleButton(
                 label = actionLabel,
                 onClick = { onEvent(LogEntryEvent.SaveClicked) },
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }

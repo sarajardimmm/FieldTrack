@@ -14,5 +14,7 @@ data class LogEntryUiState(
     val notes: String? = "",
     val isSaving: Boolean = false,
     val isEditing: Boolean = false,
-    val genericError: String? = null
+    val genericError: String? = null,
+    val zoneSuggestions: List<String> = emptyList(),
+    val productSuggestions: List<String> = emptyList()
 )

@@ -20,7 +20,9 @@ class LogEntryRepository @Inject constructor(
     private val productDao: ProductDao
 ) {
     fun getLogEntriesForDisplay() = logEntryDao.getLogEntriesDisplay()
-    fun getLogEntriesByZone(zoneId: Long): Flow<List<LogEntry>> = logEntryDao.getLogEntriesDisplayByZone(zoneId)
+    fun getLogEntriesByZone(zoneId: Long): Flow<List<LogEntry>> =
+        logEntryDao.getLogEntriesDisplayByZone(zoneId)
+
     suspend fun getLogEntryForDisplay(id: Long) = logEntryDao.getLogEntryDisplayById(id)
 
     suspend fun saveLogEntry(

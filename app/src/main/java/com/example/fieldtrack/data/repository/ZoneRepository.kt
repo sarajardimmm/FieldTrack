@@ -13,13 +13,12 @@ class ZoneRepository @Inject constructor(
         zones.map { it.toDomain() }
     }
 
+    fun getAllZoneNames() = zoneDao.getZones().map { zones ->
+        zones.map { it.name }.distinct()
+    }
+
     suspend fun getZoneById(id: Long) =
         zoneDao.getById(id)?.toDomain()
 
-    suspend fun getZoneByNormalizedName(normalizedName: String) =
-        zoneDao.getByNormalizedName(normalizedName)?.toDomain()
-
-
     suspend fun insertZone(zone: ZoneEntity) = zoneDao.insert(zone)
-
 }

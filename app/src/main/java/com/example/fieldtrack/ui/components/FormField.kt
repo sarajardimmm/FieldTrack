@@ -10,6 +10,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -27,7 +28,12 @@ fun FormField(
     errorMessage: String? = null,
     readOnly: Boolean = false,
     enabled: Boolean = true,
-    digitsOnly: Boolean = false
+    digitsOnly: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
+        focusedBorderColor = MaterialTheme.colorScheme.primary,
+        unfocusedBorderColor = MaterialTheme.colorScheme.outline
+    )
 ) {
     Column {
         OutlinedTextField(
@@ -47,10 +53,8 @@ fun FormField(
             readOnly = readOnly,
             enabled = enabled,
             shape = MaterialTheme.shapes.medium,
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline
-            ),
+            colors = colors,
+            trailingIcon = trailingIcon,
             keyboardOptions = KeyboardOptions(
                 keyboardType = if (digitsOnly) KeyboardType.Number else KeyboardType.Text
             ),

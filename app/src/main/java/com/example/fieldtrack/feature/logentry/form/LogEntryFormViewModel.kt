@@ -6,12 +6,17 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.repository.LogEntryRepository
+import com.example.fieldtrack.data.repository.ProductRepository
+import com.example.fieldtrack.data.repository.ZoneRepository
 import com.example.fieldtrack.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,13 +24,34 @@ import javax.inject.Inject
 @HiltViewModel
 class LogEntryFormViewModel @Inject constructor(
     private val logEntryRepository: LogEntryRepository,
+    private val zoneRepository: ZoneRepository,
+    private val productRepository: ProductRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val logEntryId: Long = savedStateHandle.toRoute<Routes.LogEntryForm>().logEntryId ?: -1L
 
     private val _uiState = MutableStateFlow(LogEntryUiState(isEditing = logEntryId != -1L))
-    val uiState: StateFlow<LogEntryUiState> = _uiState
+    
+    // Combine base UI state with filtered suggestions from the repository
+    val uiState: StateFlow<LogEntryUiState> = combine(
+        _uiState,
+        zoneRepository.getAllZoneNames(),
+        productRepository.getAllProductNames()
+    ) { state, zones, products ->
+        state.copy(
+            zoneSuggestions = zones.filter { 
+                it.contains(state.zoneName, ignoreCase = true) && it != state.zoneName 
+            },
+            productSuggestions = products.filter { 
+                it.contains(state.productName, ignoreCase = true) && it != state.productName
+            }
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = _uiState.value
+    )
 
     private val _effect = MutableSharedFlow<LogEntryEffect>()
     val effect = _effect.asSharedFlow()
