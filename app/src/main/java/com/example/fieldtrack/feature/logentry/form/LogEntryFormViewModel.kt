@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -64,15 +65,15 @@ class LogEntryFormViewModel @Inject constructor(
 
     private fun loadLogEntry(id: Long) {
         viewModelScope.launch {
-            logEntryRepository.getLogEntryForDisplay(id)?.let { logEntry ->
+            logEntryRepository.getLogEntryForDisplay(id).collect { logEntry ->
                 _uiState.update {
                     it.copy(
-                        zoneName = logEntry.zoneName,
-                        productName = logEntry.productName,
-                        appliedAt = logEntry.appliedAt,
-                        quantity = logEntry.quantity,
-                        reapplyDays = logEntry.reapplyDays?.toString(),
-                        notes = logEntry.notes
+                        zoneName = logEntry?.zoneName ?: "",
+                        productName = logEntry?.productName ?: "",
+                        appliedAt = logEntry?.appliedAt ?: LocalDate.now(),
+                        quantity = logEntry?.quantity,
+                        reapplyDays = logEntry?.reapplyDays?.toString(),
+                        notes = logEntry?.notes
                     )
                 }
             }

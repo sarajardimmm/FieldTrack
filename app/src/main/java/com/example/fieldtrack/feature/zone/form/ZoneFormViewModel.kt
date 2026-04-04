@@ -58,6 +58,11 @@ class ZoneFormViewModel @Inject constructor(
         }
     }
 
+    fun doesZoneExist(name: String): Boolean {
+        //todo check if zone already exists
+        return false
+    }
+
     private fun saveZone() {
         if (uiState.name.isBlank()) {
             uiState = uiState.copy(nameErrorRes = R.string.error_zone_required)

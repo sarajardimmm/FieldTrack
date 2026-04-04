@@ -20,6 +20,25 @@ class ZoneRepository @Inject constructor(
     suspend fun getZoneById(id: Long) =
         zoneDao.getById(id)?.toDomain()
 
+    fun getZoneByIdFlow(id: Long) =
+        zoneDao.getByIdFlow(id).map { it?.toDomain() }
+
+    suspend fun resolveZoneIdByName(name: String): Long {
+        val trimmedName = name.trim()
+        val normalizedName = trimmedName.lowercase()
+
+        val existingZone = zoneDao.getByNormalizedName(normalizedName)
+        if (existingZone != null) return existingZone.id
+
+        return zoneDao.insert(
+            ZoneEntity(
+                name = trimmedName,
+                normalizedName = normalizedName,
+                notes = null
+            )
+        )
+    }
+
     suspend fun insertZone(zone: ZoneEntity) = zoneDao.insert(zone)
 
     suspend fun updateZone(zone: ZoneEntity) = zoneDao.update(zone)

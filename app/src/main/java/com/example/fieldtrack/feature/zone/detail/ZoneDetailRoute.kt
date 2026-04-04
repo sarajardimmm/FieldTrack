@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun ZoneDetailRoute(
@@ -13,9 +14,10 @@ fun ZoneDetailRoute(
     viewModel: ZoneDetailViewModel = hiltViewModel()
 ) {
     val logEntries by viewModel.logEntries.collectAsState()
+    val zone by viewModel.zone.collectAsStateWithLifecycle()
 
     ZoneDetailScreen(
-        zone = viewModel.zone,
+        zone = zone,
         logEntries = logEntries,
         onEditClick = onEditClick,
         onLogEntryClick = onLogEntryClick,

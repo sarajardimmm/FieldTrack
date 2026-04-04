@@ -44,10 +44,10 @@ object DataModule {
     fun provideLogEntryRepository(
         database: AppDatabase,
         logEntryDao: LogEntryDao,
-        zoneDao: ZoneDao,
-        productDao: ProductDao
+        zoneRepo: ZoneRepository,
+        productRepo: ProductRepository
     ): LogEntryRepository {
-        return LogEntryRepository(database, logEntryDao, zoneDao, productDao)
+        return LogEntryRepository(database, logEntryDao, zoneRepo, productRepo)
     }
 
     @Provides

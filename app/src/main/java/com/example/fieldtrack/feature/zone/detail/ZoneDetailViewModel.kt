@@ -1,8 +1,5 @@
 package com.example.fieldtrack.feature.zone.detail
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,8 +23,12 @@ class ZoneDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val zoneId: Long = savedStateHandle.toRoute<Routes.ZoneDetail>().zoneId
 
-    var zone by mutableStateOf<Zone?>(null)
-        private set
+    val zone: StateFlow<Zone?> = zoneRepository.getZoneByIdFlow(zoneId)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null
+        )
 
     val logEntries: StateFlow<List<LogEntry>> = logEntryRepository.getLogEntriesByZone(zoneId)
         .stateIn(
@@ -36,10 +36,4 @@ class ZoneDetailViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
-
-    init {
-        viewModelScope.launch {
-            zone = zoneRepository.getZoneById(zoneId)
-        }
-    }
 }

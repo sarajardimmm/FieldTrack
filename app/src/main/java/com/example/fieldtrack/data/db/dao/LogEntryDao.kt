@@ -15,7 +15,7 @@ interface LogEntryDao {
     fun getAll(): Flow<List<LogEntryEntity>>
 
     @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.id = :id LIMIT 1")
-    suspend fun getLogEntryDisplayById(id: Long): LogEntry?
+    fun getLogEntryDisplayById(id: Long): Flow<LogEntry?>
 
     @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.zoneId = :zoneId ORDER BY le.appliedAt DESC")
     fun getLogEntriesDisplayByZone(zoneId: Long): Flow<List<LogEntry>>
