@@ -5,12 +5,13 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
 fun ZoneDetailRoute(
+    onEditClick: (Long) -> Unit,
     onNavigateBack: () -> Unit,
     viewModel: ZoneDetailViewModel = hiltViewModel()
 ) {
     ZoneDetailScreen(
-        zoneName = viewModel.zone?.name ?: "",
-        zoneNotes = viewModel.zone?.notes ?: "",
+        zone = viewModel.zone,
+        onEditClick = onEditClick,
         onNavigateBack = onNavigateBack
     )
 }

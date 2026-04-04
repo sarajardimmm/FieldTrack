@@ -3,6 +3,7 @@ package com.example.fieldtrack.feature.zone.form
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fieldtrack.R
@@ -14,11 +15,32 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ZoneFormViewModel @Inject constructor(
-    private val zoneRepository: ZoneRepository
+    private val zoneRepository: ZoneRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(ZoneUiState())
+    private val zoneId: Long = savedStateHandle.get<Long>("zoneId") ?: -1L
+
+    var uiState by mutableStateOf(ZoneUiState(isEditing = zoneId != -1L))
         private set
+
+    init {
+        if (zoneId != -1L) {
+            loadZone(zoneId)
+        }
+    }
+
+    private fun loadZone(id: Long) {
+        viewModelScope.launch {
+            zoneRepository.getZoneById(id)?.let { zone ->
+                uiState = uiState.copy(
+                    id = zone.id,
+                    name = zone.name,
+                    notes = zone.notes ?: ""
+                )
+            }
+        }
+    }
 
     fun onEvent(event: ZoneEvent) {
         when (event) {
@@ -43,8 +65,9 @@ class ZoneFormViewModel @Inject constructor(
         viewModelScope.launch {
             uiState = uiState.copy(isSaving = true)
             val zone = ZoneEntity(
+                id = if (zoneId != -1L) zoneId else 0L,
                 name = uiState.name,
-                normalizedName = uiState.name.lowercase().replace(" ", "_"),
+                normalizedName = uiState.name.lowercase().trim(),
                 notes = uiState.notes.ifBlank { null }
             )
             zoneRepository.insertZone(zone)

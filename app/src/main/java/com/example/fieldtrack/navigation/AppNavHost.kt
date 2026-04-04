@@ -19,8 +19,10 @@ import com.example.fieldtrack.feature.zone.list.ZoneListRoute
 fun MyApp(modifier: Modifier, navController: NavHostController) {
     val startRoute = Routes.HISTORY
     NavHost(
-        navController,
-        startDestination = startRoute) {
+        navController = navController,
+        startDestination = startRoute,
+        modifier = modifier
+    ) {
         composable(Routes.HISTORY) {
             LogEntryListRoute(
                 onLogEntryClick = { logEntryId ->
@@ -69,7 +71,13 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 }
             )
         }
-        composable(Routes.ZONE_FORM) {
+        composable(
+            route = Routes.ZONE_FORM,
+            arguments = listOf(navArgument("zoneId") {
+                type = NavType.LongType
+                defaultValue = -1L
+            })
+        ) {
             ZoneFormRoute(onNavigateBack = {
                 navController.popBackStack()
             })
@@ -78,9 +86,14 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
             route = Routes.ZONE_DETAIL,
             arguments = listOf(navArgument("zoneId") { type = NavType.LongType })
         ) {
-            ZoneDetailRoute(onNavigateBack = {
-                navController.popBackStack()
-            })
+            ZoneDetailRoute(
+                onEditClick = { zoneId ->
+                    navController.navigate(Routes.zoneForm(zoneId))
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

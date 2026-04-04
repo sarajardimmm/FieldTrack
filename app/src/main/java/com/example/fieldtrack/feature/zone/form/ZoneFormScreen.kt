@@ -13,12 +13,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.fieldtrack.R
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.FormField
@@ -34,7 +32,11 @@ fun ZoneFormScreen(
     Scaffold(
         topBar = {
             AppTopBar(
-                title = stringResource(R.string.title_add_zone),
+                title = if (uiState.isEditing) {
+                    stringResource(R.string.title_edit_zone)
+                } else {
+                    stringResource(R.string.title_add_zone)
+                },
                 onBack = onNavigateBack
             )
         }
@@ -79,7 +81,11 @@ fun ZoneFormScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 SingleButton(
-                    label = stringResource(R.string.action_add),
+                    label = if (uiState.isEditing) {
+                        stringResource(R.string.action_edit)
+                    } else {
+                        stringResource(R.string.action_add)
+                    },
                     onClick = { onEvent(ZoneEvent.SaveClicked) },
                     enabled = !uiState.isSaving
                 )

@@ -10,6 +10,7 @@
     <string name="title_entry_details">Entry Details</string>
     <string name="log_entry_List_title">Log Entry List</string>
     <string name="title_add_zone">Add Zone</string>
+    <string name="title_edit_zone">Edit Zone</string>
     <string name="title_zone_detail">Zone Detail</string>
 
     <!-- Navigation Labels -->

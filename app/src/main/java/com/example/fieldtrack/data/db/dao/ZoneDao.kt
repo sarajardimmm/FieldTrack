@@ -2,6 +2,7 @@ package com.example.fieldtrack.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.fieldtrack.data.db.entity.ZoneEntity
 import kotlinx.coroutines.flow.Flow
@@ -17,6 +18,9 @@ interface ZoneDao {
     @Query("SELECT * FROM zones WHERE normalizedName = :normalizedName LIMIT 1")
     suspend fun getByNormalizedName(normalizedName: String): ZoneEntity?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(zone: ZoneEntity): Long
+
+    @Query("DELETE FROM zones WHERE id = :id")
+    suspend fun delete(id: Long)
 }
