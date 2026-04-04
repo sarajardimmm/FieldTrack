@@ -34,7 +34,7 @@ fun ZoneDetailScreen(
     Scaffold(
         topBar = {
             AppTopBar(
-                title = "Zone Detail",
+                title = stringResource(R.string.title_zone_detail),
                 onBack = onNavigateBack
             )
         }
@@ -74,7 +74,7 @@ fun ZoneDetailContent(
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 Text(
-                    text = "Zone Details",
+                    text = stringResource(R.string.title_zone_detail),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold
                 )

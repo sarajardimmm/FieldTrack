@@ -13,5 +13,9 @@ fun ZoneListRoute(
 ) {
     val zones by zoneListViewModel.zones.collectAsState(initial = emptyList())
 
-    ZoneListScreen(onNavigateBack, onZoneClick, zones)
+    ZoneListScreen(
+        onNavigateBack = onNavigateBack,
+        onZoneClick = onZoneClick,
+        zones = zones
+    )
 }

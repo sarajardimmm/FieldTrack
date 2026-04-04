@@ -83,7 +83,7 @@ fun LogEntryDetailContent(
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 Text(
-                    text = "Log Entry Details",
+                    text = stringResource(R.string.title_entry_details),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -91,32 +91,32 @@ fun LogEntryDetailContent(
                 HorizontalDivider()
 
                 DetailItem(
-                    label = "Zone",
+                    label = stringResource(R.string.label_zone),
                     value = logEntry?.zoneName
                 )
 
                 DetailItem(
-                    label = "Product",
+                    label = stringResource(R.string.label_product),
                     value = logEntry?.productName
                 )
 
                 DetailItem(
-                    label = "Quantity",
+                    label = stringResource(R.string.label_quantity),
                     value = logEntry?.quantity
                 )
 
                 DetailItem(
-                    label = "Applied at",
+                    label = stringResource(R.string.label_applied_at),
                     value = logEntry?.appliedAt?.format(formatter)
                 )
 
                 DetailItem(
-                    label = "Reapply in",
-                    value = logEntry?.reapplyDays?.let { "$it days" }
+                    label = stringResource(R.string.label_reapply_in),
+                    value = logEntry?.reapplyDays?.let { stringResource(R.string.label_days, it) }
                 )
 
                 DetailItem(
-                    label = "Notes",
+                    label = stringResource(R.string.label_notes),
                     value = logEntry?.notes,
                     multiline = true
                 )
@@ -136,7 +136,7 @@ fun LogEntryDetailContent(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    text = "Deleting this log entry cannot be undone.",
+                    text = stringResource(R.string.msg_delete_log_warning),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.error,
                     fontWeight = FontWeight.SemiBold

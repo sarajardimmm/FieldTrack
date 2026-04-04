@@ -8,6 +8,8 @@
     <string name="title_log_form">Adicionar Novo Registo</string>
     <string name="title_entry_details">Detalhes da Entrada</string>
     <string name="log_entry_List_title">Lista de Registos</string>
+    <string name="title_add_zone">Adicionar Zona</string>
+    <string name="title_zone_detail">Detalhe da Zona</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">Histórico</string>
@@ -24,6 +26,7 @@
     <string name="label_reapply_in_days">Reaplicar em dias</string>
     <string name="label_quantity">Quantidade</string>
     <string name="label_notes">Notas</string>
+    <string name="label_days">%1$d dias</string>
 
     <!-- Actions -->
     <string name="action_add">Adicionar</string>
@@ -47,5 +50,8 @@
     <string name="title_no_zones">Ainda não existem zonas</string>
     <string name="description_no_zones">Comece por adicionar uma zona</string>
     <string name="title_zone_list">Zonas</string>
+
+    <!-- Details -->
+    <string name="msg_delete_log_warning">Eliminar este registo não pode ser desfeito.</string>
 
 </resources>

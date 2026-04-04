@@ -46,7 +46,8 @@ fun MainScreen() {
 
                 Routes.ZONES -> {
                     FloatingActionButton(
-                        onClick = { navController.navigate(Routes.ZONES) }
+                        onClick = { navController.navigate(Routes.ZONE_FORM) },
+                        containerColor = MaterialTheme.colorScheme.tertiary,
                     ) {
                         Icon(Icons.Default.Add, contentDescription = "Add zone")
                     }
@@ -54,7 +55,7 @@ fun MainScreen() {
 
                 Routes.PRODUCTS -> {
                     FloatingActionButton(
-                        onClick = { navController.navigate(Routes.PRODUCTS) }
+                        onClick = { navController.navigate(Routes.PRODUCTS) } // TODO: Add Product Form
                     ) {
                         Icon(Icons.Default.Add, contentDescription = "Add product")
                     }

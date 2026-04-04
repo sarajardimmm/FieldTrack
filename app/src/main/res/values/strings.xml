@@ -8,6 +8,8 @@
     <string name="title_log_form">Add New Log Entry</string>
     <string name="title_entry_details">Entry Details</string>
     <string name="log_entry_List_title">Log Entry List</string>
+    <string name="title_add_zone">Add Zone</string>
+    <string name="title_zone_detail">Zone Detail</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">History</string>
@@ -24,6 +26,7 @@
     <string name="label_reapply_in_days">Reapply in days</string>
     <string name="label_quantity">Quantity</string>
     <string name="label_notes">Notes</string>
+    <string name="label_days">%1$d days</string>
 
     <!-- Actions -->
     <string name="action_add">Add</string>
@@ -47,5 +50,8 @@
     <string name="title_no_zones">No zones yet</string>
     <string name="description_no_zones">Start tracking your field work by adding a zone</string>
     <string name="title_zone_list">Zones</string>
+
+    <!-- Details -->
+    <string name="msg_delete_log_warning">Deleting this log entry cannot be undone.</string>
 
 </resources>

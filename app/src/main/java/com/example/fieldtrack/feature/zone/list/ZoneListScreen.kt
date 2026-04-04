@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -24,6 +26,7 @@ import com.example.fieldtrack.data.db.model.Zone
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.EmptyStateCard
 import com.example.fieldtrack.ui.components.ListItem
+import com.example.fieldtrack.ui.components.buttons.DefaultFloatingActionButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -132,7 +135,11 @@ fun ZoneListScreenPreview() {
     )
     FieldTrackTheme {
         Surface {
-            ZoneListContent(onZoneClick = {}, zones = zones, modifier = Modifier)
+            ZoneListScreen(
+                onNavigateBack = {},
+                onZoneClick = {},
+                zones = zones
+            )
         }
     }
 }

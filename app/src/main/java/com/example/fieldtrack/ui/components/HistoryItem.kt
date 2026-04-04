@@ -6,7 +6,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntrySample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
@@ -39,7 +41,7 @@ fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
 
             logEntry.reapplyDays?.let {
                 Text(
-                    text = "$it days",
+                    text = stringResource(R.string.label_days, it),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary
                 )

@@ -12,6 +12,7 @@ import com.example.fieldtrack.feature.logentry.detail.LogEntryDetailRoute
 import com.example.fieldtrack.feature.logentry.history.LotEntryListRoute
 import com.example.fieldtrack.feature.product.list.ProductListRoute
 import com.example.fieldtrack.feature.zone.detail.ZoneDetailRoute
+import com.example.fieldtrack.feature.zone.form.ZoneFormRoute
 import com.example.fieldtrack.feature.zone.list.ZoneListRoute
 
 @Composable
@@ -56,6 +57,11 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                     navController.navigate(Routes.zoneDetail(zoneId = zoneId))
                 }
             )
+        }
+        composable(Routes.ZONE_FORM) {
+            ZoneFormRoute(onNavigateBack = {
+                navController.popBackStack()
+            })
         }
         composable(
             route = Routes.ZONE_DETAIL,

@@ -11,10 +11,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
-fun SingleButton(label: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun SingleButton(
+    label: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
     Button(
         modifier = modifier.fillMaxWidth(),
         onClick = onClick,
+        enabled = enabled
     ) { Text(label) }
 }
 
