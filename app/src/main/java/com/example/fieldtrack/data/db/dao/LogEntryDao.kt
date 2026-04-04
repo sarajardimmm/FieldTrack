@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.data.db.model.LogEntry
 import kotlinx.coroutines.flow.Flow
@@ -16,21 +17,21 @@ interface LogEntryDao {
     @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.id = :id LIMIT 1")
     suspend fun getLogEntryDisplayById(id: Long): LogEntry?
 
-    @Query("SELECT * FROM log_entries WHERE zoneId IN (:zoneIds)")
-    fun getByZone(zoneIds: String): Flow<List<LogEntryEntity>>
-
     @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.zoneId = :zoneId ORDER BY le.appliedAt DESC")
     fun getLogEntriesDisplayByZone(zoneId: Long): Flow<List<LogEntry>>
 
-    @Query("SELECT * FROM log_entries WHERE productId IN (:productIds)")
-    fun getByProduct(productIds: String): Flow<List<LogEntryEntity>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(logEntry: LogEntryEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(logEntry: LogEntryEntity)
+    @Update
+    suspend fun update(logEntry: LogEntryEntity)
+
+    @Query("SELECT createdAt FROM log_entries WHERE id = :id")
+    suspend fun getCreatedAt(id: Long): Long?
 
     @Query("DELETE FROM log_entries WHERE id = :id")
     suspend fun delete(id: Long)
 
-    @Query(" SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id ORDER BY le.appliedAt DESC")
+    @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id ORDER BY le.appliedAt DESC")
     fun getLogEntriesDisplay(): Flow<List<LogEntry>>
 }

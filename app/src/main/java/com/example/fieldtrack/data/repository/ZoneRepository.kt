@@ -21,4 +21,6 @@ class ZoneRepository @Inject constructor(
         zoneDao.getById(id)?.toDomain()
 
     suspend fun insertZone(zone: ZoneEntity) = zoneDao.insert(zone)
+
+    suspend fun updateZone(zone: ZoneEntity) = zoneDao.update(zone)
 }

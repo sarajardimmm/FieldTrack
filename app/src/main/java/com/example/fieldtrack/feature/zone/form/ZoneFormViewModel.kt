@@ -72,7 +72,13 @@ class ZoneFormViewModel @Inject constructor(
                 normalizedName = uiState.name.lowercase().trim(),
                 notes = uiState.notes.ifBlank { null }
             )
-            zoneRepository.insertZone(zone)
+            
+            if (zoneId != -1L) {
+                zoneRepository.updateZone(zone)
+            } else {
+                zoneRepository.insertZone(zone)
+            }
+
             uiState = uiState.copy(isSaving = false, isSaveSuccess = true)
         }
     }
