@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
-fun LotEntryListRoute(
+fun LogEntryListRoute(
     onLogEntryClick: (Long) -> Unit,
     viewModel: LogEntryListViewModel = hiltViewModel()
 ) {

@@ -37,7 +37,7 @@ fun MainScreen() {
             when (currentRoute) {
                 Routes.HISTORY -> {
                     FloatingActionButton(
-                        onClick = { navController.navigate(Routes.LOG_ENTRY_FORM) },
+                        onClick = { navController.navigate(Routes.logEntryForm()) },
                         containerColor = MaterialTheme.colorScheme.tertiary,
                     ) {
                         Icon(Icons.Default.Add, contentDescription = "Add log entry")

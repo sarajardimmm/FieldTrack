@@ -19,11 +19,9 @@ class LogEntryRepository @Inject constructor(
 ) {
     fun getLogEntriesForDisplay() = logEntryDao.getLogEntriesDisplay()
     suspend fun getLogEntryForDisplay(id: Long) = logEntryDao.getLogEntryDisplayById(id)
-    suspend fun insertLogEntry(logEntryEntity: LogEntryEntity) {
-        logEntryDao.insert(logEntryEntity)
-    }
 
-    suspend fun createLogEntryFromNames(
+    suspend fun saveLogEntry(
+        id: Long? = null,
         zoneName: String,
         productName: String,
         appliedAt: LocalDate,
@@ -35,23 +33,34 @@ class LogEntryRepository @Inject constructor(
             val resolvedZoneId = resolveZoneId(zoneName)
             val resolvedProductId = resolveProductId(productName)
 
-            logEntryDao.insert(
-                LogEntryEntity(
-                    zoneId = resolvedZoneId,
-                    productId = resolvedProductId,
-                    appliedAt = appliedAt,
-                    reapplyDays = reapplyDays,
-                    quantity = quantity?.trim()?.takeIf { it.isNotBlank() },
-                    notes = notes?.trim()?.takeIf { it.isNotBlank() }
-                )
+            val logEntry = LogEntryEntity(
+                id = id ?: 0L,
+                zoneId = resolvedZoneId,
+                productId = resolvedProductId,
+                appliedAt = appliedAt,
+                reapplyDays = reapplyDays,
+                quantity = quantity?.trim()?.takeIf { it.isNotBlank() },
+                notes = notes?.trim()?.takeIf { it.isNotBlank() }
             )
+
+            logEntryDao.insert(logEntry)
         }
     }
+
+    suspend fun createLogEntryFromNames(
+        zoneName: String,
+        productName: String,
+        appliedAt: LocalDate,
+        reapplyDays: Int?,
+        quantity: String?,
+        notes: String?
+    ) {
+        saveLogEntry(null, zoneName, productName, appliedAt, reapplyDays, quantity, notes)
+    }
+
     suspend fun deleteLogEntry(id: Long) {
         logEntryDao.delete(id)
     }
-
-
 
     private suspend fun resolveZoneId(zoneName: String): Long {
         val trimmedName = zoneName.trim()

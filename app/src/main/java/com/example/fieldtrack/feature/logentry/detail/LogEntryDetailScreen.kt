@@ -2,22 +2,29 @@ package com.example.fieldtrack.feature.logentry.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +41,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun LogEntryDetailScreen(
     logEntry: LogEntry?,
+    onEditClick: (Long) -> Unit,
     onPrimaryAction: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
@@ -47,6 +55,7 @@ fun LogEntryDetailScreen(
     ) { innerPadding ->
         LogEntryDetailContent(
             logEntry = logEntry,
+            onEditClick = onEditClick,
             onPrimaryAction = onPrimaryAction,
             onNavigateBack = onNavigateBack,
             modifier = Modifier.padding(innerPadding)
@@ -56,6 +65,7 @@ fun LogEntryDetailScreen(
 @Composable
 fun LogEntryDetailContent(
     logEntry: LogEntry?,
+    onEditClick: (Long) -> Unit,
     onPrimaryAction: () -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
@@ -82,11 +92,32 @@ fun LogEntryDetailContent(
                 modifier = Modifier.padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.title_entry_details),
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.SemiBold
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = stringResource(R.string.title_entry_details),
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    logEntry?.let {
+                        IconButton(
+                            onClick = { onEditClick(it.id) },
+                            modifier = Modifier.padding(start = 4.dp).size(24.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = stringResource(R.string.action_edit),
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
+                }
 
                 HorizontalDivider()
 
@@ -187,7 +218,12 @@ private fun DetailItem(
 fun LogEntryDetailScreenPreview() {
     FieldTrackTheme {
         Surface {
-            LogEntryDetailScreen(LogEntrySamplePreviewData.logEntrySample, {}) {}
+            LogEntryDetailScreen(
+                logEntry = LogEntrySamplePreviewData.logEntrySample,
+                onEditClick = {},
+                onPrimaryAction = {},
+                onNavigateBack = {}
+            )
         }
     }
 }

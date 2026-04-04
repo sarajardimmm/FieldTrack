@@ -18,13 +18,24 @@ fun LogEntryFormScreen(
 ) {
     Scaffold(
         topBar = {
-            AppTopBar(stringResource(R.string.title_log_form), onBack = onNavigateBack)
+            AppTopBar(
+                title = if (uiState.isEditing) {
+                    stringResource(R.string.title_edit_log_form)
+                } else {
+                    stringResource(R.string.title_log_form)
+                },
+                onBack = onNavigateBack
+            )
         }
     ) { innerPadding ->
         Column(Modifier.padding(innerPadding)) {
             LogEntryForm(
                 uiState = uiState,
-                actionLabel = stringResource(R.string.action_add),
+                actionLabel = if (uiState.isEditing) {
+                    stringResource(R.string.action_edit)
+                } else {
+                    stringResource(R.string.action_add)
+                },
                 onEvent = onEvent,
             )
         }

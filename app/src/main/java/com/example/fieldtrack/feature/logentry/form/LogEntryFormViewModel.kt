@@ -1,5 +1,6 @@
 package com.example.fieldtrack.feature.logentry.form
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fieldtrack.R
@@ -15,14 +16,40 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LogEntryFormViewModel @Inject constructor(
-    private val logEntryRepository: LogEntryRepository
+    private val logEntryRepository: LogEntryRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(LogEntryUiState())
+    private val logEntryId: Long = savedStateHandle.get<Long>("logEntryId") ?: -1L
+
+    private val _uiState = MutableStateFlow(LogEntryUiState(isEditing = logEntryId != -1L))
     val uiState: StateFlow<LogEntryUiState> = _uiState
 
     private val _effect = MutableSharedFlow<LogEntryEffect>()
     val effect = _effect.asSharedFlow()
+
+    init {
+        if (logEntryId != -1L) {
+            loadLogEntry(logEntryId)
+        }
+    }
+
+    private fun loadLogEntry(id: Long) {
+        viewModelScope.launch {
+            logEntryRepository.getLogEntryForDisplay(id)?.let { logEntry ->
+                _uiState.update {
+                    it.copy(
+                        zoneName = logEntry.zoneName,
+                        productName = logEntry.productName,
+                        appliedAt = logEntry.appliedAt,
+                        quantity = logEntry.quantity,
+                        reapplyDays = logEntry.reapplyDays?.toString(),
+                        notes = logEntry.notes
+                    )
+                }
+            }
+        }
+    }
 
     fun onEvent(event: LogEntryEvent) {
         when (event) {
@@ -61,7 +88,7 @@ class LogEntryFormViewModel @Inject constructor(
             }
 
             LogEntryEvent.SaveClicked -> {
-                addLogEntry()
+                saveLogEntry()
             }
         }
     }
@@ -85,19 +112,21 @@ class LogEntryFormViewModel @Inject constructor(
         return zoneError == null && productError == null
     }
 
-    fun addLogEntry() {
+    private fun saveLogEntry() {
         if (!validateForm()) return
 
         val state = _uiState.value
 
         viewModelScope.launch {
-            logEntryRepository.createLogEntryFromNames(
+            logEntryRepository.saveLogEntry(
+                id = if (logEntryId != -1L) logEntryId else null,
                 zoneName = state.zoneName,
                 productName = state.productName,
                 appliedAt = state.appliedAt,
                 reapplyDays = state.reapplyDays?.toIntOrNull(),
                 quantity = state.quantity,
-                notes = state.notes)
+                notes = state.notes
+            )
             _effect.emit(LogEntryEffect.NavigateBack)
         }
     }

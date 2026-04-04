@@ -6,6 +6,7 @@
     <string name="title_log_history">Log History</string>
     <string name="title_log_detail">Log Detail</string>
     <string name="title_log_form">Add New Log Entry</string>
+    <string name="title_edit_log_form">Edit Log Entry</string>
     <string name="title_entry_details">Entry Details</string>
     <string name="log_entry_List_title">Log Entry List</string>
     <string name="title_add_zone">Add Zone</string>

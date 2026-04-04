@@ -13,5 +13,6 @@ data class LogEntryUiState(
     val reapplyDays: String? = "",
     val notes: String? = "",
     val isSaving: Boolean = false,
+    val isEditing: Boolean = false,
     val genericError: String? = null
 )

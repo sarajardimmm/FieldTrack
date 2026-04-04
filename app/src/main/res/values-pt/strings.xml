@@ -6,6 +6,7 @@
     <string name="title_log_history">Histórico de Registos</string>
     <string name="title_log_detail">Detalhe do Registo</string>
     <string name="title_log_form">Adicionar Novo Registo</string>
+    <string name="title_edit_log_form">Editar Registo</string>
     <string name="title_entry_details">Detalhes da Entrada</string>
     <string name="log_entry_List_title">Lista de Registos</string>
     <string name="title_add_zone">Adicionar Zona</string>
