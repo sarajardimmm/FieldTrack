@@ -19,12 +19,12 @@ class LogEntryDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val logEntryId: Long = checkNotNull(savedStateHandle["logEntryId"])
-    var logEntryEntity by mutableStateOf<LogEntry?>(null)
+    var logEntry by mutableStateOf<LogEntry?>(null)
         private set
 
     init {
         viewModelScope.launch {
-            logEntryEntity = logEntryRepository.getLogEntryForDisplay(logEntryId)
+            logEntry = logEntryRepository.getLogEntryForDisplay(logEntryId)
         }
     }
 

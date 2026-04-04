@@ -11,6 +11,9 @@ interface ZoneDao {
     @Query("SELECT * FROM zones")
     fun getZones(): Flow<List<ZoneEntity>>
 
+    @Query("SELECT * FROM zones WHERE id = :id LIMIT 1")
+    suspend fun getById(id: Long): ZoneEntity?
+
     @Query("SELECT * FROM zones WHERE normalizedName = :normalizedName LIMIT 1")
     suspend fun getByNormalizedName(normalizedName: String): ZoneEntity?
 
