@@ -3,10 +3,8 @@ package com.example.fieldtrack.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.example.fieldtrack.feature.logentry.form.LogEntryFormRoute
 import com.example.fieldtrack.feature.logentry.detail.LogEntryDetailRoute
 import com.example.fieldtrack.feature.logentry.history.LogEntryListRoute
@@ -17,78 +15,60 @@ import com.example.fieldtrack.feature.zone.list.ZoneListRoute
 
 @Composable
 fun MyApp(modifier: Modifier, navController: NavHostController) {
-    val startRoute = Routes.HISTORY
     NavHost(
         navController = navController,
-        startDestination = startRoute,
+        startDestination = Routes.History,
         modifier = modifier
     ) {
-        composable(Routes.HISTORY) {
+        composable<Routes.History> {
             LogEntryListRoute(
                 onLogEntryClick = { logEntryId ->
-                    navController.navigate(Routes.logEntryDetail(logEntryId))
+                    navController.navigate(Routes.LogEntryDetail(logEntryId))
                 }
             )
         }
-        composable(
-            route = Routes.LOG_ENTRY_DETAIL,
-            arguments = listOf(navArgument("logEntryId") { type = NavType.LongType })
-        ) {
+        composable<Routes.LogEntryDetail> {
             LogEntryDetailRoute(
                 onEditClick = { logEntryId ->
-                    navController.navigate(Routes.logEntryForm(logEntryId))
+                    navController.navigate(Routes.LogEntryForm(logEntryId))
                 },
                 onNavigateBack = {
                     navController.popBackStack()
                 }
             )
-
         }
-        composable(
-            route = Routes.LOG_ENTRY_FORM,
-            arguments = listOf(navArgument("logEntryId") {
-                type = NavType.LongType
-                defaultValue = -1L
-            })
-        ) {
+        composable<Routes.LogEntryForm> {
             LogEntryFormRoute(onNavigateBack = {
                 navController.popBackStack()
             })
         }
-        composable(Routes.PRODUCTS) {
+        composable<Routes.Products> {
             ProductListRoute(onNavigateBack = {
                 navController.popBackStack()
             })
         }
-        composable(
-            route =Routes.ZONES) {
+        composable<Routes.Zones> {
             ZoneListRoute(
                 onNavigateBack = {
                     navController.popBackStack()
                 },
-                onZoneClick =  { zoneId ->
-                    navController.navigate(Routes.zoneDetail(zoneId = zoneId))
+                onZoneClick = { zoneId ->
+                    navController.navigate(Routes.ZoneDetail(zoneId))
                 }
             )
         }
-        composable(
-            route = Routes.ZONE_FORM,
-            arguments = listOf(navArgument("zoneId") {
-                type = NavType.LongType
-                defaultValue = -1L
-            })
-        ) {
+        composable<Routes.ZoneForm> {
             ZoneFormRoute(onNavigateBack = {
                 navController.popBackStack()
             })
         }
-        composable(
-            route = Routes.ZONE_DETAIL,
-            arguments = listOf(navArgument("zoneId") { type = NavType.LongType })
-        ) {
+        composable<Routes.ZoneDetail> {
             ZoneDetailRoute(
                 onEditClick = { zoneId ->
-                    navController.navigate(Routes.zoneForm(zoneId))
+                    navController.navigate(Routes.ZoneForm(zoneId))
+                },
+                onLogEntryClick = { logEntryId ->
+                    navController.navigate(Routes.LogEntryDetail(logEntryId))
                 },
                 onNavigateBack = {
                     navController.popBackStack()

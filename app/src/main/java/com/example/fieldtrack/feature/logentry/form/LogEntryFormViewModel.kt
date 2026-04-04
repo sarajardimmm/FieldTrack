@@ -3,8 +3,10 @@ package com.example.fieldtrack.feature.logentry.form
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.repository.LogEntryRepository
+import com.example.fieldtrack.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +22,7 @@ class LogEntryFormViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val logEntryId: Long = savedStateHandle.get<Long>("logEntryId") ?: -1L
+    private val logEntryId: Long = savedStateHandle.toRoute<Routes.LogEntryForm>().logEntryId ?: -1L
 
     private val _uiState = MutableStateFlow(LogEntryUiState(isEditing = logEntryId != -1L))
     val uiState: StateFlow<LogEntryUiState> = _uiState

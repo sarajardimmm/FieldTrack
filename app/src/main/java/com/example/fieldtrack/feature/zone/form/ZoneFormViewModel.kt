@@ -6,9 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.entity.ZoneEntity
 import com.example.fieldtrack.data.repository.ZoneRepository
+import com.example.fieldtrack.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +21,7 @@ class ZoneFormViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val zoneId: Long = savedStateHandle.get<Long>("zoneId") ?: -1L
+    private val zoneId: Long = savedStateHandle.toRoute<Routes.ZoneForm>().zoneId ?: -1L
 
     var uiState by mutableStateOf(ZoneUiState(isEditing = zoneId != -1L))
         private set

@@ -25,7 +25,7 @@ class ZoneDetailViewModel @Inject constructor(
     private val zoneRepository: ZoneRepository,
     private val logEntryRepository: LogEntryRepository
 ) : ViewModel() {
-    private val zoneId: Long = checkNotNull(savedStateHandle["zoneId"])
+    private val zoneId: Long = savedStateHandle.toRoute<Routes.ZoneDetail>().zoneId
 
     var zone by mutableStateOf<Zone?>(null)
         private set

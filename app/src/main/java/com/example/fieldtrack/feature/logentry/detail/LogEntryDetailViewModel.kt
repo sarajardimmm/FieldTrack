@@ -6,8 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.example.fieldtrack.data.repository.LogEntryRepository
 import com.example.fieldtrack.data.db.model.LogEntry
+import com.example.fieldtrack.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +20,7 @@ class LogEntryDetailViewModel @Inject constructor(
     private val logEntryRepository: LogEntryRepository
 ) : ViewModel() {
 
-    private val logEntryId: Long = checkNotNull(savedStateHandle["logEntryId"])
+    private val logEntryId: Long = savedStateHandle.toRoute<Routes.LogEntryDetail>().logEntryId
     var logEntry by mutableStateOf<LogEntry?>(null)
         private set
 

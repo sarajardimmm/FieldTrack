@@ -11,9 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.fieldtrack.navigation.BottomNavItem
+import com.example.fieldtrack.navigation.Routes
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -21,10 +24,10 @@ fun BottomBar(
     navController: NavHostController
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val destination = navBackStackEntry?.destination
 
     BottomBarContent(
-        currentRoute = currentRoute,
+        destination = destination,
         onItemClick = { route ->
             navController.navigate(route) {
                 popUpTo(navController.graph.startDestinationId) {
@@ -39,14 +42,14 @@ fun BottomBar(
 
 @Composable
 fun BottomBarContent(
-    currentRoute: String?,
-    onItemClick: (String) -> Unit
+    destination: NavDestination?,
+    onItemClick: (Any) -> Unit
 ) {
     NavigationBar {
         BottomNavItem.bottomNavItems.forEach { item ->
             val label = stringResource(item.labelRes)
             NavigationBarItem(
-                selected = currentRoute == item.route,
+                selected = destination?.hasRoute(item.route::class) == true,
                 onClick = { onItemClick(item.route) },
                 icon = {
                     Icon(
@@ -83,7 +86,7 @@ fun BottomBarContent(
 fun BottomBarPreview() {
     FieldTrackTheme {
         BottomBarContent(
-            currentRoute = "history",
+            destination = null,
             onItemClick = {}
         )
     }

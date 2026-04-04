@@ -9,24 +9,24 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.fieldtrack.R
 
 data class BottomNavItem(
-    val route: String,
+    val route: Any,
     @StringRes val labelRes: Int,
     val icon: ImageVector,
 ) {
     companion object {
         val bottomNavItems: List<BottomNavItem> = listOf(
             BottomNavItem(
-                route = Routes.HISTORY,
+                route = Routes.History,
                 labelRes = R.string.nav_history,
                 icon = Icons.Default.List
             ),
             BottomNavItem(
-                route = Routes.ZONES,
+                route = Routes.Zones,
                 labelRes = R.string.nav_zones,
                 icon = Icons.Default.Place
             ),
             BottomNavItem(
-                route = Routes.PRODUCTS,
+                route = Routes.Products,
                 labelRes = R.string.nav_products,
                 icon = Icons.Default.Agriculture
             )
