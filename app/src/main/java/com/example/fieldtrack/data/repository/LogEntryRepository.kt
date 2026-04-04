@@ -8,6 +8,8 @@ import com.example.fieldtrack.data.db.dao.ZoneDao
 import com.example.fieldtrack.data.db.entity.LogEntryEntity
 import com.example.fieldtrack.data.db.entity.ProductEntity
 import com.example.fieldtrack.data.db.entity.ZoneEntity
+import com.example.fieldtrack.data.db.model.LogEntry
+import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -18,6 +20,7 @@ class LogEntryRepository @Inject constructor(
     private val productDao: ProductDao
 ) {
     fun getLogEntriesForDisplay() = logEntryDao.getLogEntriesDisplay()
+    fun getLogEntriesByZone(zoneId: Long): Flow<List<LogEntry>> = logEntryDao.getLogEntriesDisplayByZone(zoneId)
     suspend fun getLogEntryForDisplay(id: Long) = logEntryDao.getLogEntryDisplayById(id)
 
     suspend fun saveLogEntry(

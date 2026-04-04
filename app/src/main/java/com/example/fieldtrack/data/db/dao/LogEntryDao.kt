@@ -19,6 +19,9 @@ interface LogEntryDao {
     @Query("SELECT * FROM log_entries WHERE zoneId IN (:zoneIds)")
     fun getByZone(zoneIds: String): Flow<List<LogEntryEntity>>
 
+    @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.zoneId = :zoneId ORDER BY le.appliedAt DESC")
+    fun getLogEntriesDisplayByZone(zoneId: Long): Flow<List<LogEntry>>
+
     @Query("SELECT * FROM log_entries WHERE productId IN (:productIds)")
     fun getByProduct(productIds: String): Flow<List<LogEntryEntity>>
 

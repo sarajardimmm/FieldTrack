@@ -6,11 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -26,7 +25,6 @@ import com.example.fieldtrack.data.db.model.Zone
 import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.EmptyStateCard
 import com.example.fieldtrack.ui.components.ListItem
-import com.example.fieldtrack.ui.components.buttons.DefaultFloatingActionButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -44,9 +42,9 @@ fun ZoneListScreen(
         }
     ) { innerPadding ->
         ZoneListContent(
-            onZoneClick,
-            zones,
-            Modifier.padding(innerPadding)
+            onZoneClick = onZoneClick,
+            zones = zones,
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }
@@ -55,55 +53,56 @@ fun ZoneListScreen(
 fun ZoneListContent(
     onZoneClick: (Long) -> Unit,
     zones: List<Zone>,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
-
     if (zones.isEmpty()) {
         Box(
             modifier = modifier
                 .fillMaxSize()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = 16.dp),
             contentAlignment = Alignment.Center
         ) {
             EmptyStateCard(
                 title = stringResource(R.string.title_no_zones),
-                description = stringResource(R.string.description_no_zones),
-                modifier = modifier
+                description = stringResource(R.string.description_no_zones)
             )
         }
     } else {
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(top = 12.dp, start = 12.dp, end = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-
-        items(zones) { zone ->
-            ZoneListItem(
-                zone = zone,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        onZoneClick(zone.id)
-                    }
-            )
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .navigationBarsPadding(),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                top = 12.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            items(zones) { zone ->
+                ZoneListItem(
+                    zone = zone,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onZoneClick(zone.id) }
+                )
+            }
         }
     }
 }
-}
 
 @Composable
-fun ZoneListItem(zone: Zone, modifier: Modifier) {
+fun ZoneListItem(zone: Zone, modifier: Modifier = Modifier) {
     ListItem(
-        modifier,
+        modifier = modifier,
         contentLeft = {
             Text(
                 text = zone.name,
                 style = MaterialTheme.typography.titleMedium
             )
 
-            zone.notes?.let {
+            zone.notes?.takeIf { it.isNotBlank() }?.let {
                 Text(
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
@@ -115,23 +114,20 @@ fun ZoneListItem(zone: Zone, modifier: Modifier) {
 }
 
 @Preview(
-    name = "History Item - Light",
+    name = "Zone List - Light",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
-    name = "History Item - Dark",
+    name = "Zone List - Dark",
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
 fun ZoneListScreenPreview() {
     val zones = listOf(
-        Zone(
-            id = 1,
-            name = "Zone 1",
-            notes = "Notes for Zone 1"
-        ),
+        Zone(id = 1, name = "North Orchard", notes = "Apples and Pears"),
+        Zone(id = 2, name = "South Field", notes = "Corn"),
     )
     FieldTrackTheme {
         Surface {

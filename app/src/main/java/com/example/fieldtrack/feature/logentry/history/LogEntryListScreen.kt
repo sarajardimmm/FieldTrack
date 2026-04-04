@@ -2,8 +2,10 @@ package com.example.fieldtrack.feature.logentry.history
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,12 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
+import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.AppTopBar
+import com.example.fieldtrack.ui.components.EmptyStateCard
 import com.example.fieldtrack.ui.components.HistoryItem
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryEntityListSample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
-import com.example.fieldtrack.data.db.model.LogEntry
-import com.example.fieldtrack.ui.components.EmptyStateCard
 
 @Composable
 fun LogEntryListScreen(
@@ -33,9 +35,9 @@ fun LogEntryListScreen(
         }
     ) { innerPadding ->
         LogEntryListContent(
-            onLogEntryClick,
-            logEntries,
-            Modifier.padding(innerPadding)
+            onLogEntryClick = onLogEntryClick,
+            logEntries = logEntries,
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }
@@ -43,42 +45,38 @@ fun LogEntryListScreen(
 @Composable
 fun LogEntryListContent(
     onLogEntryClick: (Long) -> Unit,
-    logEntryHistory: List<LogEntry>,
-    modifier: Modifier
+    logEntries: List<LogEntry>,
+    modifier: Modifier = Modifier
 ) {
-    if (logEntryHistory.isEmpty()) {
+    if (logEntries.isEmpty()) {
         EmptyStateCard(
             title = stringResource(R.string.title_no_log_entries),
             description = stringResource(R.string.description_no_log_entries),
-            modifier = modifier
+            modifier = modifier.padding(16.dp)
         )
     } else {
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
-                .padding(top = 12.dp, start = 12.dp, end = 12.dp),
+                .navigationBarsPadding(),
+            contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-
-            items(logEntryHistory) { logEntry ->
+            items(logEntries) { logEntry ->
                 HistoryItem(
                     logEntry = logEntry,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {
-                            onLogEntryClick(logEntry.id)
-                        }
+                        .clickable { onLogEntryClick(logEntry.id) }
                 )
             }
         }
     }
 }
 
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun LogEntryListScreenPreview() {
-
     FieldTrackTheme {
         Surface {
             LogEntryListScreen(
@@ -89,10 +87,9 @@ fun LogEntryListScreenPreview() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun LogEntryListScreenEmptyPreview() {
-
     FieldTrackTheme {
         Surface {
             LogEntryListScreen(
