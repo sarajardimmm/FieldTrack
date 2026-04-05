@@ -1,25 +1,23 @@
 package com.example.fieldtrack.feature.product.list
 
 import androidx.lifecycle.ViewModel
-import com.example.fieldtrack.data.repository.LogEntryRepository
+import androidx.lifecycle.viewModelScope
+import com.example.fieldtrack.data.db.model.Product
+import com.example.fieldtrack.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
-    private val logEntryRepository: LogEntryRepository
+    private val productRepository: ProductRepository
 ) : ViewModel() {
-    //Each product can have:
-    //name
-    //type/category: insecticide, fungicide, fertilizer/adubo, herbicide, other
-    //default reapply interval in days
-    //notes
-    //maybe storage location later
-    //
-    //Actions:
-    //
-    //add product
-    //edit product
-    //delete product
-    //open product details
+    val products: StateFlow<List<Product>> = productRepository.getProducts()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 }

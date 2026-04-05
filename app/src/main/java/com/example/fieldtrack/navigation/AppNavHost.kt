@@ -43,7 +43,15 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
             })
         }
         composable<Routes.Products> {
-            ProductListRoute(onNavigateBack = {
+            ProductListRoute(
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onProductClick = { productId ->
+                    navController.navigate(Routes.ProductDetail(productId))
+                }
+            )
+        }
                 navController.popBackStack()
             })
         }

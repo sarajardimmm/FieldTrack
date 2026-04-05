@@ -9,6 +9,10 @@ import javax.inject.Inject
 class ProductRepository @Inject constructor(
     private val productDao: ProductDao
 ) {
+    fun getProducts() = productDao.getProducts().map { products ->
+        products.map { it.toDomain() }
+    }
+
     fun getAllProductNames() = productDao.getProducts().map { products ->
         products.map { it.name }.distinct()
     }
