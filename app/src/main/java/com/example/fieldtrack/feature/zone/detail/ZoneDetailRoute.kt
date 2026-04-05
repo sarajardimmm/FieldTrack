@@ -1,7 +1,6 @@
 package com.example.fieldtrack.feature.zone.detail
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -13,7 +12,7 @@ fun ZoneDetailRoute(
     onNavigateBack: () -> Unit,
     viewModel: ZoneDetailViewModel = hiltViewModel()
 ) {
-    val logEntries by viewModel.logEntries.collectAsState()
+    val logEntries by viewModel.logEntries.collectAsStateWithLifecycle()
     val zone by viewModel.zone.collectAsStateWithLifecycle()
 
     ZoneDetailScreen(
