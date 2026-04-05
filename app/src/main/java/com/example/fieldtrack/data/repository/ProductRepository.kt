@@ -42,5 +42,11 @@ class ProductRepository @Inject constructor(
         )
     }
 
-    suspend fun insertProduct(product: ProductEntity) = productDao.insert(product)
+    suspend fun saveProduct(product: ProductEntity) {
+        if (product.id == 0L) {
+            productDao.insert(product)
+        } else {
+            productDao.update(product)
+        }
+    }
 }

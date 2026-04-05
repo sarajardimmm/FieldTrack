@@ -9,6 +9,7 @@ import com.example.fieldtrack.feature.logentry.form.LogEntryFormRoute
 import com.example.fieldtrack.feature.logentry.detail.LogEntryDetailRoute
 import com.example.fieldtrack.feature.logentry.history.LogEntryListRoute
 import com.example.fieldtrack.feature.product.detail.ProductDetailRoute
+import com.example.fieldtrack.feature.product.form.ProductFormRoute
 import com.example.fieldtrack.feature.product.list.ProductListRoute
 import com.example.fieldtrack.feature.zone.detail.ZoneDetailRoute
 import com.example.fieldtrack.feature.zone.form.ZoneFormRoute
@@ -62,6 +63,9 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                     navController.popBackStack()
                 }
             )
+        }
+        composable<Routes.ProductForm> {
+            ProductFormRoute(onNavigateBack = {
                 navController.popBackStack()
             })
         }
