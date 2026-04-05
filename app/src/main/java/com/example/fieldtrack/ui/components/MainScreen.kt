@@ -3,9 +3,7 @@ package com.example.fieldtrack.ui.components
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,6 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.fieldtrack.navigation.Routes
 import com.example.fieldtrack.navigation.MyApp
+import com.example.fieldtrack.ui.components.buttons.CustomFloatingActionButton
 
 @Composable
 fun MainScreen() {
@@ -34,22 +33,20 @@ fun MainScreen() {
         },
         floatingActionButton = {
             if (destination?.hasRoute<Routes.History>() == true) {
-                FloatingActionButton(
-                    onClick = { navController.navigate(Routes.LogEntryForm()) },
-                    containerColor = MaterialTheme.colorScheme.tertiary,
+                CustomFloatingActionButton(
+                    onClick = { navController.navigate(Routes.LogEntryForm()) }
                 ) {
                     Icon(Icons.Default.Add, contentDescription = "Add log entry")
                 }
             } else if (destination?.hasRoute<Routes.Zones>() == true) {
-                FloatingActionButton(
-                    onClick = { navController.navigate(Routes.ZoneForm()) },
-                    containerColor = MaterialTheme.colorScheme.tertiary,
+                CustomFloatingActionButton(
+                    onClick = { navController.navigate(Routes.ZoneForm()) }
                 ) {
                     Icon(Icons.Default.Add, contentDescription = "Add zone")
                 }
             } else if (destination?.hasRoute<Routes.Products>() == true) {
-                FloatingActionButton(
-                    onClick = { navController.navigate(Routes.Products) } // TODO: Add Product Form
+                CustomFloatingActionButton(
+                    onClick = { navController.navigate(Routes.ProductForm()) }
                 ) {
                     Icon(Icons.Default.Add, contentDescription = "Add product")
                 }
