@@ -11,6 +11,12 @@ interface ProductDao {
     @Query("SELECT * FROM products")
     fun getProducts(): Flow<List<ProductEntity>>
 
+    @Query("SELECT * FROM products WHERE id = :id LIMIT 1")
+    suspend fun getById(id: Long): ProductEntity?
+
+    @Query("SELECT * FROM products WHERE id = :id LIMIT 1")
+    fun getByIdFlow(id: Long): Flow<ProductEntity?>
+
     @Query("SELECT * FROM products WHERE normalizedName = :normalizedName LIMIT 1")
     suspend fun getByNormalizedName(normalizedName: String): ProductEntity?
 

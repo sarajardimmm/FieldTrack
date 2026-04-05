@@ -12,6 +12,10 @@
     <string name="title_add_zone">Add Zone</string>
     <string name="title_edit_zone">Edit Zone</string>
     <string name="title_zone_detail">Zone Detail</string>
+    <string name="title_product_detail">Product Detail</string>
+    <string name="title_add_product">Add Product</string>
+    <string name="title_edit_product">Edit Product</string>
+    <string name="title_product_list">Products</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">History</string>
@@ -29,6 +33,9 @@
     <string name="label_quantity">Quantity</string>
     <string name="label_notes">Notes</string>
     <string name="label_days">%1$d days</string>
+    <string name="label_category">Category</string>
+    <string name="label_default_reapply_days">Default Reapply Days</string>
+    <string name="label_storage_location">Storage Location</string>
 
     <!-- Actions -->
     <string name="action_add">Add</string>
@@ -47,6 +54,7 @@
     <!-- Errors -->
     <string name="error_zone_required">Zone is required</string>
     <string name="error_product_required">Product is required</string>
+    <string name="error_product_name_required">Product name is required</string>
     <string name="title_no_log_entries">No log entries yet</string>
     <string name="description_no_log_entries">Start tracking your field work by adding your first entry.</string>
     <string name="title_no_zones">No zones yet</string>

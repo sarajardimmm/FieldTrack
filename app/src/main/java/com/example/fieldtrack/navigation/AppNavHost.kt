@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.fieldtrack.feature.logentry.form.LogEntryFormRoute
 import com.example.fieldtrack.feature.logentry.detail.LogEntryDetailRoute
 import com.example.fieldtrack.feature.logentry.history.LogEntryListRoute
+import com.example.fieldtrack.feature.product.detail.ProductDetailRoute
 import com.example.fieldtrack.feature.product.list.ProductListRoute
 import com.example.fieldtrack.feature.zone.detail.ZoneDetailRoute
 import com.example.fieldtrack.feature.zone.form.ZoneFormRoute
@@ -52,6 +53,15 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 }
             )
         }
+        composable<Routes.ProductDetail> {
+            ProductDetailRoute(
+                onEditClick = { productId ->
+                    navController.navigate(Routes.ProductForm(productId))
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
                 navController.popBackStack()
             })
         }

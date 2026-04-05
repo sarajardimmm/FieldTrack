@@ -24,4 +24,10 @@ sealed interface Routes {
 
     @Serializable
     data class ZoneForm(val zoneId: Long? = null) : Routes
+
+    @Serializable
+    data class ProductDetail(val productId: Long) : Routes
+
+    @Serializable
+    data class ProductForm(val productId: Long? = null) : Routes
 }

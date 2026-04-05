@@ -10,7 +10,12 @@
     <string name="title_entry_details">Detalhes da Entrada</string>
     <string name="log_entry_List_title">Lista de Registos</string>
     <string name="title_add_zone">Adicionar Zona</string>
+    <string name="title_edit_zone">Editar Zona</string>
     <string name="title_zone_detail">Detalhe da Zona</string>
+    <string name="title_product_detail">Detalhe do Produto</string>
+    <string name="title_add_product">Adicionar Produto</string>
+    <string name="title_edit_product">Editar Produto</string>
+    <string name="title_product_list">Produtos</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">Histórico</string>
@@ -28,6 +33,9 @@
     <string name="label_quantity">Quantidade</string>
     <string name="label_notes">Notas</string>
     <string name="label_days">%1$d dias</string>
+    <string name="label_category">Categoria</string>
+    <string name="label_default_reapply_days">Dias de Reaplicação Padrão</string>
+    <string name="label_storage_location">Local de Armazenamento</string>
 
     <!-- Actions -->
     <string name="action_add">Adicionar</string>
@@ -46,10 +54,13 @@
     <!-- Errors -->
     <string name="error_zone_required">A zona é obrigatória</string>
     <string name="error_product_required">O produto é obrigatório</string>
+    <string name="error_product_name_required">O nome do produto é obrigatório</string>
     <string name="title_no_log_entries">Ainda não existem registos</string>
     <string name="description_no_log_entries">Comece por adicionar um registo</string>
     <string name="title_no_zones">Ainda não existem zonas</string>
     <string name="description_no_zones">Comece por adicionar uma zona</string>
+    <string name="title_no_products">Ainda não existem produtos</string>
+    <string name="description_no_products">Adicione produtos ao seu inventário para acompanhar o seu uso.</string>
     <string name="title_zone_list">Zonas</string>
 
     <!-- Details -->

@@ -17,6 +17,12 @@ class ProductRepository @Inject constructor(
         products.map { it.name }.distinct()
     }
 
+    fun getProductByIdFlow(id: Long) =
+        productDao.getByIdFlow(id).map { it?.toDomain() }
+
+    suspend fun getProductById(id: Long) =
+        productDao.getById(id)?.toDomain()
+
     suspend fun resolveProductIdByName(name: String): Long {
         val trimmedName = name.trim()
         val normalizedName = trimmedName.lowercase()
