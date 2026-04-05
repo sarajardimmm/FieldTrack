@@ -20,6 +20,9 @@ interface LogEntryDao {
     @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.zoneId = :zoneId ORDER BY le.appliedAt DESC")
     fun getLogEntriesDisplayByZone(zoneId: Long): Flow<List<LogEntry>>
 
+    @Query("SELECT le.id, z.name AS zoneName, p.name AS productName, le.appliedAt, le.reapplyDays, le.quantity, le.notes FROM log_entries le JOIN zones z ON le.zoneId = z.id JOIN products p ON le.productId = p.id WHERE le.productId = :productId ORDER BY le.appliedAt DESC")
+    fun getLogEntriesDisplayByProduct(productId: Long): Flow<List<LogEntry>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(logEntry: LogEntryEntity): Long
 

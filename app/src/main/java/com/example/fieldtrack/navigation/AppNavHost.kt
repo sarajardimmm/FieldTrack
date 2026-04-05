@@ -59,6 +59,9 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 onEditClick = { productId ->
                     navController.navigate(Routes.ProductForm(productId))
                 },
+                onLogEntryClick = { logEntryId ->
+                    navController.navigate(Routes.LogEntryDetail(logEntryId))
+                },
                 onNavigateBack = {
                     navController.popBackStack()
                 }

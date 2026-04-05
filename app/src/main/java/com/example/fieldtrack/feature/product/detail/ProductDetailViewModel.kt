@@ -4,7 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.data.db.model.Product
+import com.example.fieldtrack.data.repository.LogEntryRepository
 import com.example.fieldtrack.data.repository.ProductRepository
 import com.example.fieldtrack.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val logEntryRepository: LogEntryRepository
 ) : ViewModel() {
     private val productId: Long = savedStateHandle.toRoute<Routes.ProductDetail>().productId
 
@@ -26,5 +29,12 @@ class ProductDetailViewModel @Inject constructor(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = null
+        )
+
+    val logEntries: StateFlow<List<LogEntry>> = logEntryRepository.getLogEntriesByProduct(productId)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
         )
 }
