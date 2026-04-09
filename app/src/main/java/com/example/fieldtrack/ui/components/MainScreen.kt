@@ -1,5 +1,6 @@
 package com.example.fieldtrack.ui.components
 
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -24,12 +25,7 @@ fun MainScreen() {
 
     Scaffold(
         bottomBar = {
-            if (destination?.hasRoute<Routes.History>() == true ||
-                destination?.hasRoute<Routes.Zones>() == true ||
-                destination?.hasRoute<Routes.Products>() == true
-            ) {
-                BottomBar(navController = navController)
-            }
+            BottomBar(navController = navController)
         },
         floatingActionButton = {
             if (destination?.hasRoute<Routes.History>() == true) {
@@ -53,9 +49,12 @@ fun MainScreen() {
             }
         }
     ) { innerPadding ->
+        // Use consumeWindowInsets to prevent double-padding/clipping in inner Scaffolds
         MyApp(
             navController = navController,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .consumeWindowInsets(innerPadding)
         )
     }
 }

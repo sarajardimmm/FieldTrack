@@ -13,10 +13,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.fieldtrack.navigation.BottomNavItem
-import com.example.fieldtrack.navigation.Routes
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 
 @Composable
@@ -30,11 +30,13 @@ fun BottomBar(
         destination = destination,
         onItemClick = { route ->
             navController.navigate(route) {
-                popUpTo(navController.graph.startDestinationId) {
-                    saveState = true
+                popUpTo(navController.graph.findStartDestination().id) {
+                    // We don't save state because we want to always return to the list
+                    saveState = false
                 }
                 launchSingleTop = true
-                restoreState = true
+                // We don't restore state because we want to always return to the list
+                restoreState = false
             }
         }
     )
@@ -48,8 +50,10 @@ fun BottomBarContent(
     NavigationBar {
         BottomNavItem.bottomNavItems.forEach { item ->
             val label = stringResource(item.labelRes)
+            val isSelected = destination?.hasRoute(item.route::class) == true
+            
             NavigationBarItem(
-                selected = destination?.hasRoute(item.route::class) == true,
+                selected = isSelected,
                 onClick = { onItemClick(item.route) },
                 icon = {
                     Icon(

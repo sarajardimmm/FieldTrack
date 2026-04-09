@@ -16,6 +16,7 @@
     <string name="title_add_product">Adicionar Produto</string>
     <string name="title_edit_product">Editar Produto</string>
     <string name="title_product_list">Produtos</string>
+    <string name="title_delete_confirmation">Confirmar Eliminação</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">Histórico</string>
@@ -25,9 +26,9 @@
     <!-- Form Labels & Headers -->
     <string name="header_basic_info">Informação Básica</string>
     <string name="header_details">Detalhes</string>
-    <string name="label_zone">Zona</string>
-    <string name="label_product">Produto</string>
-    <string name="label_applied_at">Aplicado em</string>
+    <string name="label_zone">Zona *</string>
+    <string name="label_product">Produto *</string>
+    <string name="label_applied_at">Aplicado em *</string>
     <string name="label_reapply_in">Reaplicar em</string>
     <string name="label_reapply_in_days">Reaplicar em dias</string>
     <string name="label_quantity">Quantidade</string>
@@ -65,5 +66,6 @@
 
     <!-- Details -->
     <string name="msg_delete_log_warning">Eliminar este registo não pode ser desfeito.</string>
+    <string name="msg_delete_log_confirmation">Tem a certeza que deseja eliminar este registo? Esta ação não pode ser desfeita.</string>
 
 </resources>
