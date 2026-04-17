@@ -1,8 +1,5 @@
 package com.example.fieldtrack.feature.zone.form
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,6 +9,12 @@ import com.example.fieldtrack.data.db.entity.ZoneEntity
 import com.example.fieldtrack.data.repository.ZoneRepository
 import com.example.fieldtrack.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,8 +26,11 @@ class ZoneFormViewModel @Inject constructor(
 
     private val zoneId: Long = savedStateHandle.toRoute<Routes.ZoneForm>().zoneId ?: -1L
 
-    var uiState by mutableStateOf(ZoneUiState(isEditing = zoneId != -1L))
-        private set
+    private val _uiState = MutableStateFlow(ZoneUiState(isEditing = zoneId != -1L))
+    val uiState: StateFlow<ZoneUiState> = _uiState.asStateFlow()
+
+    private val _effect = MutableSharedFlow<ZoneEffect>()
+    val effect = _effect.asSharedFlow()
 
     init {
         if (zoneId != -1L) {
@@ -35,11 +41,11 @@ class ZoneFormViewModel @Inject constructor(
     private fun loadZone(id: Long) {
         viewModelScope.launch {
             zoneRepository.getZoneById(id)?.let { zone ->
-                uiState = uiState.copy(
+                _uiState.update { it.copy(
                     id = zone.id,
                     name = zone.name,
                     notes = zone.notes ?: ""
-                )
+                ) }
             }
         }
     }
@@ -47,10 +53,10 @@ class ZoneFormViewModel @Inject constructor(
     fun onEvent(event: ZoneEvent) {
         when (event) {
             is ZoneEvent.NameChanged -> {
-                uiState = uiState.copy(name = event.name, nameErrorRes = null)
+                _uiState.update { it.copy(name = event.name, nameErrorRes = null) }
             }
             is ZoneEvent.NotesChanged -> {
-                uiState = uiState.copy(notes = event.notes)
+                _uiState.update { it.copy(notes = event.notes) }
             }
             ZoneEvent.SaveClicked -> {
                 saveZone()
@@ -58,24 +64,25 @@ class ZoneFormViewModel @Inject constructor(
         }
     }
 
-    fun doesZoneExist(name: String): Boolean {
-        //todo check if zone already exists
-        return false
-    }
-
     private fun saveZone() {
-        if (uiState.name.isBlank()) {
-            uiState = uiState.copy(nameErrorRes = R.string.error_zone_required)
+        if (_uiState.value.name.isBlank()) {
+            _uiState.update { it.copy(nameErrorRes = R.string.error_zone_required) }
             return
         }
 
         viewModelScope.launch {
-            uiState = uiState.copy(isSaving = true)
+            // Check for duplicate name if creating new zone
+            if (zoneId == -1L && zoneRepository.isZoneNameTaken(_uiState.value.name)) {
+                _uiState.update { it.copy(nameErrorRes = R.string.error_zone_already_exists) }
+                return@launch
+            }
+
+            _uiState.update { it.copy(isSaving = true) }
             val zone = ZoneEntity(
                 id = if (zoneId != -1L) zoneId else 0L,
-                name = uiState.name,
-                normalizedName = uiState.name.lowercase().trim(),
-                notes = uiState.notes.ifBlank { null }
+                name = _uiState.value.name,
+                normalizedName = _uiState.value.name.lowercase().trim(),
+                notes = _uiState.value.notes.ifBlank { null }
             )
             
             if (zoneId != -1L) {
@@ -84,7 +91,8 @@ class ZoneFormViewModel @Inject constructor(
                 zoneRepository.insertZone(zone)
             }
 
-            uiState = uiState.copy(isSaving = false, isSaveSuccess = true)
+            _uiState.update { it.copy(isSaving = false) }
+            _effect.emit(ZoneEffect.NavigateBack)
         }
     }
 }

@@ -22,6 +22,9 @@ interface ProductDao {
     @Query("SELECT * FROM products WHERE normalizedName = :normalizedName LIMIT 1")
     suspend fun getByNormalizedName(normalizedName: String): ProductEntity?
 
+    @Query("SELECT EXISTS(SELECT 1 FROM products WHERE normalizedName = :normalizedName LIMIT 1)")
+    suspend fun existsByNormalizedName(normalizedName: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(product: ProductEntity): Long
 

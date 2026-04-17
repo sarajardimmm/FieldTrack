@@ -54,8 +54,10 @@
 
     <!-- Errors -->
     <string name="error_zone_required">Zone is required</string>
+    <string name="error_zone_already_exists">A zone with this name already exists</string>
     <string name="error_product_required">Product is required</string>
     <string name="error_product_name_required">Product name is required</string>
+    <string name="error_product_already_exists">A product with this name already exists</string>
     <string name="title_no_log_entries">No log entries yet</string>
     <string name="description_no_log_entries">Start tracking your field work by adding your first entry.</string>
     <string name="title_no_zones">No zones yet</string>

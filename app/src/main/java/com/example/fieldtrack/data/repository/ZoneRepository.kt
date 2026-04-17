@@ -23,6 +23,10 @@ class ZoneRepository @Inject constructor(
     fun getZoneByIdFlow(id: Long) =
         zoneDao.getByIdFlow(id).map { it?.toDomain() }
 
+    suspend fun isZoneNameTaken(name: String): Boolean {
+        return zoneDao.existsByNormalizedName(name.lowercase().trim())
+    }
+
     suspend fun resolveZoneIdByName(name: String): Long {
         val trimmedName = name.trim()
         val normalizedName = trimmedName.lowercase()

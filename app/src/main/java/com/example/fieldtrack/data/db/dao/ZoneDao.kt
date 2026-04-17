@@ -22,6 +22,9 @@ interface ZoneDao {
     @Query("SELECT * FROM zones WHERE normalizedName = :normalizedName LIMIT 1")
     suspend fun getByNormalizedName(normalizedName: String): ZoneEntity?
 
+    @Query("SELECT EXISTS(SELECT 1 FROM zones WHERE normalizedName = :normalizedName LIMIT 1)")
+    suspend fun existsByNormalizedName(normalizedName: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(zone: ZoneEntity): Long
 

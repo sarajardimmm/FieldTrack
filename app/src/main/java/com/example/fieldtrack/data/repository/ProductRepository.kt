@@ -23,6 +23,10 @@ class ProductRepository @Inject constructor(
     suspend fun getProductById(id: Long) =
         productDao.getById(id)?.toDomain()
 
+    suspend fun isProductNameTaken(name: String): Boolean {
+        return productDao.existsByNormalizedName(name.lowercase().trim())
+    }
+
     suspend fun resolveProductIdByName(name: String): Long {
         val trimmedName = name.trim()
         val normalizedName = trimmedName.lowercase()

@@ -56,6 +56,7 @@
     <string name="error_zone_required">A zona é obrigatória</string>
     <string name="error_product_required">O produto é obrigatório</string>
     <string name="error_product_name_required">O nome do produto é obrigatório</string>
+    <string name="error_product_already_exists">Já existe um produto com este nome</string>
     <string name="title_no_log_entries">Ainda não existem registos</string>
     <string name="description_no_log_entries">Comece por adicionar um registo</string>
     <string name="title_no_zones">Ainda não existem zonas</string>
