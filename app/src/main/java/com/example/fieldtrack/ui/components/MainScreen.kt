@@ -9,10 +9,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.example.fieldtrack.R
 import com.example.fieldtrack.navigation.Routes
 import com.example.fieldtrack.navigation.MyApp
 import com.example.fieldtrack.ui.components.buttons.CustomFloatingActionButton
@@ -23,39 +28,87 @@ fun MainScreen() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val destination = navBackStackEntry?.destination
 
+    val title = navBackStackEntry.getScreenTitle()
+    val isTopLevel = destination.isTopLevel()
+    val fabAction = destination.getFabAction()
+
+    val onBack: (() -> Unit)? = if (!isTopLevel) {
+        { navController.popBackStack() }
+    } else null
+
     Scaffold(
+        topBar = {
+            AppTopBar(
+                title = title,
+                onBack = onBack
+            )
+        },
         bottomBar = {
             BottomBar(navController = navController)
         },
         floatingActionButton = {
-            if (destination?.hasRoute<Routes.History>() == true) {
+            fabAction?.let { route ->
                 CustomFloatingActionButton(
-                    onClick = { navController.navigate(Routes.LogEntryForm()) }
+                    onClick = { navController.navigate(route) }
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = "Add log entry")
-                }
-            } else if (destination?.hasRoute<Routes.Zones>() == true) {
-                CustomFloatingActionButton(
-                    onClick = { navController.navigate(Routes.ZoneForm()) }
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "Add zone")
-                }
-            } else if (destination?.hasRoute<Routes.Products>() == true) {
-                CustomFloatingActionButton(
-                    onClick = { navController.navigate(Routes.ProductForm()) }
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "Add product")
+                    Icon(Icons.Default.Add, contentDescription = null)
                 }
             }
         }
     ) { innerPadding ->
-        // Use consumeWindowInsets to prevent double-padding/clipping in inner Scaffolds
         MyApp(
             navController = navController,
             modifier = Modifier
                 .padding(innerPadding)
                 .consumeWindowInsets(innerPadding)
         )
+    }
+}
+
+@Composable
+private fun NavBackStackEntry?.getScreenTitle(): String {
+    val destination = this?.destination
+    return when {
+        destination?.hasRoute<Routes.History>() == true -> stringResource(R.string.title_log_history)
+        destination?.hasRoute<Routes.LogEntryDetail>() == true -> stringResource(R.string.title_log_detail)
+        destination?.hasRoute<Routes.LogEntryForm>() == true -> {
+            val route = this.toRoute<Routes.LogEntryForm>()
+            if (route.logEntryId != null) stringResource(R.string.title_edit_log_form)
+            else stringResource(R.string.title_log_form)
+        }
+        destination?.hasRoute<Routes.Products>() == true -> stringResource(R.string.title_product_list)
+        destination?.hasRoute<Routes.ProductDetail>() == true -> stringResource(R.string.title_product_detail)
+        destination?.hasRoute<Routes.ProductForm>() == true -> {
+            val route = this.toRoute<Routes.ProductForm>()
+            if (route.productId != null) stringResource(R.string.title_edit_product)
+            else stringResource(R.string.title_add_product)
+        }
+        destination?.hasRoute<Routes.Zones>() == true -> stringResource(R.string.title_zone_list)
+        destination?.hasRoute<Routes.ZoneDetail>() == true -> stringResource(R.string.title_zone_detail)
+        destination?.hasRoute<Routes.ZoneForm>() == true -> {
+            val route = this.toRoute<Routes.ZoneForm>()
+            if (route.zoneId != null) stringResource(R.string.title_edit_zone)
+            else stringResource(R.string.title_add_zone)
+        }
+        else -> ""
+    }
+}
+
+private fun NavDestination?.isTopLevel(): Boolean {
+    val topLevelRoutes = listOf(
+        Routes.History::class,
+        Routes.Products::class,
+        Routes.Zones::class
+    )
+    return topLevelRoutes.any { this?.hasRoute(it) == true }
+}
+
+private fun NavDestination?.getFabAction(): Routes? {
+    return when {
+        this?.hasRoute<Routes.History>() == true -> Routes.LogEntryForm()
+        this?.hasRoute<Routes.Zones>() == true -> Routes.ZoneForm()
+        this?.hasRoute<Routes.Products>() == true -> Routes.ProductForm()
+        else -> null
     }
 }
 

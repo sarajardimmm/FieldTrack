@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.Zone
-import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.EmptyStateCard
 import com.example.fieldtrack.ui.components.ListItem
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
@@ -33,20 +31,11 @@ fun ZoneListScreen(
     onZoneClick: (Long) -> Unit,
     zones: List<Zone>
 ) {
-    Scaffold(
-        topBar = {
-            AppTopBar(
-                title = stringResource(R.string.title_zone_list),
-                onBack = onNavigateBack
-            )
-        }
-    ) { innerPadding ->
-        ZoneListContent(
-            onZoneClick = onZoneClick,
-            zones = zones,
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
+    ZoneListContent(
+        onZoneClick = onZoneClick,
+        zones = zones,
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 @Composable

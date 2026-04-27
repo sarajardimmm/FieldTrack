@@ -20,7 +20,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.data.db.model.Zone
-import com.example.fieldtrack.ui.components.AppTopBar
 import com.example.fieldtrack.ui.components.HistoryItem
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
 import java.time.LocalDate
@@ -46,22 +44,13 @@ fun ZoneDetailScreen(
     onLogEntryClick: (Long) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    Scaffold(
-        topBar = {
-            AppTopBar(
-                title = stringResource(R.string.title_zone_detail),
-                onBack = onNavigateBack
-            )
-        }
-    ) { innerPadding ->
-        ZoneDetailContent(
-            zone = zone,
-            logEntries = logEntries,
-            onEditClick = onEditClick,
-            onLogEntryClick = onLogEntryClick,
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
+    ZoneDetailContent(
+        zone = zone,
+        logEntries = logEntries,
+        onEditClick = onEditClick,
+        onLogEntryClick = onLogEntryClick,
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 @Composable
