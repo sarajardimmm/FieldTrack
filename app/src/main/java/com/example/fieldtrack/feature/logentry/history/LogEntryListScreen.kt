@@ -13,13 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.EmptyStateCard
 import com.example.fieldtrack.ui.components.HistoryItem
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntryEntityListSample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun LogEntryListScreen(
@@ -39,17 +39,19 @@ fun LogEntryListContent(
     logEntries: List<LogEntry>,
     modifier: Modifier = Modifier
 ) {
+    val spacing = LocalSpacing.current
+    
     if (logEntries.isEmpty()) {
         EmptyStateCard(
             title = stringResource(R.string.title_no_log_entries),
             description = stringResource(R.string.description_no_log_entries),
-            modifier = modifier.padding(16.dp)
+            modifier = modifier.padding(spacing.medium)
         )
     } else {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(spacing.medium),
+            verticalArrangement = Arrangement.spacedBy(spacing.small),
         ) {
             items(logEntries) { logEntry ->
                 HistoryItem(

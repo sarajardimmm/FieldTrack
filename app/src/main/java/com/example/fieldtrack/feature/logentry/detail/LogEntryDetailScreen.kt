@@ -27,12 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData
 import com.example.fieldtrack.ui.components.buttons.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -59,25 +59,26 @@ fun LogEntryDetailContent(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val spacing = LocalSpacing.current
     val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(spacing.medium),
+        verticalArrangement = Arrangement.spacedBy(spacing.medium)
     ) {
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
-                elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = spacing.extraSmall),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                    modifier = Modifier.padding(spacing.medium),
+                    verticalArrangement = Arrangement.spacedBy(spacing.medium)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -85,8 +86,7 @@ fun LogEntryDetailContent(
                     ) {
                         Text(
                             text = stringResource(R.string.title_entry_details),
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.SemiBold
+                            style = MaterialTheme.typography.titleLarge
                         )
 
                         Spacer(modifier = Modifier.weight(1f))
@@ -94,19 +94,18 @@ fun LogEntryDetailContent(
                         logEntry?.let {
                             IconButton(
                                 onClick = { onEditClick(it.id) },
-                                modifier = Modifier.padding(start = 4.dp).size(24.dp)
+                                modifier = Modifier.size(spacing.large)
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Edit,
                                     contentDescription = stringResource(R.string.action_edit),
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(20.dp)
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
                     }
 
-                    HorizontalDivider()
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
                     DetailItem(
                         label = stringResource(R.string.label_zone),
@@ -146,20 +145,19 @@ fun LogEntryDetailContent(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
-                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = spacing.extraSmall),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.errorContainer
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier.padding(spacing.medium),
+                    verticalArrangement = Arrangement.spacedBy(spacing.small)
                 ) {
                     Text(
                         text = stringResource(R.string.msg_delete_log_warning),
                         style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.error,
-                        fontWeight = FontWeight.SemiBold
+                        color = MaterialTheme.colorScheme.onErrorContainer
                     )
 
                     SingleButton(
@@ -174,7 +172,7 @@ fun LogEntryDetailContent(
         }
 
         item {
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(spacing.medium))
         }
     }
 }
@@ -185,7 +183,8 @@ private fun DetailItem(
     value: String?,
     multiline: Boolean = false
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    val spacing = LocalSpacing.current
+    Column(verticalArrangement = Arrangement.spacedBy(spacing.extraSmall)) {
         Text(
             text = label,
             style = MaterialTheme.typography.labelMedium,

@@ -1,24 +1,21 @@
 package com.example.fieldtrack.feature.product.form
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.ui.components.FormContainer
 import com.example.fieldtrack.ui.components.FormField
 import com.example.fieldtrack.ui.components.buttons.SingleButton
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun ProductFormScreen(
@@ -39,6 +36,8 @@ fun ProductFormContent(
     onEvent: (ProductEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val spacing = LocalSpacing.current
+    
     FormContainer(modifier = modifier) {
         Text(
             text = stringResource(R.string.header_basic_info),
@@ -82,7 +81,7 @@ fun ProductFormContent(
             label = stringResource(R.string.label_notes)
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(spacing.small))
 
         SingleButton(
             label = if (uiState.isEditing) {

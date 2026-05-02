@@ -18,12 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.Zone
 import com.example.fieldtrack.ui.components.EmptyStateCard
 import com.example.fieldtrack.ui.components.ListItem
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun ZoneListScreen(
@@ -44,11 +44,13 @@ fun ZoneListContent(
     zones: List<Zone>,
     modifier: Modifier = Modifier
 ) {
+    val spacing = LocalSpacing.current
+    
     if (zones.isEmpty()) {
         Box(
             modifier = modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = spacing.medium),
             contentAlignment = Alignment.Center
         ) {
             EmptyStateCard(
@@ -59,8 +61,8 @@ fun ZoneListContent(
     } else {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(spacing.medium),
+            verticalArrangement = Arrangement.spacedBy(spacing.small),
         ) {
             items(zones) { zone ->
                 ZoneListItem(

@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun EmptyStateCard(
@@ -28,36 +28,39 @@ fun EmptyStateCard(
     description: String,
     modifier: Modifier = Modifier,
 ) {
+    val spacing = LocalSpacing.current
+    
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(spacing.large),
         contentAlignment = Alignment.Center
     ) {
         Surface(
             shape = MaterialTheme.shapes.extraLarge,
-            tonalElevation = 2.dp,
+            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            tonalElevation = spacing.extraSmall,
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp),
+                modifier = Modifier.padding(horizontal = spacing.large, vertical = spacing.extraLarge),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(
                     imageVector = Icons.Default.Description,
                     contentDescription = null,
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(spacing.extraExtraLarge),
                     tint = MaterialTheme.colorScheme.primary
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(spacing.medium))
 
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleMedium
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(spacing.small))
 
                 Text(
                     text = description,

@@ -2,13 +2,16 @@ package com.example.fieldtrack.ui.components.buttons
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun SingleButton(
@@ -20,8 +23,14 @@ fun SingleButton(
     Button(
         modifier = modifier.fillMaxWidth(),
         onClick = onClick,
-        enabled = enabled
-    ) { Text(label) }
+        enabled = enabled,
+        shape = MaterialTheme.shapes.large
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
 }
 
 @Preview(
@@ -37,8 +46,9 @@ fun SingleButton(
 @Composable
 fun SingleButtonPreview() {
     FieldTrackTheme {
-        Surface {
-            SingleButton(label = "Add", onClick = {})
+        val spacing = LocalSpacing.current
+        Surface(modifier = Modifier.padding(spacing.medium)) {
+            SingleButton(label = "Save Entry", onClick = {})
         }
     }
 }

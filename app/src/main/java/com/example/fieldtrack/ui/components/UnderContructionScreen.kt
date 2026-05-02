@@ -20,36 +20,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun UnderConstructionScreen(
     title: String = stringResource(R.string.under_construction_title),
     message: String = stringResource(R.string.under_construction_message)
 ) {
+    val spacing = LocalSpacing.current
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(spacing.large),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
             imageVector = Icons.Default.LockClock,
             contentDescription = null,
-            modifier = Modifier.size(64.dp)
+            modifier = Modifier.size(spacing.extraExtraExtraLarge),
+            tint = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(spacing.medium))
 
         Text(
             text = title,
             style = MaterialTheme.typography.headlineSmall
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(spacing.small))
 
         Text(
             textAlign = TextAlign.Center,

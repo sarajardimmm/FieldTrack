@@ -12,7 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 /**
  * A shared container for all forms in the app.
@@ -23,22 +23,24 @@ fun FormContainer(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val spacing = LocalSpacing.current
+    
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .verticalScroll(rememberScrollState())
+            .padding(spacing.medium),
+        verticalArrangement = Arrangement.spacedBy(spacing.medium)
     ) {
         Surface(
-            tonalElevation = 2.dp,
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            tonalElevation = spacing.extraSmall,
+            shape = MaterialTheme.shapes.extraLarge,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                modifier = Modifier.padding(spacing.medium),
+                verticalArrangement = Arrangement.spacedBy(spacing.medium)
             ) {
                 content()
             }

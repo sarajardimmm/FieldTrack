@@ -1,6 +1,7 @@
 package com.example.fieldtrack.ui.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,6 +13,7 @@ import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntrySample
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -63,9 +65,10 @@ fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
 @Composable
 fun HistoryItemPreview() {
     val logEntryEntity = logEntrySample
+    val spacing = LocalSpacing.current
 
     FieldTrackTheme {
-        Surface {
+        Surface(modifier = Modifier.padding(spacing.medium)) {
             HistoryItem(logEntry = logEntryEntity, modifier = Modifier)
         }
     }

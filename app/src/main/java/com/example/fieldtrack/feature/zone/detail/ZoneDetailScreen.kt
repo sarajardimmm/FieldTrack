@@ -26,14 +26,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.data.db.model.Zone
 import com.example.fieldtrack.ui.components.HistoryItem
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 import java.time.LocalDate
 
 @Composable
@@ -61,23 +60,25 @@ fun ZoneDetailContent(
     onLogEntryClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val spacing = LocalSpacing.current
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(spacing.medium),
+        verticalArrangement = Arrangement.spacedBy(spacing.medium)
     ) {
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
-                elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = spacing.extraSmall),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                    modifier = Modifier.padding(spacing.medium),
+                    verticalArrangement = Arrangement.spacedBy(spacing.medium)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -85,8 +86,7 @@ fun ZoneDetailContent(
                     ) {
                         Text(
                             text = stringResource(R.string.title_zone_detail),
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.SemiBold
+                            style = MaterialTheme.typography.titleLarge
                         )
 
                         Spacer(modifier = Modifier.weight(1f))
@@ -94,19 +94,18 @@ fun ZoneDetailContent(
                         zone?.let {
                             IconButton(
                                 onClick = { onEditClick(it.id) },
-                                modifier = Modifier.padding(start = 4.dp).size(24.dp)
+                                modifier = Modifier.size(spacing.large)
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Edit,
                                     contentDescription = stringResource(R.string.action_edit),
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(20.dp)
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
                     }
 
-                    HorizontalDivider()
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
                     DetailItem(
                         label = stringResource(R.string.label_zone),
@@ -127,7 +126,7 @@ fun ZoneDetailContent(
                 Text(
                     text = stringResource(R.string.title_log_history),
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = spacing.small)
                 )
             }
 
@@ -149,7 +148,8 @@ private fun DetailItem(
     value: String?,
     multiline: Boolean = false
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    val spacing = LocalSpacing.current
+    Column(verticalArrangement = Arrangement.spacedBy(spacing.extraSmall)) {
         Text(
             text = label,
             style = MaterialTheme.typography.labelMedium,

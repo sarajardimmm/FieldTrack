@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,13 +15,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.ui.components.AutocompleteField
 import com.example.fieldtrack.ui.components.FieldTrackDatePickerDialog
 import com.example.fieldtrack.ui.components.FormContainer
 import com.example.fieldtrack.ui.components.FormField
 import com.example.fieldtrack.ui.components.buttons.SingleButton
+import com.example.fieldtrack.ui.theme.LocalSpacing
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -109,7 +108,8 @@ fun LogEntryFormScreen(
             onValueChange = { onEvent(LogEntryEvent.NotesChanged(it)) },
             label = stringResource(R.string.label_notes),
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        
+        Spacer(modifier = Modifier.height(spacing.small))
 
         SingleButton(
             label = if (uiState.isEditing) {

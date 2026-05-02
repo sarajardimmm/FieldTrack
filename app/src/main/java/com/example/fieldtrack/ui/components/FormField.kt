@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @Composable
 fun FormField(
@@ -32,10 +32,15 @@ fun FormField(
     trailingIcon: @Composable (() -> Unit)? = null,
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = MaterialTheme.colorScheme.primary,
-        unfocusedBorderColor = MaterialTheme.colorScheme.outline
+        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+        errorBorderColor = MaterialTheme.colorScheme.error,
+        focusedContainerColor = MaterialTheme.colorScheme.surface,
+        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
     )
 ) {
-    Column {
+    val spacing = LocalSpacing.current
+    
+    Column(modifier = modifier) {
         OutlinedTextField(
             value = value,
             onValueChange = { input ->
@@ -49,10 +54,10 @@ fun FormField(
             label = { Text(label) },
             singleLine = singleLine,
             isError = errorMessage != null,
-            modifier = modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             readOnly = readOnly,
             enabled = enabled,
-            shape = MaterialTheme.shapes.medium,
+            shape = MaterialTheme.shapes.large, // More rounded corners for modern look
             colors = colors,
             trailingIcon = trailingIcon,
             keyboardOptions = KeyboardOptions(
@@ -64,7 +69,7 @@ fun FormField(
                 text = errorMessage,
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                modifier = Modifier.padding(start = spacing.medium, top = spacing.extraSmall)
             )
         }
     }
@@ -83,8 +88,9 @@ fun FormField(
 @Composable
 fun FormFieldPreview() {
     FieldTrackTheme {
+        val spacing = LocalSpacing.current
         Surface {
-            FormField("Name", {}, "Name")
+            FormField("Name", {}, "Name", modifier = Modifier.padding(spacing.medium))
         }
     }
 }

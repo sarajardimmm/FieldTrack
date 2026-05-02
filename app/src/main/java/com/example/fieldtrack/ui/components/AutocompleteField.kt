@@ -19,8 +19,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
+import com.example.fieldtrack.ui.theme.LocalSpacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +54,9 @@ fun AutocompleteField(
             colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
+                errorBorderColor = MaterialTheme.colorScheme.error,
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
             ),
         )
 
@@ -96,7 +98,8 @@ fun AutocompleteField(
 @Composable
 fun AutocompleteFieldPreview() {
     FieldTrackTheme {
-        Surface(modifier = Modifier.padding(16.dp)) {
+        val spacing = LocalSpacing.current
+        Surface(modifier = Modifier.padding(spacing.medium)) {
             var value by remember { mutableStateOf("Nor") }
             val suggestions = listOf("North Orchard", "North Field", "North Gate")
             
