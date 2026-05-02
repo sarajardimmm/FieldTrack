@@ -38,7 +38,7 @@ fun EmptyStateCard(
     ) {
         Surface(
             shape = MaterialTheme.shapes.extraLarge,
-            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            color = MaterialTheme.colorScheme.surfaceContainer,
             tonalElevation = spacing.extraSmall,
             modifier = Modifier.fillMaxWidth()
         ) {

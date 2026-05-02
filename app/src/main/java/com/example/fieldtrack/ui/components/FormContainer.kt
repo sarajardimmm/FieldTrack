@@ -33,9 +33,9 @@ fun FormContainer(
         verticalArrangement = Arrangement.spacedBy(spacing.medium)
     ) {
         Surface(
-            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            color = MaterialTheme.colorScheme.surfaceContainer,
             tonalElevation = spacing.extraSmall,
-            shape = MaterialTheme.shapes.extraLarge,
+            shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(

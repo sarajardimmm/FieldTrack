@@ -32,6 +32,7 @@ fun LogEntryFormScreen(
     onNavigateBack: () -> Unit,
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
+    val spacing = LocalSpacing.current
 
     if (showDatePicker) {
         FieldTrackDatePickerDialog(

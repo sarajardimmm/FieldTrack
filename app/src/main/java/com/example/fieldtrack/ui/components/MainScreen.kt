@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,10 +52,15 @@ fun MainScreen() {
                 CustomFloatingActionButton(
                     onClick = { navController.navigate(route) }
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = null)
+                    Icon(
+                        imageVector = Icons.Default.Add, 
+                        contentDescription = stringResource(R.string.title_log_form),
+                        tint = MaterialTheme.colorScheme.onTertiary
+                    )
                 }
             }
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background // Explicit background to prevent blending
     ) { innerPadding ->
         MyApp(
             navController = navController,
