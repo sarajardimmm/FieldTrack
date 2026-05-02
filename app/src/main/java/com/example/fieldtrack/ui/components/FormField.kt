@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.fieldtrack.ui.theme.FieldTrackTheme
@@ -34,8 +35,9 @@ fun FormField(
         focusedBorderColor = MaterialTheme.colorScheme.primary,
         unfocusedBorderColor = MaterialTheme.colorScheme.outline,
         errorBorderColor = MaterialTheme.colorScheme.error,
-        focusedContainerColor = MaterialTheme.colorScheme.surface,
-        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+        focusedContainerColor = Color.Transparent,
+        unfocusedContainerColor = Color.Transparent,
+        errorContainerColor = Color.Transparent,
     )
 ) {
     val spacing = LocalSpacing.current
@@ -51,13 +53,17 @@ fun FormField(
                 }
                 onValueChange(filtered)
             },
-            label = { Text(label) },
+            label = { 
+                if (label.isNotEmpty()) {
+                    Text(label) 
+                }
+            },
             singleLine = singleLine,
             isError = errorMessage != null,
             modifier = Modifier.fillMaxWidth(),
             readOnly = readOnly,
             enabled = enabled,
-            shape = MaterialTheme.shapes.large, // More rounded corners for modern look
+            shape = MaterialTheme.shapes.large,
             colors = colors,
             trailingIcon = trailingIcon,
             keyboardOptions = KeyboardOptions(
@@ -108,8 +114,9 @@ fun FormFieldPreview() {
 @Composable
 fun FormFieldWithErrorPreview() {
     FieldTrackTheme {
+        val spacing = LocalSpacing.current
         Surface {
-            FormField("Name", {}, "Name", errorMessage = "Error")
+            FormField("Name", {}, "Name", errorMessage = "Error", modifier = Modifier.padding(spacing.medium))
         }
     }
 }
