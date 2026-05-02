@@ -29,6 +29,8 @@ The app follows a layered architecture with a clear separation of concerns:
 - ViewModel Layer: Manages UI state and user interactions using StateFlow
 - Data Layer: Handles data persistence and retrieval via Room and a repository abstraction
 
+Architected using MVVM with Unidirectional Data Flow (UDF) and MVI principles for predictable state management.
+
 The ViewModel exposes a single source of truth for the UI through immutable state, enabling predictable and reactive updates.
 
 The current implementation keeps the architecture relatively simple for clarity, but it is designed to evolve as complexity grows.
