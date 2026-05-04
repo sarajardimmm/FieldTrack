@@ -1,14 +1,21 @@
 package com.example.fieldtrack.ui.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.LogEntrySamplePreviewData.logEntrySample
@@ -20,36 +27,53 @@ import java.time.format.DateTimeFormatter
 fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
     val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
 
-    ListItem(
-        modifier,
-        contentLeft = {
-            Text(
-                text = logEntry.zoneName,
-                style = MaterialTheme.typography.titleMedium
-            )
+    val spacing = LocalSpacing.current
 
-            Text(
-                text = logEntry.productName,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        },
-        contentRight = {
-            Text(
-                text = logEntry.appliedAt.format(formatter),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-
-            logEntry.reapplyDays?.let {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = spacing.medium),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(spacing.extraSmall)
+            ) {
                 Text(
-                    text = stringResource(R.string.label_days, it),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary
+                    text = logEntry.zoneName,
+                    style = MaterialTheme.typography.titleMedium
                 )
-            }
+
+                Text(
+                    text = logEntry.productName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )            }
+
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(spacing.extraSmall)
+            ) {
+                Text(
+                    text = logEntry.appliedAt.format(formatter),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                logEntry.reapplyDays?.let {
+                    Text(
+                        text = stringResource(R.string.label_days, it),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }            }
         }
-    )
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.outlineVariant,
+            thickness = 0.5.dp
+        )
+    }
 }
 
 @Preview(

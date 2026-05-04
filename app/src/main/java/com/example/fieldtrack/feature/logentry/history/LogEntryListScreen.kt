@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.ui.components.EmptyStateCard
@@ -50,7 +51,7 @@ fun LogEntryListContent(
     } else {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(spacing.medium),
+            contentPadding = PaddingValues(spacing.medium, 0.dp),
             verticalArrangement = Arrangement.spacedBy(spacing.small),
         ) {
             items(logEntries) { logEntry ->
