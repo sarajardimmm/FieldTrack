@@ -2,6 +2,7 @@ package com.example.fieldtrack.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val AppWhite = Color(0xFFF5F8F4)
 val Green90 = Color(0xFFE7EFE5)
 val Green80 = Color(0xFFC9D9C4)
 val Green70 = Color(0xFFAABFA3)
