@@ -48,7 +48,7 @@ fun BottomBarContent(
     onItemClick: (Any) -> Unit
 ) {
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceContainer, // Distinct from screen background
+        containerColor = MaterialTheme.colorScheme.surface,
     ) {
         BottomNavItem.bottomNavItems.forEach { item ->
             val label = stringResource(item.labelRes)
@@ -70,8 +70,8 @@ fun BottomBarContent(
                     selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    unselectedIconColor = MaterialTheme.colorScheme.onSurface,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSurface
                 )
             )
         }

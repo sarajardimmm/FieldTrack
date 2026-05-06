@@ -42,14 +42,16 @@ fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
             ) {
                 Text(
                     text = logEntry.zoneName,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Text(
                     text = logEntry.productName,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
-                )            }
+                )
+            }
 
             Column(
                 horizontalAlignment = Alignment.End,
@@ -67,7 +69,8 @@ fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary
                     )
-                }            }
+                }
+            }
         }
         HorizontalDivider(
             color = MaterialTheme.colorScheme.outlineVariant,

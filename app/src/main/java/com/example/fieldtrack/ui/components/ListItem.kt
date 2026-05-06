@@ -2,7 +2,6 @@ package com.example.fieldtrack.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -16,8 +15,7 @@ import com.example.fieldtrack.ui.theme.LocalSpacing
 @Composable
 fun ListItem(
     modifier: Modifier,
-    contentLeft: @Composable () -> Unit,
-    contentRight: @Composable () -> Unit? = {}
+    contentTop: @Composable () -> Unit,
 ) {
     val spacing = LocalSpacing.current
     
@@ -28,25 +26,14 @@ fun ListItem(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(spacing.medium),
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.spacedBy(spacing.small),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(spacing.extraSmall)
-            ) {
-                contentLeft()
-            }
-
-            Column(
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.spacedBy(spacing.extraSmall)
-            ) {
-                contentRight()
-            }
+            contentTop()
         }
     }
 }

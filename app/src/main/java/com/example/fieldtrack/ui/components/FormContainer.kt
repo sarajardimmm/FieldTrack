@@ -1,5 +1,6 @@
 package com.example.fieldtrack.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -12,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.fieldtrack.ui.theme.GreenGrey90
 import com.example.fieldtrack.ui.theme.LocalSpacing
 
 /**
@@ -24,26 +26,15 @@ fun FormContainer(
     content: @Composable ColumnScope.() -> Unit
 ) {
     val spacing = LocalSpacing.current
-    
+
     Column(
         modifier = modifier
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(spacing.medium),
-        verticalArrangement = Arrangement.spacedBy(spacing.medium)
+        verticalArrangement = Arrangement.spacedBy(spacing.medium),
     ) {
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceContainer,
-            tonalElevation = spacing.extraSmall,
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(spacing.medium),
-                verticalArrangement = Arrangement.spacedBy(spacing.medium)
-            ) {
-                content()
-            }
-        }
+        content()
     }
 }

@@ -25,8 +25,7 @@ fun ProductFormScreen(
 ) {
     ProductFormContent(
         uiState = uiState,
-        onEvent = onEvent,
-        modifier = Modifier.fillMaxSize()
+        onEvent = onEvent
     )
 }
 

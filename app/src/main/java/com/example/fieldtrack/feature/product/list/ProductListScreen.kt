@@ -80,7 +80,7 @@ fun ProductListContent(
 fun ProductListItem(product: Product, modifier: Modifier = Modifier) {
     ListItem(
         modifier = modifier,
-        contentLeft = {
+        contentTop = {
             Text(
                 text = product.name,
                 style = MaterialTheme.typography.titleMedium

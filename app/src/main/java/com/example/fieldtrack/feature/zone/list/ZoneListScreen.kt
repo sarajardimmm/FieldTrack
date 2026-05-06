@@ -80,7 +80,7 @@ fun ZoneListContent(
 fun ZoneListItem(zone: Zone, modifier: Modifier = Modifier) {
     ListItem(
         modifier = modifier,
-        contentLeft = {
+        contentTop = {
             Text(
                 text = zone.name,
                 style = MaterialTheme.typography.titleMedium
