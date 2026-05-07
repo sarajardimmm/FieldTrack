@@ -137,14 +137,6 @@ fun ProductDetailContent(
         }
 
         if (logEntries.isNotEmpty()) {
-            item {
-                Text(
-                    text = stringResource(R.string.title_log_history),
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = spacing.small)
-                )
-            }
-
             items(logEntries) { logEntry ->
                 HistoryItem(
                     logEntry = logEntry,
