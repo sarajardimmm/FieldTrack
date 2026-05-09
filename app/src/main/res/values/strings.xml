@@ -17,6 +17,7 @@
     <string name="title_edit_product">Edit Product</string>
     <string name="title_product_list">Products</string>
     <string name="title_delete_confirmation">Delete Confirmation</string>
+    <string name="title_pending_reapplies">Pending Reapplies</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">History</string>
@@ -37,6 +38,8 @@
     <string name="label_category">Category</string>
     <string name="label_default_reapply_days">Default Reapply Days</string>
     <string name="label_storage_location">Storage Location</string>
+    <string name="label_overdue">Overdue</string>
+    <string name="label_due_in_days">Due in %1$d days</string>
 
     <!-- Actions -->
     <string name="action_add">Add</string>

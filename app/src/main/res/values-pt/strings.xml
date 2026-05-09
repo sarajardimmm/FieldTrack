@@ -17,6 +17,7 @@
     <string name="title_edit_product">Editar Produto</string>
     <string name="title_product_list">Produtos</string>
     <string name="title_delete_confirmation">Confirmar Eliminação</string>
+    <string name="title_pending_reapplies">Reaplicações Pendentes</string>
 
     <!-- Navigation Labels -->
     <string name="nav_history">Histórico</string>
@@ -37,6 +38,8 @@
     <string name="label_category">Categoria</string>
     <string name="label_default_reapply_days">Dias de Reaplicação Padrão</string>
     <string name="label_storage_location">Local de Armazenamento</string>
+    <string name="label_overdue">Em atraso</string>
+    <string name="label_due_in_days">Reaplicar em %1$d dias</string>
 
     <!-- Actions -->
     <string name="action_add">Adicionar</string>
