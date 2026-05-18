@@ -8,12 +8,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun LogEntryListRoute(
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     viewModel: LogEntryListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LogEntryListScreen(
         onLogEntryClick = onLogEntryClick,
+        onReapplyClick = onReapplyClick,
         uiState = uiState
     )
 }

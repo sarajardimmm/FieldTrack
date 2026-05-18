@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -24,7 +28,11 @@ import com.example.fieldtrack.ui.theme.LocalSpacing
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
+fun HistoryItem(
+    logEntry: LogEntry,
+    onReapplyClick: (Long) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
 
     val spacing = LocalSpacing.current
@@ -63,12 +71,25 @@ fun HistoryItem(logEntry: LogEntry, modifier: Modifier) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                logEntry.reapplyDays?.let {
-                    Text(
-                        text = stringResource(R.string.label_days, it),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(spacing.small)
+                ) {
+                    logEntry.reapplyDays?.let {
+                        Text(
+                            text = stringResource(R.string.label_days, it),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+
+                    IconButton(onClick = { onReapplyClick(logEntry.id) }) {
+                        Icon(
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = stringResource(R.string.cd_reapply),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }
@@ -96,7 +117,7 @@ fun HistoryItemPreview() {
 
     FieldTrackTheme {
         Surface(modifier = Modifier.padding(spacing.medium)) {
-            HistoryItem(logEntry = logEntryEntity, modifier = Modifier)
+            HistoryItem(logEntry = logEntryEntity, onReapplyClick = {}, modifier = Modifier)
         }
     }
 }

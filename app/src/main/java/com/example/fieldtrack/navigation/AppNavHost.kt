@@ -26,13 +26,16 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
             LogEntryListRoute(
                 onLogEntryClick = { logEntryId ->
                     navController.navigate(Routes.LogEntryDetail(logEntryId))
+                },
+                onReapplyClick = { logEntryId ->
+                    navController.navigate(Routes.LogEntryForm(reapplyFromId = logEntryId))
                 }
             )
         }
         composable<Routes.LogEntryDetail> {
             LogEntryDetailRoute(
                 onEditClick = { logEntryId ->
-                    navController.navigate(Routes.LogEntryForm(logEntryId))
+                    navController.navigate(Routes.LogEntryForm(logEntryId = logEntryId))
                 },
                 onNavigateBack = {
                     navController.popBackStack()
@@ -61,6 +64,9 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 },
                 onLogEntryClick = { logEntryId ->
                     navController.navigate(Routes.LogEntryDetail(logEntryId))
+                },
+                onReapplyClick = { logEntryId ->
+                    navController.navigate(Routes.LogEntryForm(reapplyFromId = logEntryId))
                 },
                 onNavigateBack = {
                     navController.popBackStack()
@@ -94,6 +100,9 @@ fun MyApp(modifier: Modifier, navController: NavHostController) {
                 },
                 onLogEntryClick = { logEntryId ->
                     navController.navigate(Routes.LogEntryDetail(logEntryId))
+                },
+                onReapplyClick = { logEntryId ->
+                    navController.navigate(Routes.LogEntryForm(reapplyFromId = logEntryId))
                 },
                 onNavigateBack = {
                     navController.popBackStack()

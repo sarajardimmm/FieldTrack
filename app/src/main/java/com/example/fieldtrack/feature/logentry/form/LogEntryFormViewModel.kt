@@ -30,7 +30,9 @@ class LogEntryFormViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val logEntryId: Long = savedStateHandle.toRoute<Routes.LogEntryForm>().logEntryId ?: -1L
+    private val route = savedStateHandle.toRoute<Routes.LogEntryForm>()
+    private val logEntryId: Long = route.logEntryId ?: -1L
+    private val reapplyFromId: Long = route.reapplyFromId ?: -1L
 
     private val _uiState = MutableStateFlow(LogEntryUiState(isEditing = logEntryId != -1L))
     
@@ -60,17 +62,19 @@ class LogEntryFormViewModel @Inject constructor(
     init {
         if (logEntryId != -1L) {
             loadLogEntry(logEntryId)
+        } else if (reapplyFromId != -1L) {
+            loadLogEntry(reapplyFromId, isReapply = true)
         }
     }
 
-    private fun loadLogEntry(id: Long) {
+    private fun loadLogEntry(id: Long, isReapply: Boolean = false) {
         viewModelScope.launch {
             logEntryRepository.getLogEntryForDisplay(id).collect { logEntry ->
                 _uiState.update {
                     it.copy(
                         zoneName = logEntry?.zoneName ?: "",
                         productName = logEntry?.productName ?: "",
-                        appliedAt = logEntry?.appliedAt ?: LocalDate.now(),
+                        appliedAt = if (isReapply) LocalDate.now() else (logEntry?.appliedAt ?: LocalDate.now()),
                         quantity = logEntry?.quantity,
                         reapplyDays = logEntry?.reapplyDays?.toString(),
                         notes = logEntry?.notes

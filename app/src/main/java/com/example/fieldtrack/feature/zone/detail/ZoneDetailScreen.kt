@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.data.db.model.Zone
@@ -41,6 +42,7 @@ fun ZoneDetailScreen(
     logEntries: List<LogEntry>,
     onEditClick: (Long) -> Unit,
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     onNavigateBack: () -> Unit
 ) {
     ZoneDetailContent(
@@ -48,6 +50,7 @@ fun ZoneDetailScreen(
         logEntries = logEntries,
         onEditClick = onEditClick,
         onLogEntryClick = onLogEntryClick,
+        onReapplyClick = onReapplyClick,
         modifier = Modifier.fillMaxSize()
     )
 }
@@ -58,6 +61,7 @@ fun ZoneDetailContent(
     logEntries: List<LogEntry>,
     onEditClick: (Long) -> Unit,
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -71,7 +75,7 @@ fun ZoneDetailContent(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
-                elevation = CardDefaults.cardElevation(defaultElevation = spacing.extraSmall),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 )
@@ -125,6 +129,7 @@ fun ZoneDetailContent(
             items(logEntries) { logEntry ->
                 HistoryItem(
                     logEntry = logEntry,
+                    onReapplyClick = onReapplyClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { onLogEntryClick(logEntry.id) }
@@ -180,6 +185,7 @@ fun ZoneDetailScreenPreview() {
                 ),
                 onEditClick = {},
                 onLogEntryClick = {},
+                onReapplyClick = {},
                 onNavigateBack = {}
             )
         }

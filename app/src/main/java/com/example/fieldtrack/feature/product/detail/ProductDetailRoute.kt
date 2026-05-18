@@ -1,7 +1,6 @@
 package com.example.fieldtrack.feature.product.detail
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -10,6 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun ProductDetailRoute(
     onEditClick: (Long) -> Unit,
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     onNavigateBack: () -> Unit,
     viewModel: ProductDetailViewModel = hiltViewModel()
 ) {
@@ -18,9 +18,10 @@ fun ProductDetailRoute(
 
     ProductDetailScreen(
         product = product,
+        logEntries = logEntries,
         onEditClick = onEditClick,
         onLogEntryClick = onLogEntryClick,
-        onNavigateBack = onNavigateBack,
-        logEntries = logEntries
+        onReapplyClick = onReapplyClick,
+        onNavigateBack = onNavigateBack
     )
 }

@@ -1,6 +1,5 @@
 package com.example.fieldtrack.feature.logentry.history
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,10 +36,12 @@ import java.time.LocalDate
 @Composable
 fun LogEntryListScreen(
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     uiState: LogEntryListUiState
 ) {
     LogEntryListContent(
         onLogEntryClick = onLogEntryClick,
+        onReapplyClick = onReapplyClick,
         uiState = uiState,
         modifier = Modifier.fillMaxSize()
     )
@@ -45,6 +50,7 @@ fun LogEntryListScreen(
 @Composable
 fun LogEntryListContent(
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     uiState: LogEntryListUiState,
     modifier: Modifier = Modifier
 ) {
@@ -73,6 +79,7 @@ fun LogEntryListContent(
                 items(uiState.pendingReapplies) { pending ->
                     PendingReapplyItem(
                         pending = pending,
+                        onReapplyClick = onReapplyClick,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onLogEntryClick(pending.logEntry.id) }
@@ -90,6 +97,7 @@ fun LogEntryListContent(
             items(uiState.history) { logEntry ->
                 HistoryItem(
                     logEntry = logEntry,
+                    onReapplyClick = onReapplyClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { onLogEntryClick(logEntry.id) }
@@ -102,6 +110,7 @@ fun LogEntryListContent(
 @Composable
 fun PendingReapplyItem(
     pending: PendingReapply,
+    onReapplyClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -133,16 +142,29 @@ fun PendingReapplyItem(
                 )
             }
             
-            Text(
-                text = if (pending.isOverdue) {
-                    stringResource(R.string.label_overdue)
-                } else {
-                    stringResource(R.string.label_due_in_days, pending.daysRemaining)
-                },
-                style = MaterialTheme.typography.labelLarge,
-                color = color,
-                fontWeight = FontWeight.Bold
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(spacing.small)
+            ) {
+                Text(
+                    text = if (pending.isOverdue) {
+                        stringResource(R.string.label_overdue)
+                    } else {
+                        stringResource(R.string.label_due_in_days, pending.daysRemaining)
+                    },
+                    style = MaterialTheme.typography.labelLarge,
+                    color = color,
+                    fontWeight = FontWeight.Bold
+                )
+
+                IconButton(onClick = { onReapplyClick(pending.logEntry.id) }) {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = stringResource(R.string.cd_reapply),
+                        tint = color
+                    )
+                }
+            }
         }
     }
 }
@@ -154,6 +176,7 @@ fun LogEntryListScreenPreview() {
         Surface {
             LogEntryListScreen(
                 onLogEntryClick = {},
+                onReapplyClick = {},
                 uiState = LogEntryListUiState(
                     history = logEntryEntityListSample,
                     pendingReapplies = listOf(
@@ -183,6 +206,7 @@ fun LogEntryListScreenEmptyPreview() {
         Surface {
             LogEntryListScreen(
                 onLogEntryClick = {},
+                onReapplyClick = {},
                 uiState = LogEntryListUiState(),
             )
         }

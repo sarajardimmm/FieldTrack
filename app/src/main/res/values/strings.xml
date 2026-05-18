@@ -47,9 +47,11 @@
     <string name="action_delete">Delete</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_reapply">Reapply</string>
 
     <!-- Content Descriptions -->
     <string name="cd_back">Back</string>
+    <string name="cd_reapply">Reapply product</string>
 
     <!-- Under Construction -->
     <string name="under_construction_title">Under Construction</string>

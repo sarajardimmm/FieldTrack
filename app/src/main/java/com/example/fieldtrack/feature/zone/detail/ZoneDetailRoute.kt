@@ -9,6 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun ZoneDetailRoute(
     onEditClick: (Long) -> Unit,
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     onNavigateBack: () -> Unit,
     viewModel: ZoneDetailViewModel = hiltViewModel()
 ) {
@@ -20,6 +21,7 @@ fun ZoneDetailRoute(
         logEntries = logEntries,
         onEditClick = onEditClick,
         onLogEntryClick = onLogEntryClick,
+        onReapplyClick = onReapplyClick,
         onNavigateBack = onNavigateBack
     )
 }

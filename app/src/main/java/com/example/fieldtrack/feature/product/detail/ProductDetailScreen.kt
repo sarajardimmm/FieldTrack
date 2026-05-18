@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.fieldtrack.R
 import com.example.fieldtrack.data.db.model.LogEntry
 import com.example.fieldtrack.data.db.model.Product
@@ -41,6 +42,7 @@ fun ProductDetailScreen(
     logEntries: List<LogEntry>,
     onEditClick: (Long) -> Unit,
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     onNavigateBack: () -> Unit
 ) {
     ProductDetailContent(
@@ -48,6 +50,7 @@ fun ProductDetailScreen(
         logEntries = logEntries,
         onEditClick = onEditClick,
         onLogEntryClick = onLogEntryClick,
+        onReapplyClick = onReapplyClick,
         modifier = Modifier.fillMaxSize()
     )
 }
@@ -58,6 +61,7 @@ fun ProductDetailContent(
     logEntries: List<LogEntry>,
     onEditClick: (Long) -> Unit,
     onLogEntryClick: (Long) -> Unit,
+    onReapplyClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -71,7 +75,7 @@ fun ProductDetailContent(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
-                elevation = CardDefaults.cardElevation(defaultElevation = spacing.extraSmall),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 )
@@ -85,7 +89,7 @@ fun ProductDetailContent(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = stringResource(R.string.title_entry_details),
+                            text = stringResource(R.string.title_product_detail),
                             style = MaterialTheme.typography.titleLarge
                         )
 
@@ -140,6 +144,7 @@ fun ProductDetailContent(
             items(logEntries) { logEntry ->
                 HistoryItem(
                     logEntry = logEntry,
+                    onReapplyClick = onReapplyClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { onLogEntryClick(logEntry.id) }
@@ -184,17 +189,11 @@ fun ProductDetailScreenPreview() {
     FieldTrackTheme {
         Surface {
             ProductDetailScreen(
-                product = Product(
-                    id = 1,
-                    name = "Copper Sulfate",
-                    category = "Fungicide",
-                    defaultReapplyDays = 14,
-                    storageLocation = "Shed B",
-                    notes = "Wear protective gear."
-                ),
+                product = null,
                 logEntries = emptyList(),
                 onEditClick = {},
                 onLogEntryClick = {},
+                onReapplyClick = {},
                 onNavigateBack = {}
             )
         }

@@ -17,7 +17,10 @@ sealed interface Routes {
     data class LogEntryDetail(val logEntryId: Long) : Routes
 
     @Serializable
-    data class LogEntryForm(val logEntryId: Long? = null) : Routes
+    data class LogEntryForm(
+        val logEntryId: Long? = null,
+        val reapplyFromId: Long? = null
+    ) : Routes
 
     @Serializable
     data class ZoneDetail(val zoneId: Long) : Routes
